@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="9.00"
+	Name="WSL"
+	ProjectGUID="{A0B2EF66-BA93-4EF9-A80F-1933312101C2}"
+	RootNamespace="WSL"
+	Keyword="Win32Proj"
+	TargetFrameworkVersion="196613"
+	>
+	<Platforms>
+		<Platform
+			Name="Win32"
+		/>
+	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="1"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="&quot;C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\Lua&quot;;&quot;C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\Luabind&quot;;&quot;C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\SFML&quot;"
+				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
+				MinimalRebuild="true"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				DebugInformationFormat="4"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="lua51.lib luabind.debug.lib luabind.release.lib sfml-main-d.lib sfml-system-d.lib sfml-window-d.lib sfml-graphics-d.lib sfml-audio-d.lib sfml-network-d.lib"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories="&quot;C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\lib&quot;"
+				AssemblyLinkResource=""
+				GenerateDebugInformation="true"
+				SubSystem="1"
+				TargetMachine="1"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="1"
+			CharacterSet="1"
+			WholeProgramOptimization="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="2"
+				EnableIntrinsicFunctions="true"
+				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
+				RuntimeLibrary="2"
+				EnableFunctionLevelLinking="true"
+				FloatingPointModel="0"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="sfml-audio-s.lib sfml-graphics-s.lib sfml-network-s.lib sfml-system-s.lib sfml-window-s.lib lua51.lib luabind.release.lib"
+				LinkIncremental="1"
+				GenerateDebugInformation="true"
+				SubSystem="1"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				TargetMachine="1"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+	</Configurations>
+	<References>
+	</References>
+	<Files>
+		<Filter
+			Name="Source Files"
+			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
+			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
+			>
+			<File
+				RelativePath=".\All Animation Data.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Animation Data.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Animation.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Bubble Sort.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Camera.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Component.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Core Info Container.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Entity Translator.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Entity.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Image Library.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Input.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Large Data Manager.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Level Sender.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Level.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Lightning Sprite.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Main Lua.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Main.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Mobile Translator.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Mobile.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Positional Translator.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Positional.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Render Layer.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Singleton Sender.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Singleton.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Sound Manager.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Vector Calculator.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Vector Graphics Component.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Vector.cpp"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Header Files"
+			Filter="h;hpp;hxx;hm;inl;inc;xsd"
+			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
+			>
+			<File
+				RelativePath=".\All Animation Data.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Animation Data.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Animation.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Base Entity.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Base Translator.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Bool XYZ.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Bubble Sort.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Builder.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Camera.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Collision Detector.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Collision Engine.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Color Wrap.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Component.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Core Info Container.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Double XYZ.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Engine Base.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Engine.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Entity Translator.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Entity.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Headers.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Image Library.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Include.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Initilizor.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Input.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Int Bool.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Key.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Large Data Manager.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Level Sender.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Level.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Lightning Sprite.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Lua Send Base.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Main Lua.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Mobile Translator.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Mobile.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Non Class Container.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Object Tracker.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Pointable Vector.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Polygon.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Positional Translator.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Positional.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Range_Check.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Receiver Node.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Refrence.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Render Base.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Render Components.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Render Functonal.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Render Layer.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Render Type.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Renders.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Rotation Calculator.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Rudementary Bounding Box.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Scan Area.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Sender Node.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SFML Type.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Singleton Base.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Singleton Sender.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Singleton.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Sound Container.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Sound Manager.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Stack.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Sub Singleton Base.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Updator.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Vector Calculator.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Vector Graphics Component.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Vector Graphics.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Vector Movement.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Vector.h"
+				>
+			</File>
+			<File
+				RelativePath=".\White Storm Lightning.h"
+				>
+			</File>
+			<File
+				RelativePath=".\XYZ.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Resource Files"
+			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
+			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
+			>
+		</Filter>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>
