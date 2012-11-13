@@ -19,6 +19,55 @@ This file is part of White - Storm: Lightning (alpha).
 #include "Component.h"
 namespace WSL
 {
+	//Last minute thought.//
+	namespace Containers
+	{
+		class IDXYZ
+		{
+			unsigned int id, objectID, componentID;
+			WSL::Containers::Base::XYZ point;
+			public: 
+				IDXYZ()
+				{
+					point = WSL::Containers::Base::XYZ();
+					id = 0;
+					objectID = 0;
+					componentID = 0;
+				}
+				IDXYZ( unsigned int id_, unsigned int objectID_, unsigned int componentID_, WSL::Containers::Base::XYZ point_ )
+				{
+					point = point_;
+					id = id_;
+					objectID = objectID_;
+					componentID = componentID_;
+				}
+				unsigned int GetID() {
+					return id;
+				}
+				unsigned int GetObjectID() { 
+					return objectID;
+				}
+				unsigned int GetComponentID() {
+					return componentID;
+				}
+				WSL::Containers::Base::XYZ GetPoint() {
+					return point;
+				}
+				void SetID( unsigned int id_ ) {
+					id = id_;
+				}
+				void SetObjectID( unsigned int objectID_ ) { 
+					objectID = objectID_;
+				}
+				void SetComponentID( unsigned int componentID_ ) {
+					componentID = componentID_;
+				}
+				void SetPoint( WSL::Containers::Base::XYZ point_ ) {
+					point = point_;
+				}
+
+		};
+	}
 	namespace Collision
 	{
 		namespace Scan_Area_Collision
@@ -31,9 +80,11 @@ namespace WSL
 					int y;
 					int w;
 					int h;
-			}Rectangle;
+			} Rectangle;
+			//This class is for the most part deprocated. It will be re-implemented in a future release.//
 			class Scan_Area : public WSL::Components::Base::Component
 			{
+				std::vector< WSL::Containers::IDXYZ  > collisionData;
 				float X, Y, Z;
 				WSL::Containers::Bool_XYZ collision;
 				std::vector<WSL::Containers::Base::XYZ> Points;
@@ -82,6 +133,21 @@ namespace WSL
 					Rotated = false;
 					Last_Move = 0;
 					rotation = 0;*/
+				}
+				WSL::Containers::IDXYZ GetACollisionData( unsigned int index )
+				{
+					if( index < collisionData.size() )
+						return collisionData[ index ];
+					return WSL::Containers::IDXYZ();
+				}
+				inline void AddCollisionData( WSL::Containers::IDXYZ dataToAdd ) {
+					collisionData.push_back( dataToAdd );
+				}
+				inline unsigned int GetCollisionDataSize() {
+					return collisionData.size();
+				}
+				inline void ClearCollisionData() {
+					collisionData.clear();
 				}
 				inline Rectangle GetR()
 				{

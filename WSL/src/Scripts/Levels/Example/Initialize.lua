@@ -15,4 +15,3 @@ MakeUFO( 3 )
 
 stack:AddInt( "add", 0, true )
 print( "Level Up!" )
-

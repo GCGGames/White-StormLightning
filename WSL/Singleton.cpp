@@ -91,7 +91,7 @@ void WSL::Singleton::AddPolygon()
 	else
 	{
 		WSL::Components::Polygon temp;
-		BaseAddComponent( &temp, "src/Scripts/Engine/Component Control/Add Sprite.lua" );
+		BaseAddComponent( &temp, "src/Scripts/Engine/Component Control/Add Polygon.lua" );
 	}
 }
 //-----=====-----//
@@ -137,7 +137,7 @@ void WSL::Singleton::AddVectorGraphic()
 	else
 	{
 		WSL::Components::Vector_Graphics temp;
-		BaseAddComponent( &temp, "src/Scripts/Engine/Component Control/Add Polygon.lua" );
+		BaseAddComponent( &temp, "src/Scripts/Engine/Component Control/Add Vector Graphic.lua" );
 	}
 }
 void WSL::Singleton::AddVectorGraphic( std::string scanAreaFile )
@@ -405,10 +405,14 @@ void WSL::Singleton::DetectCollision()
 	unsigned int size = engine->scanAreas.Array.size();
 	if( size != 0 && size != 1 )
 	{
+		for( unsigned int i = 0; i < size; ++i ) {
+			engine->scanAreas.Array[i]->SetCollision( WSL::Containers::Bool_XYZ( false ) );
+			engine->scanAreas.Array[i]->ClearCollisionData();
+		}
 		while( i1 < size )
 		{
 			//	*engine->scanAreas.Array[i1] = engine->Run( *engine->scanAreas.Array[i1], false, 0 );
-			while( i2 < size )
+			while( i2 < size && engine->scanAreas.Array[i1]->GetCollision().getBool() == false )
 			{
 				if( i2 != i1 )
 				{
@@ -419,8 +423,17 @@ void WSL::Singleton::DetectCollision()
 					engine->scanAreas.Array[i1]->SetVector( engine->scanAreas.Array[i1]->GetCollision().getCoords() );
 					if( engine->scanAreas.Array[i1]->GetCollision().getBool() == true )
 					{
-						engine->scanAreas.Array.erase( engine->scanAreas.Array.begin() + i1 );
-						--size;
+						//It is a quick fix.//
+						engine->scanAreas.Array[i2]->AddCollisionData( WSL::Containers::IDXYZ( engine->scanAreas.Array[i1]->GetID(), engine->scanAreas.Array[i1]->GetObjectID(), 
+							engine->scanAreas.Array[i1]->GetComponentID(), WSL::Containers::Base::XYZ( engine->scanAreas.Array[i1]->getX(), engine->scanAreas.Array[i1]->getY(), engine->scanAreas.Array[i1]->getZ() ) ) );
+						
+						engine->scanAreas.Array[i1]->AddCollisionData( WSL::Containers::IDXYZ( engine->scanAreas.Array[i2]->GetID(), engine->scanAreas.Array[i2]->GetObjectID(), 
+							engine->scanAreas.Array[i2]->GetComponentID(), WSL::Containers::Base::XYZ( engine->scanAreas.Array[i2]->getX(), engine->scanAreas.Array[i2]->getY(), engine->scanAreas.Array[i2]->getZ() ) ) );
+
+						engine->scanAreas.Array[i2]->SetCollision( WSL::Containers::Bool_XYZ( engine->scanAreas.Array[i2]->GetCollision().getCoords(), true ) );
+
+						//engine->scanAreas.Array.erase( engine->scanAreas.Array.begin() + i1 );
+						//--size;
 						break;
 					}
 				}

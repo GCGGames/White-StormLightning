@@ -246,6 +246,19 @@ namespace WSL
 				.def_readwrite( "w", &WSL::Collision::Scan_Area_Collision::Rectangle::w )
 				.def_readwrite( "h", &WSL::Collision::Scan_Area_Collision::Rectangle::h )
 		];
+		//-----IDXYZ-----//
+		luabind::module( engine->luaContainer->State )[
+			luabind::class_< WSL::Containers::IDXYZ >( "IDXYZ" )
+				.def( luabind::constructor<>() )
+				.def( "GetID", &WSL::Containers::IDXYZ::GetID )
+				.def( "GetObjectID", &WSL::Containers::IDXYZ::GetObjectID )
+				.def( "GetComponentID", &WSL::Containers::IDXYZ::GetComponentID )
+				.def( "GetPoint", &WSL::Containers::IDXYZ::GetPoint )
+				.def( "SetID", &WSL::Containers::IDXYZ::SetID )
+				.def( "SetObjectID", &WSL::Containers::IDXYZ::SetObjectID )
+				.def( "SetComponentID", &WSL::Containers::IDXYZ::SetComponentID )
+				.def( "SetPoint", &WSL::Containers::IDXYZ::SetPoint )
+		];
 		//-----Scan Area-----//
 		luabind::module( engine->luaContainer->State )[
 			luabind::class_<WSL::Collision::Scan_Area_Collision::Scan_Area, WSL::Components::Base::Component>( "ScanArea" )
@@ -278,6 +291,10 @@ namespace WSL
 				.def( "SetBoundingBox", &WSL::Collision::Scan_Area_Collision::Scan_Area::SetBoundingBox )
 				.def( "GetR", &WSL::Collision::Scan_Area_Collision::Scan_Area::GetR )
 				.def( "SetR", &WSL::Collision::Scan_Area_Collision::Scan_Area::SetR )
+				.def( "GetACollisionData", &WSL::Collision::Scan_Area_Collision::Scan_Area::GetACollisionData )
+				.def( "GetCollisionDataSize", &WSL::Collision::Scan_Area_Collision::Scan_Area::GetCollisionDataSize )
+				.def( "ClearCollisionData", &WSL::Collision::Scan_Area_Collision::Scan_Area::ClearCollisionData )
+				.def( "AddCollisionData", &WSL::Collision::Scan_Area_Collision::Scan_Area::AddCollisionData )
 		];
 		//-----Non class type-----//
 			//-----int-----//

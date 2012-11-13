@@ -32,7 +32,7 @@ namespace WSL
 				bool GetUpdateData();
 				void SetElement( unsigned int element_ );
 				void SetUpdateData( bool value );
-				void Update( unsigned int id_, int objectID, int componentID_ );
+				void Update( unsigned int id_, int objectID_, int componentID_ );
 			protected:
 				bool updateData;
 				unsigned int id, element;
