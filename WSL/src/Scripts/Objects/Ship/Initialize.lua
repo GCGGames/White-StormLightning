@@ -12,6 +12,3 @@ r.h = 64
 r.x = position:GetX() + 1
 r.y = position:GetY() + 1
 scanArea:SetR( r )
-for i = 0, 900, 1 do
-	print( "SHIP!" )
-end

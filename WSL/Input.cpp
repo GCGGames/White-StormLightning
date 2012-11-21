@@ -74,6 +74,7 @@ void WSL::Global::Input::Frame()
 			keys[11].SetKey( true );
 		if( refrence->window->GetInput().IsKeyDown( sf::Key::M ) )
 			keys[12].SetKey( true );
+		//I still have no idea why, but this generates a compiler error.//
 	//	if( refrence->window->GetInput().IsKeyDown( sf::Key::N ) )
 	//		keys[13].SetKey( true );
 		if( refrence->window->GetInput().IsKeyDown( sf::Key::O ) )
@@ -259,12 +260,16 @@ bool WSL::Global::Input::IsKeyDown( std::string key )
 	while( i < size )
 	{
 		if( keys[i].GetName() == key )
-		{
 			return keys[i].GetKey();
-		}
 		i++;
 	}
 	return false;
+}
+WSL::Containers::Base::XYZ WSL::Global::Input::GetMousePosition()
+{
+	return WSL::Containers::Base::XYZ( ( float ) refrence->window->GetInput().GetMouseX(), 
+	( float ) refrence->window->GetInput().GetMouseY(), 
+	( float ) cameraZ );
 }
 bool WSL::Global::Input::GetMouseClick( std::string button )
 {
@@ -283,13 +288,9 @@ bool WSL::Global::Input::GetMouseClick( std::string button )
 				if( refrence->window->GetInput().IsMouseButtonDown( sf::Mouse::Right ) )
 				return (true);
 			}
-			else
-			{
-				if( button == "Middle" )
-				{
+			else if( button == "Middle" ) {
 					if( refrence->window->GetInput().IsMouseButtonDown( sf::Mouse::Middle ) )
 						return (true);
-				}
 			}
 		}
 		break;

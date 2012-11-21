@@ -243,8 +243,10 @@ namespace WSL
 				.def( luabind::constructor<>() )
 				.def_readwrite( "x", &WSL::Collision::Scan_Area_Collision::Rectangle::x )
 				.def_readwrite( "y", &WSL::Collision::Scan_Area_Collision::Rectangle::y )
+				.def_readwrite( "z", &WSL::Collision::Scan_Area_Collision::Rectangle::z )
 				.def_readwrite( "w", &WSL::Collision::Scan_Area_Collision::Rectangle::w )
 				.def_readwrite( "h", &WSL::Collision::Scan_Area_Collision::Rectangle::h )
+				.def_readwrite( "l", &WSL::Collision::Scan_Area_Collision::Rectangle::l )
 		];
 		//-----IDXYZ-----//
 		luabind::module( engine->luaContainer->State )[
@@ -352,6 +354,7 @@ namespace WSL
 				.def( "IsKeyDown", &WSL::Global::Input::IsKeyDown )
 				.def( "GetMouseClick", &WSL::Global::Input::GetMouseClick )
 				.def( "GetMouseEvent", &WSL::Global::Input::GetMouseEvent )
+				.def( "GetMousePosition", &WSL::Global::Input::GetMousePosition )
 		];
 		//-----Base Entity-----//
 		luabind::module( engine->luaContainer->State )[

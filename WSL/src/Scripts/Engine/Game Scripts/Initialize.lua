@@ -1,7 +1,6 @@
 print( "Engine loaded." )
 print( "Initializing engine." )
 stack:AddInt( "levelCount", 0, true )
-stack:AddInt( "amount", 0, true )
 singleton:LoadImage( "SpaceShip0", "bin/Images/SpaceShip.png" )
 singleton:LoadImage( "SpaceShip", "bin/Images/UFO.png" )
 singleton:InstantiateLevel( "bin/Info/Levels/Example/Level.txt" )

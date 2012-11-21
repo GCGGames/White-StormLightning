@@ -31,6 +31,7 @@ namespace WSL
 			Input();
 			void Frame();
 			bool IsKeyDown( std::string key );
+			WSL::Containers::Base::XYZ GetMousePosition();
 			bool GetMouseClick( std::string button );
 			int GetMouseEvent( std::string mouseEvent );
 			void Map();

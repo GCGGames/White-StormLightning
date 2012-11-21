@@ -76,10 +76,12 @@ namespace WSL
 			//I needed it for the time beaing thank you Lightdark from the Elysian Shadows chat room!!!!!
 			typedef struct
 			{
-					int x;
-					int y;
-					int w;
-					int h;
+					float z;
+					float x;
+					float y;
+					float w;
+					float h;
+					float l;
 			} Rectangle;
 			//This class is for the most part deprocated. It will be re-implemented in a future release.//
 			class Scan_Area : public WSL::Components::Base::Component

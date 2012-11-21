@@ -821,10 +821,12 @@ bool WSL::Singleton::Check_Collision( WSL::Collision::Scan_Area_Collision::Recta
 {
 	//Temporary code but
 	//I needed it for the time beaing thank you Lightdark from the Elysian Shadows chat room!!!!!
-	int leftA, leftB;
-	int rightA, rightB;
-	int topA, topB;
-	int bottomA, bottomB;
+	float leftA, leftB;
+	float rightA, rightB;
+	float topA, topB;
+	float bottomA, bottomB;
+	float lowA, lowB;
+	float highA, highB;
 	leftA = rect1.x;
 	rightA = rect1.x + rect1.w;
 	topA = rect1.y;
@@ -833,6 +835,12 @@ bool WSL::Singleton::Check_Collision( WSL::Collision::Scan_Area_Collision::Recta
 	rightB = rect2.x + rect2.w;
 	topB = rect2.y;
 	bottomB = rect2.y + rect2.h;
+	//////////////////////////////
+	highA = rect1.z;
+	lowA = rect1.z + rect1.l;
+	highB = rect2.z;
+	lowB = rect2.z + rect2.l;
+	///////////////////////////////
 	if( bottomA <= topB )
 		return false;
 	if( topA >= bottomB )
@@ -841,6 +849,14 @@ bool WSL::Singleton::Check_Collision( WSL::Collision::Scan_Area_Collision::Recta
 		return false;
 	if( leftA >= rightB )
 		return false;
+	if( rect1.l != 0 && rect2.l != 0 )
+	{
+		if( lowA <= highB )
+			return false;
+		if( highA >= lowB )
+			return false;
+	}
+	//////////////////////////////
 	return true;
 }
 WSL::Containers::Bool_XYZ WSL::Singleton::CheckCollision( WSL::Collision::Scan_Area_Collision::Scan_Area a, WSL::Collision::Scan_Area_Collision::Scan_Area b, bool ThreeD )

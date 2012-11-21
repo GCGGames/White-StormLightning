@@ -66,11 +66,16 @@ namespace WSL
 
 				//Temporary code but
 				//I needed it for the time beaing thank you Lightdark from the Elysian Shadows chat room!!!!!
-				int leftA, leftB;
-				int rightA, rightB;
-				int topA, topB;
-				int bottomA, bottomB;
-		     
+				float leftA, leftB;
+				float rightA, rightB;
+				float topA, topB;
+				float bottomA, bottomB;
+				float lowA, lowB;
+				float highA, highB;
+				highA = rect1.z;
+				lowA = rect1.z + rect1.l;
+				highB = rect2.z;
+				lowB = rect2.z + rect2.l;
 		     
 				leftA = rect1.x;
 				rightA = rect1.x + rect1.w;
@@ -85,26 +90,21 @@ namespace WSL
 		     
 		     
 				if( bottomA <= topB )
-				{
 					return false;
-				}
-		     
 				if( topA >= bottomB )
-				{
 					return false;
-				}
 		     
 				if( rightA <= leftB )
-				{
 					return false;
-				}
-		     
 				if( leftA >= rightB )
-				{
 					return false;
+				if( rect1.l != 0 && rect2.l != 0 )
+				{
+					if( lowA <= highB )
+						return false;
+					if( highA >= lowB )
+						return false;
 				}
-		     
-		     
 				return true;
 		     
 			}
