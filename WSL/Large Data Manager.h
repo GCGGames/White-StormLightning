@@ -24,9 +24,9 @@ namespace WSL
 		class LargeDataManager
 		{
 		protected:
-			WSL::Containers::PointableVector<WSL::Algorithmic::ReceiverNode> objects;
+			WSL::Containers::PointableVector< WSL::Algorithmic::ReceiverNode > objects;
 			std::string refreshScript;
-			WSL::Engine *refrence;
+			WSL::Engine* refrence;
 		public:
 			void AddObject( unsigned int element );
 			void DeleteRefrence();
@@ -39,9 +39,9 @@ namespace WSL
 			virtual void Update( WSL::Algorithmic::SenderNode node );
 			virtual void Refresh();
 			void SetRefreshScript( std::string refreshScript_ );
-			void SetObjects( std::vector<WSL::Algorithmic::ReceiverNode> objects_ );
-			void SetRefrence( WSL::Engine *engine );
-			void (*luaSend)();
+			void SetObjects( std::vector< WSL::Algorithmic::ReceiverNode > objects_ );
+			void SetRefrence( WSL::Engine* engine );
+			void (* luaSend )();
 		};
 	}
 }

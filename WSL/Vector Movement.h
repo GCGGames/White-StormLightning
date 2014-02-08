@@ -23,25 +23,25 @@ namespace WSL
 	{
 		namespace Movement
 		{
-			static WSL::Containers::Base::XYZ Vector_Movement( float XOffset, float YOffset, WSL::Containers::Base::XYZ Position )
+			static WSL::Containers::Base::XYZ VectorMovement( float xOffset, float yOffset, WSL::Containers::Base::XYZ position )
 			{
-				Position.setX( Position.getX() + floor( 0.5f + XOffset ) );
-				Position.setY( Position.getY() + floor( 0.5f + YOffset ) );
-				return Position;
+				position.SetX( position.GetX() + floor( 0.5f + xOffset ) );
+				position.SetY( position.GetY() + floor( 0.5f + yOffset ) );
+				return position;
 			}
-			static WSL::Containers::Base::XYZ Vector_Movement( float XOffset, float YOffset, float ZOffset, WSL::Containers::Base::XYZ Position )
+			static WSL::Containers::Base::XYZ VectorMovement( float xOffset, float yOffset, float zOffset, WSL::Containers::Base::XYZ position )
 			{
-				Position.setX( Position.getX() + floor( 0.5f + XOffset ) );
-				Position.setY( Position.getY() + floor( 0.5f + YOffset ) );
-				Position.setZ( Position.getZ() + floor( 0.5f + ZOffset ) );
-				return Position;
+				position.SetX( position.GetX() + floor( 0.5f + xOffset ) );
+				position.SetY( position.GetY() + floor( 0.5f + yOffset ) );
+				position.SetZ( position.GetZ() + floor( 0.5f + zOffset ) );
+				return position;
 			}
-			static WSL::Containers::Base::XYZ Vector_Movement( WSL::Containers::Base::XYZ Offset, WSL::Containers::Base::XYZ Position )
+			static WSL::Containers::Base::XYZ VectorMovement( WSL::Containers::Base::XYZ offset, WSL::Containers::Base::XYZ position )
 			{
-				Position.setX( Position.getX() + floor( 0.5f + Offset.getX() ) );
-				Position.setY( Position.getY() + floor( 0.5f + Offset.getY() ) );
-				Position.setZ( Position.getZ() + floor( 0.5f + Offset.getZ() ) );
-				return Position;
+				position.SetX( position.GetX() + floor( 0.5f + offset.GetX() ) );
+				position.SetY( position.GetY() + floor( 0.5f + offset.GetY() ) );
+				position.SetZ( position.GetZ() + floor( 0.5f + offset.GetZ() ) );
+				return position;
 			}
 		}
 	}

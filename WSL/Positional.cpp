@@ -17,64 +17,56 @@ This file is part of White - Storm: Lightning (alpha).
     along with White - Storm: Lightning (alpha).  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "Positional.h"
-WSL::Framework::Standard::Positional::Positional( int obj_ID, bool Refresh, bool Destroy, bool initialize_, bool RDestroy,
-	std::string refresh_Script, std::string initialize_Script, std::string destroy_Script,
-	std::string other_Script, std::string physicalBehavior_, WSL::Engine *refrence_ )
+WSL::Framework::Standard::Positional::Positional( int objectID, bool refresh_, bool destroy_, bool initialize_, bool runDestroy,
+	std::string refreshScript_, std::string initializeScript_, std::string destroyScript_,
+	std::string otherScript_, std::string physicalBehavior_, WSL::Engine* refrence_ )
 {
 	physicalBehavior = physicalBehavior_;
-	Construct( obj_ID, Refresh, Destroy, initialize_, RDestroy, refresh_Script, initialize_Script, destroy_Script,
-		other_Script, refrence_ );
+	Construct( objectID, refresh_, destroy_, initialize_, runDestroy, refreshScript_, initializeScript_, destroyScript_,
+		otherScript_, refrence_ );
 	componentID = 1;
 	spr = NULL;
 	poly = NULL;
 	sca = NULL;
 	vec = NULL;
 }
-WSL::Framework::Standard::Positional::Positional()
-{
+WSL::Framework::Standard::Positional::Positional() {
 }
-WSL::Framework::Standard::Positional::~Positional()
-{
+WSL::Framework::Standard::Positional::~Positional() {
 }
-void WSL::Framework::Standard::Positional::AddSprite( WSL::Components::Lightning_Sprite sprite_ )
+void WSL::Framework::Standard::Positional::AddSprite( WSL::Components::LightningSprite* sprite_ )
 {
-	spr = new WSL::Components::Lightning_Sprite;
-	*spr = sprite_;
-	spr->SetRefrence( reinterpret_cast<WSL::Base::EngineBase*>( refrence[0] ) );
-	refrence[0]->renders.push_back( spr );
+	spr = sprite_;
+	spr->SetRefrence( reinterpret_cast< WSL::Base::EngineBase* >( refrence ) );
+	refrence->renders.push_back( spr );
 	spr->Update( iD, objID, componentID );
-	luabind::globals( refrence[0]->luaContainer->State )[ "sprite" ] = spr;
+	luabind::globals( refrence->luaContainer->State )[ "sprite" ] = spr;
 }
-void WSL::Framework::Standard::Positional::AddPolygon( WSL::Components::Polygon polygon_ )
+void WSL::Framework::Standard::Positional::AddPolygon( WSL::Components::Polygon* polygon_ )
 {
-	poly = new WSL::Components::Polygon;
-	*poly = polygon_;
-	refrence[0]->renders.push_back( poly );
+	poly = polygon_;
+	refrence->renders.push_back( poly );
 	poly->Update( iD, objID, componentID );
-	luabind::globals( refrence[0]->luaContainer->State )[ "polygon" ] = poly;
+	luabind::globals( refrence->luaContainer->State )[ "polygon" ] = poly;
 }
-void WSL::Framework::Standard::Positional::AddScanArea( WSL::Collision::Scan_Area_Collision::Scan_Area scanArea_ )
+void WSL::Framework::Standard::Positional::AddScanArea( WSL::Collision::ScanAreaCollision::ScanArea* scanArea_ )
 {
-	sca = new WSL::Collision::Scan_Area_Collision::Scan_Area;
-	*sca = scanArea_;
-	refrence[0]->scanAreas.Add( sca );
+	sca = scanArea_;
+	refrence->scanAreas.Add( sca );
 	sca->Update( iD, objID, componentID );
-	luabind::globals( refrence[0]->luaContainer->State )[ "scanArea" ] = sca;
+	luabind::globals( refrence->luaContainer->State )[ "scanArea" ] = sca;
 }
-void WSL::Framework::Standard::Positional::AddVectorGraphic( WSL::Components::Vector_Graphics vectorGraphi_ )
+void WSL::Framework::Standard::Positional::AddVectorGraphic( WSL::Components::VectorGraphics* vectorGraphi_ )
 {
-	vec = new WSL::Components::Vector_Graphics;
-	*vec = vectorGraphi_;
-	refrence[0]->renders.push_back( vec );
+	vec = vectorGraphi_;
+	refrence->renders.push_back( vec );
 	vec->Update( iD, objID, componentID );
-	luabind::globals( refrence[0]->luaContainer->State )[ "vectorGraphi" ] = vec;
+	luabind::globals( refrence->luaContainer->State )[ "vectorGraphi" ] = vec;
 }
-WSL::Containers::Base::XYZ WSL::Framework::Standard::Positional::GetPosition()
-{
+WSL::Containers::Base::XYZ WSL::Framework::Standard::Positional::GetPosition() {
 	return position;
 }
-float WSL::Framework::Standard::Positional::GetRotation()
-{
+float WSL::Framework::Standard::Positional::GetRotation() {
 	return rotation;
 }
 void WSL::Framework::Standard::Positional::Rotate( float degree )
@@ -87,10 +79,9 @@ void WSL::Framework::Standard::Positional::Rotate( float degree )
 	if( vec != NULL )
 		vec->Rotate( rotation );
 	if( sca != NULL )
-		*sca = refrence[0]->Rotate_Scan_Area( degree, *sca );
+		*sca = refrence->RotateScanArea( degree, *sca );
 }
-void WSL::Framework::Standard::Positional::SetComponentPosition( bool twoD )
-{
+void WSL::Framework::Standard::Positional::SetComponentPosition( bool twoD ) {
 	if( spr != NULL )
 		spr->SetPosition( position );
 	if( poly != NULL )
@@ -99,23 +90,23 @@ void WSL::Framework::Standard::Positional::SetComponentPosition( bool twoD )
 		vec->SetPosition( position );
 	if( sca != NULL )
 	{
-		sca->setX( position.getX() );
-		sca->setY( position.getY() );
+		sca->SetX( position.GetX() );
+		sca->SetY( position.GetY() );
 		if( twoD == false )
-			sca->setZ( position.getZ() );
+			sca->SetZ( position.GetZ() );
 	}
 }
 void WSL::Framework::Standard::Positional::SetPosition( float x, float y, float z )
 {
-	position.setX( x );
-	position.setY( y );
-	position.setZ( z );
+	position.SetX( x );
+	position.SetY( y );
+	position.SetZ( z );
 	SetComponentPosition( false );
 }
 void WSL::Framework::Standard::Positional::SetPosition( float x, float y )
 {
-	position.setX( x );
-	position.setY( y );
+	position.SetX( x );
+	position.SetY( y );
 	SetComponentPosition( true );
 }
 void WSL::Framework::Standard::Positional::SetPosition( WSL::Containers::Base::XYZ position_ )
@@ -123,8 +114,7 @@ void WSL::Framework::Standard::Positional::SetPosition( WSL::Containers::Base::X
 	position = position_;
 	SetComponentPosition( false );
 }
-void WSL::Framework::Standard::Positional::SendToLua()
-{
+void WSL::Framework::Standard::Positional::SendToLua() {
 	PositionalSend();
 }
 void WSL::Framework::Standard::Positional::SetRotation( float degree )
@@ -136,13 +126,10 @@ void WSL::Framework::Standard::Positional::SetRotation( float degree )
 		poly->SetRotation( rotation );
 	if( vec != NULL )
 		sca->SetRotation( rotation );
-	//if( sca != NULL )
-		//*sca = refrence[0]->Rotate_Scan_Area( degree - rotation, *sca );
 }
 void WSL::Framework::Standard::Positional::PositionalInitialize()
 {
-	if( initialize == true )
-	{
+	if( initialize == true ) {
 		RunScript( initializeScript );
 		SetPosition( position );
 	}
@@ -153,9 +140,7 @@ void WSL::Framework::Standard::Positional::PositionalRefresh()
 	{
 		RunScript( refreshScript );
 		if( physicalBehavior != "NULL" )
-		{
 			RunPhysScript( physicalBehavior );
-		}
 		SetPosition( position );
 	}
 }
@@ -163,8 +148,7 @@ void WSL::Framework::Standard::Positional::PositionalDestroy()
 {
 	if( destroy == true )
 	{
-		if( runDestroyScript == true )
-		{
+		if( runDestroyScript == true ) {
 			SetPosition( position );
 			RunDestroy__( destroyScript );
 		}
@@ -172,64 +156,51 @@ void WSL::Framework::Standard::Positional::PositionalDestroy()
 		DeleteIdentification();
 	}
 }
-void WSL::Framework::Standard::Positional::Initialize()
-{
+void WSL::Framework::Standard::Positional::Initialize() {
 	PositionalInitialize();
 }
-void WSL::Framework::Standard::Positional::Refresh()
-{
+void WSL::Framework::Standard::Positional::Refresh() {
 	PositionalRefresh();
 }
-void WSL::Framework::Standard::Positional::Destroy()
-{
+void WSL::Framework::Standard::Positional::Destroy() {
 	PositionalDestroy();
 }
-void WSL::Framework::Standard::Positional::DeleteComponents()
-{
+void WSL::Framework::Standard::Positional::DeleteComponents() {
 	PositionalDelete();
 }
 void WSL::Framework::Standard::Positional::PositionalSend()
 {
-	if( spr != NULL )
-	{
+	if( spr != NULL ) {
 		spr->Update( iD, objID, componentID );
-		luabind::globals( refrence[0]->luaContainer->State )[ "sprite" ] = spr;
+		luabind::globals( refrence->luaContainer->State )[ "sprite" ] = spr;
 	}
-	if( poly != NULL )
-	{
+	if( poly != NULL ) {
 		poly->Update( iD, objID, componentID );
-		luabind::globals( refrence[0]->luaContainer->State )[ "polygon" ] = poly;
+		luabind::globals( refrence->luaContainer->State )[ "polygon" ] = poly;
 	}
-	if( vec != NULL )
-	{
+	if( vec != NULL ) {
 		vec->Update( iD, objID, componentID );
-		luabind::globals( refrence[0]->luaContainer->State )[ "vectorGraphic" ] = vec;
+		luabind::globals( refrence->luaContainer->State )[ "vectorGraphic" ] = vec;
 	}
-	if( sca != NULL )
-	{
+	if( sca != NULL ) {
 		sca->Update( iD, objID, componentID );
-		luabind::globals( refrence[0]->luaContainer->State )[ "scanArea" ] = sca;
+		luabind::globals( refrence->luaContainer->State )[ "scanArea" ] = sca;
 	}
-	luabind::globals( refrence[0]->luaContainer->State )[ "position" ] = &position;
+	luabind::globals( refrence->luaContainer->State )[ "position" ] = &position;
 }
 void WSL::Framework::Standard::Positional::PositionalDelete()
 {
 	if( spr != NULL )
 	{
 		spr->DeleteRefrence();
-		//spr->SetParentsToNULL();
 		delete spr;
 		spr = NULL;
 	}
-	if( poly != NULL )
-	{
-		//poly->SetParentsToNULL();
+	if( poly != NULL ) {
 		delete poly;
 		poly = NULL;
 	}
-	if( vec != NULL )
-	{
-		//vec->SetParentsToNULL();
+	if( vec != NULL ) {
 		delete vec;
 		vec = NULL;
 	}
@@ -240,34 +211,30 @@ void WSL::Framework::Standard::Positional::PositionalDelete()
 }
 void WSL::Framework::Standard::Positional::RunSubClassMethodBegin()
 {
-	if( spr != NULL )
-	{
-		spr->SetRefrence( reinterpret_cast<WSL::Base::EngineBase*>( refrence[0] ) );
-		refrence[0]->renders.push_back( spr );
+	if( spr != NULL ) {
+		spr->SetRefrence( reinterpret_cast< WSL::Base::EngineBase* >( refrence ) );
+		refrence->renders.push_back( spr );
 	}
 	if( poly != NULL )
-		refrence[0]->renders.push_back( poly );
+		refrence->renders.push_back( poly );
 	if( vec != NULL )
-		refrence[0]->renders.push_back( vec );
+		refrence->renders.push_back( vec );
 	if( sca != NULL )
-		refrence[0]->scanAreas.Add( sca );
+		refrence->scanAreas.Add( sca );
 }
-void WSL::Framework::Standard::Positional::RunSubClassMethodEnd()
-{
+void WSL::Framework::Standard::Positional::RunSubClassMethodEnd() {
 	if( spr != NULL )
 		spr->DeleteRefrence();
 }
-std::string WSL::Framework::Standard::Positional::GetPhysicalBehavior()
-{
+std::string WSL::Framework::Standard::Positional::GetPhysicalBehavior() {
 	return physicalBehavior;
 }
-void WSL::Framework::Standard::Positional::SetPhysicalBehavior( std::string physicalBehavior_ )
-{
+void WSL::Framework::Standard::Positional::SetPhysicalBehavior( std::string physicalBehavior_ ) {
 	physicalBehavior = physicalBehavior_;
 }
 void WSL::Framework::Standard::Positional::DeleteRefrence()
 {
-	refrence.clear();
+	refrence = NULL;
 	if( spr != NULL )
 		spr->DeleteRefrence();
 }
@@ -275,8 +242,8 @@ void WSL::Framework::Standard::Positional::RunPhysScript( std::string script )
 {
 	SendToLua();
 	SendSelf();
-	refrence[0]->lua->SetObjID( objID );
-	refrence[0]->lua->SetID( iD );
+	refrence->lua->SetObjID( objID );
+	refrence->lua->SetID( iD );
 	SetScanAreaProperties();
-	luaL_dofile( refrence[0]->luaContainer->State, script.c_str() );
+	luaL_dofile( refrence->luaContainer->State, script.c_str() );
 }

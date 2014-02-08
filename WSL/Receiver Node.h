@@ -27,16 +27,13 @@ namespace WSL
 		{
 			unsigned int element;
 		public:
-			inline void UpdateStatus( unsigned int change )
-			{
+			inline void UpdateStatus( unsigned int change ) {
 				element = change;
 			}
-			inline unsigned int GetElement()
-			{
+			inline unsigned int GetElement() {
 				return element;
 			}
-			inline void SetElement( unsigned int value )
-			{
+			inline void SetElement( unsigned int value ) {
 				element = value;
 			}
 		};

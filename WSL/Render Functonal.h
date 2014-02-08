@@ -26,134 +26,95 @@ namespace WSL
 			namespace Base
 			{
 				//TO DO: Add "Set Scale" method along with overloads.//
-				class Render_Functonal : public WSL::Components::Base::Component
+				class RenderFunctonal : public WSL::Components::Base::Component
 				{
-				public:
-					virtual void Rotate( float degree )
-					{
-					}
-					virtual void SetRotation( float degree )
-					{
-					}
-					virtual void SetPosition( float x, float y, float z )
-					{
-						position.setX( x );
-						position.setY( y );
-						position.setZ( z );
-					}
-					virtual void SetPosition( float x, float y )
-					{
-						position.setX( x );
-						position.setY( y );
-					}
-					virtual void Draw( sf::RenderWindow *window )
-					{
-					}
-					virtual void SetPosition( WSL::Containers::Base::XYZ Coords )
-					{
-						position = Coords;
-					}
-					virtual void Scale( float x, float y )
-					{
-					}
-					virtual void Scale( float value )
-					{
-					}
-					virtual void Scale_To_Z()
-					{
-					}
-					virtual void Link( float X, float Y, float XScale, float YScale, float Rotation )
-					{
-					}
-					virtual void Refresh_Componet()
-					{
-					}
-					virtual void Implement_Script( char* Directory )
-					{
-					}
-					inline void setColor( sf::Color Color )
-					{
-						color = Color;
-					}
-					inline void setColor( WSL::Containers::Scripting::Lua::ColorWrap color_ )
-					{
-						color = color_.GetColor();
-					}
-					inline sf::Color getColor()
-					{
-						return color;
-					}
-					inline WSL::Containers::Base::XYZ getPosition()
-					{
-						return position;
-					}
-					inline float getX()
-					{
-						return position.getX();
-					}
-					inline float getY()
-					{
-						return position.getY();
-					}
-					inline float getZ()
-					{
-						return position.getZ();
-					}
-					inline bool getRender()
-					{
-						return render;
-					}
-					inline bool getScale_To_Z()
-					{
-						return scale_to_z;
-					}
-					inline void setX( float Value )
-					{
-						position.setX( Value );
-					}
-					inline void setY( float Value )
-					{
-						position.setY( Value );
-					}
-					inline void setZ( float Value )
-					{
-						position.setZ( Value );
-					}
-					inline void setRender( bool Value )
-					{
-						render = Value;
-					}
-					inline void setScale_To_Z( bool Value )
-					{
-						scale_to_z = Value;
-					}/*
-					void AddParent( WSL::Containers::Finder< Render_Functonal > **newParent ) {
-						parent = newParent;
-					}
-					void SetParentsToNULL() {
-						*parent = NULL;
-					}
-					void SetOriginalPointer( Render_Functonal **originalPointer_ ) {
-						originalPointer = originalPointer_;
-					}
-					Render_Functonal** GetOriginalPointer() {
-						return originalPointer;
-					}*/
-					std::string GetRenderLayerName() {
-						return renderLayerName;
-					}
-					void SetRenderLayerName( std::string renderLayerName_ ) {
-						renderLayerName = renderLayerName_;
-					}
-				protected:
-					//Render_Functonal **originalPointer;
-					WSL::Containers::Base::XYZ position;
-					bool scale_to_z;
-					bool render;
-					sf::Color color;
-					std::string dir;
-					//WSL::Containers::Finder< Render_Functonal >** parent;
-					std::string renderLayerName;
+					public:
+						virtual void Rotate( float degree ) {
+						}
+						virtual void SetRotation( float degree ) {
+						}
+						virtual void SetPosition( float x, float y, float z )
+						{
+							position.SetX( x );
+							position.SetY( y );
+							position.SetZ( z );
+						}
+						virtual void SetPosition( float x, float y ) {
+							position.SetX( x );
+							position.SetY( y );
+						}
+						virtual void Draw( sf::RenderWindow* window ) {
+						}
+						virtual void SetPosition( WSL::Containers::Base::XYZ position_ ) {
+							position = position_;
+						}
+						virtual void Scale( float x, float y ) {
+						}
+						virtual void Scale( float value ) {
+						}
+						virtual void ScaleToZ() {
+						}
+						virtual void Link( float x, float y, float xScale, float yScale, float rotation ) {
+						}
+						virtual void RefreshComponet() {
+						}
+						virtual void ImplementScript( char* Directory ) {
+						}
+						inline void SetColor( sf::Color color_ ) {
+							color = color_;
+						}
+						inline void SetColor( WSL::Containers::Scripting::Lua::ColorWrap color_ ) {
+							color = color_.GetColor();
+						}
+						inline sf::Color GetColor() {
+							return color;
+						}
+						inline WSL::Containers::Base::XYZ GetPosition() {
+							return position;
+						}
+						inline float GetX() {
+							return position.GetX();
+						}
+						inline float GetY() {
+							return position.GetY();
+						}
+						inline float GetZ() {
+							return position.GetZ();
+						}
+						inline bool GetRender() {
+							return render;
+						}
+						inline bool GetScaleToZ() {
+							return scaleToZ;
+						}
+						inline void SetX( float value ) {
+							position.SetX( value );
+						}
+						inline void SetY( float value ) {
+							position.SetY( value );
+						}
+						inline void SetZ( float value ) {
+							position.SetZ( value );
+						}
+						inline void SetRender( bool render_ ) {
+							render = render_;
+						}
+						inline void SetScaleToZ( bool scaleToZ_ ) {
+							scaleToZ = scaleToZ_;
+						}
+						std::string GetRenderLayerName() {
+							return renderLayerName;
+						}
+						void SetRenderLayerName( std::string renderLayerName_ ) {
+							renderLayerName = renderLayerName_;
+						}
+					protected:
+						WSL::Containers::Base::XYZ position;
+						bool scaleToZ;
+						bool render;
+						sf::Color color;
+						std::string dir;
+						std::string renderLayerName;
 				};
 			}
 		}

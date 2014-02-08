@@ -23,9 +23,9 @@ namespace WSL
 	{
 		struct EngineBase : public WSL::Collision::CollisionEngineBase
 		{
-			WSL::Global::Stack<WSL::Components::Algorithimic::Animation> animations;
-			WSL::Global::Image_Library *imageLibrary;
-			WSL::Containers::Scripting::LuaState *luaContainer;
+			WSL::Global::Stack< WSL::Components::Algorithimic::Animation > animations;
+			WSL::Global::ImageLibrary* imageLibrary;
+			WSL::Containers::Scripting::LuaState* luaContainer;
 		};
 	}
 }

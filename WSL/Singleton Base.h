@@ -34,54 +34,92 @@ namespace WSL
 			WSL::Engine *engine;
 			bool run;
 			bool debug;
-			virtual void LoadImage( std::string name, std::string directory ){}
-			virtual void AddSprite( float x, float y, bool reScale ){}
-			virtual void AddSprite( float x, float y, unsigned int image_, bool reScale ){}
-			virtual void AddSprite( unsigned int image_, bool reScale ){}
-			virtual void AddPolygon(){}
-			virtual void AddPolygon( std::string scanAreaFile ){}
-			virtual void AddVectorGraphic(){}
-			virtual void AddVectorGraphic( std::string scanAreaFile ){}
-			virtual void AddScanArea(){}
-			virtual void AddScanArea( std::string scanAreaFile ){}
-			virtual int InstantiateLevel( std::string info ){ return 0; }
-			virtual int InstantiateRenderLayer(){ return 0; }
-			virtual int InstantiateObject( std::string info ){ return 0; }
-			virtual void SearchAlgorithum(){}
-			virtual void BaseSend(){}
-			virtual void SendLevel(){}
-			virtual void SendObject( unsigned int id, int objID,  int componentID ){}
-			virtual void ThreadObject( unsigned int id, int objID,  int componentID ){}
-			virtual void EndObjectThread(){}
-			virtual void Cycle(){}
-			virtual void DetectCollision(){}
-			virtual void Draw(){}
-			virtual void CleanUp(){}
-			virtual int HeartBeat( unsigned int i ){ return (0); }
-			virtual void LoadAlgorithim( std::string info ){}
-			virtual void LevelCycle(){}
-			virtual void GetObject( unsigned int id, int objID, int componentID ){}
-			virtual void GetRenderLayer( unsigned int layer ){}
-			virtual void GetRenderLayerByLevel( unsigned int level ){}
-			virtual void GetRenderLayerByLevel( std::string levelName ){}
-			virtual void GetCamera(){}
-			virtual void GetSoundManager(){}
-			virtual WSL::Containers::Base::XYZ GetMousePosition(){ return WSL::Containers::Base::XYZ(); }
+			virtual void LoadImage( std::string name, std::string directory ) {
+			}
+			virtual void AddSprite( float x, float y, bool reScale ) {
+			}
+			virtual void AddSprite( float x, float y, unsigned int image_, bool reScale ) {
+			}
+			virtual void AddSprite( unsigned int image_, bool reScale ) {
+			}
+			virtual void AddPolygon() {
+			}
+			virtual void AddPolygon( std::string scanAreaFile ) {
+			}
+			virtual void AddVectorGraphic() {
+			}
+			virtual void AddVectorGraphic( std::string scanAreaFile ) {
+			}
+			virtual void AddScanArea() {
+			}
+			virtual void AddScanArea( std::string scanAreaFile ) {
+			}
+			virtual int InstantiateLevel( std::string info ) {
+				return ( 0 );
+			}
+			virtual int InstantiateRenderLayer() {
+				return ( 0 );
+			}
+			virtual int InstantiateObject( std::string info ) {
+				return ( 0 );
+			}
+			virtual void SearchAlgorithum() {
+			}
+			virtual void BaseSend() {
+			}
+			virtual void SendLevel() {
+			}
+			virtual void SendObject( unsigned int id, int objID,  int componentID ) {
+			}
+			virtual void ThreadObject( unsigned int id, int objID,  int componentID ) {
+			}
+			virtual void EndObjectThread() {
+			}
+			virtual void Cycle() {
+			}
+			virtual void DetectCollision() {
+			}
+			virtual void Draw() {
+			}
+			virtual void CleanUp() {
+			}
+			virtual int HeartBeat( unsigned int i ) {
+				return ( 0 );
+			}
+			virtual void LoadAlgorithim( std::string info ) {
+			}
+			virtual void LevelCycle() {
+			}
+			virtual void GetObject( unsigned int id, int objID, int componentID ) {
+			}
+			virtual void GetRenderLayer( unsigned int layer ) {
+			}
+			virtual void GetRenderLayerByLevel( unsigned int level ) {
+			}
+			virtual void GetRenderLayerByLevel( std::string levelName ) {
+			}
+			virtual void GetCamera() {
+			}
+			virtual void GetSoundManager() {
+			}
+			virtual WSL::Containers::Base::XYZ GetMousePosition() {
+				return WSL::Containers::Base::XYZ();
+			}
 			WSL::Containers::CoreInfoContainer currentInfo;
 			bool threeDCollision;
-			WSL::Global::Input *input;
-			WSL::Global::Stack<WSL::Framework::Standard::Base::BaseEntity*> objects;
+			WSL::Global::Input* input;
+			WSL::Global::Stack< WSL::Framework::Standard::Base::BaseEntity* > objects;
 			unsigned int componentTrack;
 			int highestComponentID;
 			bool didNotFindResult;
-			WSL::Global::Stack<WSL::Algorithmic::RenderLayer*> renderLayers;
-			std::vector<WSL::DataTranslation::Base::BaseTranslator*> translators;
+			WSL::Global::Stack< WSL::Algorithmic::RenderLayer* > renderLayers;
+			std::vector< WSL::DataTranslation::Base::BaseTranslator* > translators;
 		protected:
 			WSL::Containers::CoreInfoContainer componentInfo;
-			std::vector<std::string> startScripts;
-			std::string standardScripts[5];
+			std::vector< std::string > startScripts;
+			std::string standardScripts[ 5 ];
 			bool refresh, initialize, runDestroy, destroy;
-			WSL::Collision::Scan_Area_Collision::Initializer scanInit;
+			WSL::Collision::ScanAreaCollision::Initializer scanInit;
 		};
 	}
 }

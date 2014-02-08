@@ -21,23 +21,22 @@ namespace WSL
 {
 	namespace Components
 	{
-		class Lightning_Sprite : public WSL::Components::Rendering_System::Base::SubBase::SFMLType<sf::Sprite>
+		class LightningSprite : public WSL::Components::Rendering_System::Base::SubBase::SFMLType< sf::Sprite >
 		{
 			unsigned int image;
-			std::vector<unsigned int> animations;
+			std::vector< unsigned int > animations;
 			WSL::Algorithmic::ReceiverNode node;
 			unsigned int currentAnimation;
 			bool animate, animateFirstToLast;
-			WSL::Base::EngineBase *refrence;
+			WSL::Base::EngineBase* refrence;
 		public:
-			inline Lightning_Sprite( bool null )
+			inline LightningSprite( bool null )
 			{
 				currentAnimation = 0;
 				animate = false;
 				animateFirstToLast = true;
 			}
-			inline Lightning_Sprite(){}
-			
+			inline LightningSprite(){}
 			void AddAnimation( unsigned int animation );
 			//--///////////////////////////////////////////////////
 			unsigned int AddAnimationToSingleton();
@@ -61,10 +60,10 @@ namespace WSL
 			void SetAnimateFirstToLast( bool animateFirstToLast_ );
 			//--///////////////////////////////////////////////////
 			void SetCurrentAnimation( unsigned int currentAnimation_ );
-			void SetImage( unsigned int image_, WSL::Global::Image_Library *imgLib );
+			void SetImage( unsigned int image_, WSL::Global::ImageLibrary* imgLib );
 			void SetUpSprite( float x, float y, bool reScale );
-			void SetUpSprite( unsigned int image_, bool reScale, WSL::Global::Image_Library *imgLib );
-			void SetUpSprite( float x, float y, unsigned int image_, bool reScale, WSL::Global::Image_Library *imgLib );
+			void SetUpSprite( unsigned int image_, bool reScale, WSL::Global::ImageLibrary *imgLib );
+			void SetUpSprite( float x, float y, unsigned int image_, bool reScale, WSL::Global::ImageLibrary *imgLib );
 			/////////////////////////////////////////////////////
 			void SendAnimation();
 			//--///////////////////////////////////////////////////

@@ -28,8 +28,7 @@ namespace WSL
 			WSL::Algorithmic::ReceiverNode renderLayerNode;
 			bool renderLayerDeleted;
 		public:
-			inline Level( bool null )
-			{
+			inline Level( bool null ) {
 				renderLayerDeleted = false;
 			}
 			inline Level(){}
@@ -40,49 +39,46 @@ namespace WSL
 			void SetObject( unsigned int id, int objID, WSL::Framework::Standard::Base::BaseEntity *object );
 			virtual unsigned int SearchAlgorithim( unsigned int id, int objID, int componentID );
 			bool ObjectIsInLevel( unsigned int i );
-		 	inline void SetRenderLayer( unsigned int element )
-			{
+		 	inline void SetRenderLayer( unsigned int element ) {
 				renderLayerNode.SetElement( element );
 			}
 			unsigned int SendRenderLayer()
 			{
 				unsigned int size = refrence->renderLayers.node.Size();
-				for( unsigned int i = 0; i < size; ++i )
-				{
+				for( unsigned int i = 0; i < size; ++i ) {
 					if( renderLayerNode.GetElement() == refrence->renderLayers.node.GetDeletedPosition( i ) )
 						renderLayerDeleted = true;
 				}
 				if( renderLayerDeleted == false )
 				{
 					renderLayerNode.UpdateStatus( refrence->renderLayers.node.Notify( renderLayerNode.GetElement() ) );
-					refrence->renderLayers.Array[renderLayerNode.GetElement()]->SetRefrence( refrence );
-					luabind::globals( refrence->engine->luaContainer->State )[ "defaultRenderLayer" ] = refrence->renderLayers.Array[renderLayerNode.GetElement()];
+					refrence->renderLayers.Array[ renderLayerNode.GetElement() ]->SetRefrence( refrence );
+					luabind::globals( refrence->engine->luaContainer->State )[ "defaultRenderLayer" ] = refrence->renderLayers.Array[ renderLayerNode.GetElement() ];
 				}
 				return renderLayerNode.GetElement();
 			}
-			inline void SetActive( bool value ) {
-				active = value;
+			inline void SetActive( bool active_ ) {
+				active = active_;
 			}
-			inline void SetRefresh( bool value ) {
-				refresh = value;
+			inline void SetRefresh( bool refresh_ ) {
+				refresh = refresh_;
 			}
-			inline void SetDestroy( bool value ) {
-				destroy = value;
+			inline void SetDestroy( bool destroy_ ) {
+				destroy = destroy_;
 			}
 			inline void DeleteRenderLayer()
 			{
 				unsigned int size = refrence->renderLayers.node.Size();
-				for( unsigned int i = 0; i < size; ++i )
-				{
+				for( unsigned int i = 0; i < size; ++i ) {
 					if( renderLayerNode.GetElement() == refrence->renderLayers.node.GetDeletedPosition( i ) )
 						renderLayerDeleted = true;
 				}
 				if( renderLayerDeleted == false )
 				{
 					renderLayerNode.UpdateStatus( refrence->renderLayers.node.Notify( renderLayerNode.GetElement() ) );
-					WSL::Algorithmic::RenderLayer *r = refrence->renderLayers.Array[ renderLayerNode.GetElement() ];
+					WSL::Algorithmic::RenderLayer* toDelete = refrence->renderLayers.Array[ renderLayerNode.GetElement() ];
 					refrence->renderLayers.Delete( renderLayerNode.GetElement() );
-					delete r;
+					delete toDelete;
 				}	
 			}
 			virtual void Update( WSL::Algorithmic::SenderNode node_ );

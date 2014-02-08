@@ -37,14 +37,14 @@ namespace WSL
 			void StopSound( unsigned int sound );
 			void Update();
 		protected:
-			std::vector<WSL::Containers::SoundContainer*> sounds;
-			std::vector<sf::Sound> activeSounds;
+			std::vector< WSL::Containers::SoundContainer* > sounds;
+			std::vector< sf::Sound > activeSounds;
 			sf::Sound* FindSound( unsigned int sound )
 			{
-				if( WSL::Algorithmic::Range_Check_bool( sound, activeSounds.size() ) == true )
+				if( WSL::Algorithmic::BoolRangeCheck( sound, activeSounds.size() ) == true )
 				{
 					//Unessery but safer.//
-					sf::Sound *ptr = &activeSounds[sound];
+					sf::Sound* ptr = &activeSounds[ sound ];
 					return ptr;
 				}
 				return NULL;

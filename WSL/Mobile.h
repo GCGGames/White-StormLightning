@@ -26,12 +26,12 @@ namespace WSL
 			class Mobile : public WSL::Framework::Standard::Positional
 			{
 			protected:
-				WSL::Containers::Scripting::Lua::LuaBindedType<bool> autoCalculate, autoMove;
+				WSL::Containers::Scripting::Lua::LuaBindedType< bool > autoCalculate, autoMove;
 				WSL::Containers::Math::Vector vector;
 			public:
-				Mobile( int obj_ID, bool Refresh, bool Destroy, bool initialize_, bool RDestroy,
-							std::string refesh_Script, std::string initialize_Script, std::string destroy_Script,
-							std::string other_Script, std::string physicalBehavior_, WSL::Engine *refrence );
+				Mobile( int objectID, bool refresh, bool destroy, bool initialize_, bool runDestroy,
+							std::string refeshScript, std::string initializeScript, std::string destroyScript,
+							std::string otherScript, std::string physicalBehavior_, WSL::Engine* refrence );
 				Mobile();
 				~Mobile();
 				void Calculate();

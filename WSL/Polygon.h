@@ -21,75 +21,70 @@ namespace WSL
 {
 	namespace Components
 	{
-		class Polygon : public WSL::Components::Rendering_System::Base::SubBase::SFMLType<sf::Shape>
+		class Polygon : public WSL::Components::Rendering_System::Base::SubBase::SFMLType< sf::Shape >
 		{
-			std::vector<WSL::Containers::Base::XYZ> shapePoints;
+			std::vector< WSL::Containers::Base::XYZ > shapepoints;
 		public:
-			void SetColor( sf::Color Color )
-			{
+			void SetColor( sf::Color Color ) {
 				t.SetColor( Color );
 			}
-			void SetColor( WSL::Containers::Scripting::Lua::ColorWrap color_ )
-			{
+			void SetColor( WSL::Containers::Scripting::Lua::ColorWrap color_ ) {
 				t.SetColor( color_.GetColor() );
 			}
-			void AddPoint( float x, float y )
-			{
+			void AddPoint( float x, float y ) {
 				t.AddPoint( x, y );
-				shapePoints.push_back( WSL::Containers::Base::XYZ( x, y, position.getZ() ) );
+				shapepoints.push_back( WSL::Containers::Base::XYZ( x, y, position.GetZ() ) );
 			}
-			void AddPoint( float x, float y, float z )
-			{
+			void AddPoint( float x, float y, float z ) {
 				t.AddPoint( x, y );
-				shapePoints.push_back( WSL::Containers::Base::XYZ( x, y, z ) );
+				shapepoints.push_back( WSL::Containers::Base::XYZ( x, y, z ) );
 			}
-			void AddPoint( WSL::Containers::Base::XYZ point )
-			{
-				t.AddPoint( point.getX(), point.getY() );
-				shapePoints.push_back( point );
+			void AddPoint( WSL::Containers::Base::XYZ point ) {
+				t.AddPoint( point.GetX(), point.GetY() );
+				shapepoints.push_back( point );
 			}
 			void SetPointColor( sf::Color Color, unsigned int point )
 			{
-				if( WSL::Algorithmic::Range_Check_bool( point, shapePoints.size() ) == true )
+				if( WSL::Algorithmic::BoolRangeCheck( point, shapepoints.size() ) == true )
 					t.SetPointColor( point, Color );
 				else
 				{
-					std::cout<<"You have attempted to accses a non-existant point"<<std::endl;
-					std::cout<<"in method ''SetPointColor'' in WSL::Components::Polygon."<<std::endl;
-					std::cout<<"Please attempt to remain within the vector subscript range."<<std::endl;
+					std::cout << "You have attempted to accses a non-existant point" << std::endl;
+					std::cout << "in method ''SetPointColor'' in WSL::Components::Polygon." << std::endl;
+					std::cout << "Please attempt to remain within the vector subscript range." << std::endl;
 				}
 			}
 			void SetPointColor( WSL::Containers::Scripting::Lua::ColorWrap color_, unsigned int point )
 			{
-				if( WSL::Algorithmic::Range_Check_bool( point, shapePoints.size() ) == true )
+				if( WSL::Algorithmic::BoolRangeCheck( point, shapepoints.size() ) == true )
 					t.SetPointColor( point, color_.GetColor() );
 				else
 				{
-					std::cout<<"You have attempted to accses a non-existant point"<<std::endl;
-					std::cout<<"in method ''SetPointColor'' in WSL::Components::Polygon."<<std::endl;
-					std::cout<<"Please attempt to remain within the vector subscript range."<<std::endl;
+					std::cout << "You have attempted to accses a non-existant point" << std::endl;
+					std::cout << "in method ''SetPointColor'' in WSL::Components::Polygon." << std::endl;
+					std::cout << "Please attempt to remain within the vector subscript range." << std::endl;
 				}
 			}
 			void SetPointOutlineColor( sf::Color Color, unsigned int point )
 			{
-				if( WSL::Algorithmic::Range_Check_bool( point, shapePoints.size() ) == true )
+				if( WSL::Algorithmic::BoolRangeCheck( point, shapepoints.size() ) == true )
 					t.SetPointOutlineColor( point, Color );
 				else
 				{
-					std::cout<<"You have attempted to accses a non-existant point"<<std::endl;
-					std::cout<<"in method ''SetPointOutlineColor'' in WSL::Components::Polygon."<<std::endl;
-					std::cout<<"Please attempt to remain within the vector subscript range."<<std::endl;
+					std::cout << "You have attempted to accses a non-existant point" << std::endl;
+					std::cout << "in method ''SetPointOutlineColor'' in WSL::Components::Polygon." << std::endl;
+					std::cout << "Please attempt to remain within the vector subscript range." << std::endl;
 				}
 			}
 			void SetPointOutlineColor( WSL::Containers::Scripting::Lua::ColorWrap color_, unsigned int point )
 			{
-				if( WSL::Algorithmic::Range_Check_bool( point, shapePoints.size() ) == true )
+				if( WSL::Algorithmic::BoolRangeCheck( point, shapepoints.size() ) == true )
 					t.SetPointOutlineColor( point, color_.GetColor() );
 				else
 				{
-					std::cout<<"You have attempted to accses a non-existant point"<<std::endl;
-					std::cout<<"in method ''SetPointOutlineColor'' in WSL::Components::Polygon."<<std::endl;
-					std::cout<<"Please attempt to remain within the vector subscript range."<<std::endl;
+					std::cout << "You have attempted to accses a non-existant point" << std::endl;
+					std::cout << "in method ''SetPointOutlineColor'' in WSL::Components::Polygon." << std::endl;
+					std::cout << "Please attempt to remain within the vector subscript range." << std::endl;
 				}
 			}
 		};

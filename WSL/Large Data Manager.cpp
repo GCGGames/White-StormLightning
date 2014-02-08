@@ -23,13 +23,11 @@ void WSL::Algorithmic::LargeDataManager::AddObject( unsigned int element )
 	temp.SetElement( element );
 	objects.push_back( temp );
 }
-void WSL::Algorithmic::LargeDataManager::DeleteRefrence()
-{
+void WSL::Algorithmic::LargeDataManager::DeleteRefrence() {
 	refrence = NULL;
 }
-void WSL::Algorithmic::LargeDataManager::DeleteTracker( unsigned int element )
-{
-	if( WSL::Algorithmic::Range_Check_bool( element, objects.size() ) == true )
+void WSL::Algorithmic::LargeDataManager::DeleteTracker( unsigned int element ) {
+	if( WSL::Algorithmic::BoolRangeCheck( element, objects.size() ) == true )
 		objects.erase( element );
 }
 void WSL::Algorithmic::LargeDataManager::DeleteTrackerByElement( unsigned int element )
@@ -40,7 +38,7 @@ void WSL::Algorithmic::LargeDataManager::DeleteTrackerByElement( unsigned int el
 		unsigned int i = 0;
 		while( i < size )
 		{
-			if( objects[i].GetElement() == element )
+			if( objects[ i ].GetElement() == element )
 				objects.erase( i );
 			++i;
 		}
@@ -48,71 +46,66 @@ void WSL::Algorithmic::LargeDataManager::DeleteTrackerByElement( unsigned int el
 }
 std::string WSL::Algorithmic::LargeDataManager::GetRefreshScript()
 {
-	return (refreshScript);
+	return ( refreshScript );
 }
 unsigned int WSL::Algorithmic::LargeDataManager::GetObjectElement( unsigned int node )
 {
 	unsigned int size = objects.size();
-	if( WSL::Algorithmic::Range_Check_bool( node, objects.size() ) == true )
-		return (objects[node].GetElement());
+	if( WSL::Algorithmic::BoolRangeCheck( node, objects.size() ) == true )
+		return (objects[ node ].GetElement());
 	else
 	{
-		std::cerr<<"No element (node) found with the index "<<node<<" a default value has been"<<std::endl;
-		std::cerr<<"returned for method GetObjectElement( unsigned int )."<<std::endl;
-		return (0);
+		std::cerr << "No element (node) found with the index " << node << " a default value has been" << std::endl;
+		std::cerr << "returned for method GetObjectElement( unsigned int )." << std::endl;
+		return ( 0 );
 	}
 }
-WSL::Containers::PointableVector<WSL::Algorithmic::ReceiverNode> WSL::Algorithmic::LargeDataManager::GetObjects()
-{
-	return (objects);
+WSL::Containers::PointableVector<WSL::Algorithmic::ReceiverNode> WSL::Algorithmic::LargeDataManager::GetObjects() {
+	return ( objects );
 }
 bool WSL::Algorithmic::LargeDataManager::DoesObjectExist( unsigned int node )
 {
-	if( WSL::Algorithmic::Range_Check_bool( node, objects.size() ) == true )
-		return (true);
+	if( WSL::Algorithmic::BoolRangeCheck( node, objects.size() ) == true )
+		return ( true );
 	else
-		return (false);
+		return ( false );
 }
 void WSL::Algorithmic::LargeDataManager::Update( WSL::Algorithmic::SenderNode node )
 {
 	unsigned int i = 0;
-	unsigned int i2 = 0;
-	unsigned int size = node.Size();
-	unsigned int size2 = objects.size();
-	if( size != 0 && size2 != 0 )
+	unsigned int j = 0;
+	const unsigned int SIZE = node.Size();
+	unsigned int objectsSize = objects.size();
+	if( SIZE != 0 && objectsSize != 0 )
 	{
-		while( i2 < size2 )
+		while( j < objectsSize )
 		{
-			while( i < size )
+			while( i < SIZE )
 			{
-				if( objects[i2].GetElement() == node.GetDeletedPosition( i ) )
+				if( objects[ j ].GetElement() == node.GetDeletedPosition( i ) )
 				{
-					objects.erase( i2 );
-					size2 -= 1;
-					i2 = 0;
+					objects.erase( j );
+					objectsSize -= 1;
+					j = 0;
 				}
 				i++;
 			}
-			objects[i2].UpdateStatus( node.Notify( objects[i2].GetElement() ) );
+			objects[ j ].UpdateStatus( node.Notify( objects[ j ].GetElement() ) );
 			i = 0;
-			i2++;
+			j++;
 		}
 	}
 }
-void WSL::Algorithmic::LargeDataManager::Refresh()
-{
+void WSL::Algorithmic::LargeDataManager::Refresh() {
 	luaSend();
 	luaL_dofile( refrence->luaContainer->State, refreshScript.c_str() );
 }
-void WSL::Algorithmic::LargeDataManager::SetRefreshScript( std::string refreshScript_ )
-{
+void WSL::Algorithmic::LargeDataManager::SetRefreshScript( std::string refreshScript_ ) {
 	refreshScript = refreshScript_;
 }
-void WSL::Algorithmic::LargeDataManager::SetObjects( std::vector<WSL::Algorithmic::ReceiverNode> objects_ )
-{
+void WSL::Algorithmic::LargeDataManager::SetObjects( std::vector<WSL::Algorithmic::ReceiverNode> objects_ ) {
 	objects = objects_;
 }
-void WSL::Algorithmic::LargeDataManager::SetRefrence( WSL::Engine *engine )
-{
+void WSL::Algorithmic::LargeDataManager::SetRefrence( WSL::Engine* engine ) {
 	refrence = engine;
 }

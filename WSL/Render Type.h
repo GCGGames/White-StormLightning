@@ -16,7 +16,7 @@ This file is part of White - Storm: Lightning (alpha).
     You should have received a copy of the GNU General Public License
     along with White - Storm: Lightning (alpha).  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "Range_Check.h"
+#include "Range Check.h"
 //#include "Pointable Vector.h"
 namespace WSL
 {
@@ -24,9 +24,9 @@ namespace WSL
 	{
 		struct RenderType
 		{
-			inline RenderType() {}
-			inline RenderType( bool null )
-			{
+			inline RenderType() {
+			}
+			inline RenderType( bool null ) {
 				added = false;
 			}
 			std::string type;
@@ -38,8 +38,8 @@ namespace WSL
 		struct Finder
 		{
 			unsigned int originalElement;
-			T **renderRefrence;
-			T* GetReg() {
+			T** renderRefrence;
+			T* GetRenderReference() {
 				return *renderRefrence;
 			}
 			std::string type;

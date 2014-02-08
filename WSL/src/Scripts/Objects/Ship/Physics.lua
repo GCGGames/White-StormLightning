@@ -1,6 +1,5 @@
 c = scanArea:GetCollision()
---v = c:GetCoords()
-a = c:GetBool()
+a = c:GetBooleanValue()
 if a == true then
-	print( "Collision!" )
+	print( "Collision detected!" )
 end

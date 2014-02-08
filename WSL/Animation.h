@@ -49,8 +49,8 @@ namespace WSL
 				void ReplaceData( WSL::Components::Algorithimic::SubBase::AllAnimationData data );
 				void Reset();
 				void Restore();
-				void SetUpSpriteSheet( int Sprite_Width, int Sprite_Height, int Sprite_X, int Sprite_Y, int Offset_X, int Offset_Y, int Param_Width, int Param_Height, bool Change_X, bool Change_Y );
-				void SetUpSpriteSheet( int Sprite_Width, int Sprite_Height, int Offset_X, int Offset_Y, int Param_Width, int Param_Height, bool Change_X, bool Change_Y );
+				void SetUpSpriteSheet( int spriteWidth, int spriteHeight, int spriteX, int spriteY, int offsetX, int offsetY, int parameterWidth, int parameterHeight, bool changeX, bool changeY );
+				void SetUpSpriteSheet( int spriteWidth, int spriteHeight, int offsetX, int offsetY, int parameterWidth, int parameterHeight, bool changeX, bool changeY );
 			};
 		}
 	}

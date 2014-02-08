@@ -25,25 +25,42 @@ namespace WSL
 		{
 			struct XYZB
 			{
-				inline float getX() { return X; }
-				inline float getY() { return Y; }
-				inline float getZ() { return Z; }
-				inline void setX( float Value ) { X = Value; }
-				inline void setY( float Value ) { Y = Value; }
-				inline void setZ( float Value ) { Z = Value; }
+				inline float GetX() {
+					return x;
+				}
+				inline float GetY() {
+					return y;
+				}
+				inline float GetZ() {
+					return y;
+				}
+				inline void SetX( float x_ ) {
+					x = x_;
+				}
+				inline void SetY( float y_ ) {
+					y = y_;
+				}
+				inline void SetZ( float z_ ) {
+					z = z_;
+				}
 				protected:
-					float X, Y, Z;
+					float x, y, z;
 			};
 			struct XYZ : public XYZB
 			{
 			public:
-				XYZ( float x, float y, float z )
+				XYZ( float x_, float y_, float z_ )
 				{
-					X = x;
-					Y = y; 
-					Z = z;
+					x = x_;
+					y = y_; 
+					z = z_;
 				}
-				inline XYZ() { X = 0.f; Y = 0.f; Z = 0.f; }
+				inline XYZ()
+				{
+					x = 0.f;
+					y = 0.f;
+					z = 0.f;
+				}
 			};
 		}
 	}

@@ -16,7 +16,7 @@ This file is part of White - Storm: Lightning (alpha).
     You should have received a copy of the GNU General Public License
     along with White - Storm: Lightning (alpha).  If not, see <http://www.gnu.org/licenses/>.
 */
-//#include "Range_Check.h"
+//#include "RangeCheck.h"
 #include "Rudementary Bounding Box.h"
 namespace WSL
 {
@@ -25,36 +25,29 @@ namespace WSL
 		template< typename T >
 		struct PointableVector
 		{
-			std::vector<T> vector;
-			inline unsigned int size()
-			{
+			std::vector< T > vector;
+			inline unsigned int size() {
 				return vector.size();
 			}
-			inline void push_back( T t )
-			{
+			inline void push_back( T t ) {
 				vector.push_back( t );
 			}
-			inline void clear()
-			{
+			inline void clear() {
 				vector.clear();
 			}
-			inline void erase( unsigned int i )
-			{
+			inline void erase( unsigned int i ) {
 				vector.erase( vector.begin() + i );
 			}
-			inline T operator []( unsigned int element )
+			inline T operator [ ]( unsigned int element )
 			{
-				try
-				{
-					return vector[element];
+				try {
+					return vector[ element ];
 				}
-				catch( std::exception &e )
-				{
-					std::cerr<<"-----!STL Standard Exception!-----: "<<e.what()<<".\n";
+				catch( std::exception &e ) {
+					std::cerr << "-----!STL Standard Exception!-----: " << e.what() << ".\n";
 				}
 			}
-			inline std::vector<T> operator =( std::vector<T> value )
-			{
+			inline std::vector< T > operator=( std::vector< T > value ) {
 				vector = value;
 				return vector;
 			}

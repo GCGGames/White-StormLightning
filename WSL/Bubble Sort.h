@@ -22,47 +22,13 @@ namespace WSL
 	namespace Algorithmic
 	{
 		
-		struct BubbleSort
-		{
+		struct BubbleSort {
 			void BubbleSortAlgorithm( WSL::Containers::PointableVector<WSL::Containers::RenderType> *toBeSorted );
 		};
 #ifndef BSORT
 #define BSORT
-		/*template < typename Rfind >
-		static void BubbleSortAlgorithm( std::vector< Rfind > *toBeSorted )
-		{
-			unsigned int size, i, j;
-			Rfind transfer;
-			size = toBeSorted->size();
-			i = 0;
-			j = 0;
-			while( i < size )
-			{
-				while( j < size )
-				{
-					if( j + 1 != size )
-					{
-						if( toBeSorted->at( j )->GetReg()->getZ() > toBeSorted->at( j + 1 )->GetReg()->getZ() )
-						{
-							transfer = toBeSorted->at( j );
-							toBeSorted->at( j ) = toBeSorted->at( j + 1 );
-							toBeSorted->at( j + 1 ) = transfer;
-						}
-					}
-					else if( toBeSorted->at( 0 )->GetReg()->getZ() > toBeSorted->at( j )->GetReg()->getZ() )
-					{
-						transfer = toBeSorted->at( 0 );
-						toBeSorted->at( 0 ) = toBeSorted->at( j );
-						toBeSorted->at( j ) = transfer;
-					}
-					++j;
-				}
-				j = 0;
-				++i;
-			}
-		}*/
 		template < typename Rfunc >
-		static void BubbleSortAlgorithm( std::vector< Rfunc > *toBeSorted )
+		static void BubbleSortAlgorithm( std::vector< Rfunc >* toBeSorted )
 		{
 			unsigned int size, i, j;
 			Rfunc transfer;
@@ -75,14 +41,14 @@ namespace WSL
 				{
 					if( j + 1 != size )
 					{
-						if( toBeSorted->at( j )->getZ() > toBeSorted->at( j + 1 )->getZ() )
+						if( toBeSorted->at( j )->GetZ() > toBeSorted->at( j + 1 )->GetZ() )
 						{
 							transfer = toBeSorted->at( j );
 							toBeSorted->at( j ) = toBeSorted->at( j + 1 );
 							toBeSorted->at( j + 1 ) = transfer;
 						}
 					}
-					else if( toBeSorted->at( 0 )->getZ() > toBeSorted->at( j )->getZ() )
+					else if( toBeSorted->at( 0 )->GetZ() > toBeSorted->at( j )->GetZ() )
 					{
 						transfer = toBeSorted->at( 0 );
 						toBeSorted->at( 0 ) = toBeSorted->at( j );

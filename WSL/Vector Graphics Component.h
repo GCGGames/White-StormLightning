@@ -21,18 +21,18 @@ namespace WSL
 {
 	namespace Components
 	{
-		class VectorGraphicsComponent : public WSL::Components::Rendering_System::Base::Render_Functonal
+		class VectorGraphicsComponent : public WSL::Components::Rendering_System::Base::RenderFunctonal
 		{
-			std::vector<sf::Shape> graphics;
-			Collision::Scan_Area_Collision::Scan_Area representation;
+			std::vector< sf::Shape > graphics;
+			Collision::ScanAreaCollision::ScanArea representation;
 			unsigned int i, size;
 			float thickness, outline;
 			sf::Color outlineColor;
-			bool Scale;
-			Collision::Scan_Area_Collision::Initializer I;
-			Collision::Scan_Area_Collision::Builder *B;
-			Collision::Scan_Area_Collision::Rotation_Calculator R;
-			Collision::Scan_Area_Collision::Updator U;
+			bool scale;
+			Collision::ScanAreaCollision::Initializer scanAreaInitializer;
+			Collision::ScanAreaCollision::Builder* builder;
+			Collision::ScanAreaCollision::RotationCalculator rotationCalculator;
+			Collision::ScanAreaCollision::Updator updator;
 		public:
 			VectorGraphicsComponent( std::string file );
 			VectorGraphicsComponent();
@@ -47,11 +47,11 @@ namespace WSL
 			void SetPosition( WSL::Containers::Base::XYZ Position );
 			void Reload( std::string directory );
 			void Build();
-			sf::Shape getLine( unsigned int Elem );
-			std::vector<sf::Shape> getGraphics();
+			sf::Shape GetLine( unsigned int Elem );
+			std::vector< sf::Shape > GetGraphics();
 			void Link();
 			void Draw( sf::RenderWindow *window );
-			void Rotate( float Degrees );
+			void Rotate( float degrees );
 			void SetRotation( float degree );
 			void CleanUp();
 		};

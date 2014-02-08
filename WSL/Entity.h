@@ -28,16 +28,16 @@ namespace WSL
 				class Entity : public WSL::Framework::Standard::Base::BaseEntity
 				{
 				public:
-					Entity( int obj_ID, bool Refresh, bool Destroy, bool initialize_, bool RDestroy,
-						std::string refesh_Script, std::string initialize_Script, std::string destroy_Script,
-						std::string other_Script, WSL::Engine *refrence_ );
+					Entity( int objectID, bool Refresh, bool Destroy, bool initialize_, bool runDestroy,
+						std::string refeshScript, std::string initializeScript, std::string destroyScript,
+						std::string otherScript, WSL::Engine* refrence_ );
 					Entity();
 					~Entity();
 					virtual void RunInitScript( std::string script );
-					void InitializeEntity( int obj_ID );
-					virtual void Construct( int obj_ID, bool Refresh, bool Destroy, bool initialize_, bool RDestroy,
-						std::string refesh_Script, std::string initialize_Script, std::string destroy_Script,
-						std::string other_Script, WSL::Engine *refrence_ );
+					void InitializeEntity( int objID );
+					virtual void Construct( int objectID, bool refresh_, bool destroy_, bool initialize_, bool runDestroy,
+						std::string refeshScript_, std::string initializeScript_, std::string destroyScript_,
+						std::string otherScript_, WSL::Engine* refrence_ );
 					void DeleteRefrence();
 					std::string GetRefreshScript();
 					std::string GetInitializeScript();
@@ -46,7 +46,7 @@ namespace WSL
 					bool GetDestroy();
 					void SetDestroy( bool destroy_ );
 					WSL::Containers::CoreInfoContainer GetChild( unsigned int id, unsigned int objID_ );
-					virtual void SetRefrence( WSL::Engine *refrence_ );
+					virtual void SetRefrence( WSL::Engine* refrence_ );
 					virtual void SendToLua();
 					void SetResfreshScript( std::string script );
 					void SetInitializeScript( std::string script );
@@ -56,8 +56,8 @@ namespace WSL
 					int GetComponentID();
 					int GetID();
 					int GetObjID();
-					void SetObjID( int value );
-					void SetID( int value );
+					void SetObjID( int objectId_ );
+					void SetID( int id_ );
 					virtual void RunScript( std::string script );
 					virtual void Initialize();
 					virtual void Refresh();

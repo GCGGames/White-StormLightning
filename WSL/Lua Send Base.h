@@ -25,9 +25,12 @@ namespace WSL
 		{
 			struct SenderBase
 			{
-				virtual void SendToLua(){}
-				virtual void SetRefrence( WSL::Base::SingletonBase *single ){}
-				virtual void DeleteRefrence(){}
+				virtual void SendToLua() {
+				}
+				virtual void SetRefrence( WSL::Base::SingletonBase* single ) {
+				}
+				virtual void DeleteRefrence() {
+				}
 			};
 		}
 	}

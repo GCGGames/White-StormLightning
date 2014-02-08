@@ -23,13 +23,12 @@ namespace WSL
 	{
 		struct SoundContainer
 		{
-			inline SoundContainer( std::string name_, std::string file_ )
-			{
+			inline SoundContainer( std::string name_, std::string file_ ) {
 				LoadSound( name_, file_ );
 			}
-			inline SoundContainer(){}
-			inline void LoadSound( std::string file_ )
-			{
+			inline SoundContainer() {
+			}
+			inline void LoadSound( std::string file_ ) {
 				sound.LoadFromFile( file_ );
 				file = file;
 			}
@@ -39,33 +38,25 @@ namespace WSL
 				file = file_;
 				sound.LoadFromFile( file );
 			}
-			inline void SetSound( sf::SoundBuffer sound_ )
-			{
+			inline void SetSound( sf::SoundBuffer sound_ ) {
 				sound = sound_;
 			}
-			inline void SetSound( sf::SoundBuffer *sound_ )
-			{
+			inline void SetSound( sf::SoundBuffer *sound_ ) {
 				sound = *sound_;
 			}
-			inline void SetFile( std::string file_ )
-			{
+			inline void SetFile( std::string file_ ) {
 				file = file_;
 			}
-			inline void SetName( std::string name_ )
-			{
+			inline void SetName( std::string name_ ) {
 				name = name_;
 			}
-			inline sf::SoundBuffer* GetSound()
-			{
-				sf::SoundBuffer *s = &sound;
-				return s;
+			inline sf::SoundBuffer* GetSound() {
+				return &sound;
 			}
-			inline std::string GetName()
-			{
+			inline std::string GetName() {
 				return name;
 			}
-			inline std::string GetFile()
-			{
+			inline std::string GetFile() {
 				return file;
 			}
 		protected:

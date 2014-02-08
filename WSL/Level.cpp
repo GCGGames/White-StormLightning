@@ -27,30 +27,29 @@ void WSL::Algorithmic::Level::AddObject( unsigned int id, unsigned int objID )
 	{
 		while( i < size )
 		{
-			if( refrence->objects.Array[i]->GetObjID() == objID && refrence->objects.Array[i]->GetID() == id )
+			if( refrence->objects.Array[ i ]->GetObjID() == objID && refrence->objects.Array[ i ]->GetID() == id )
 			{
-				int compID = 0;
+				int componentID = 0;
 				refrence->currentInfo.SetObjID( objID );
 				refrence->currentInfo.SetID( id );
-				while( compID < refrence->highestComponentID + 1 )
+				while( componentID < ( refrence->highestComponentID + 1 ) )
 				{
-					refrence->currentInfo.SetComponentID( compID );
+					refrence->currentInfo.SetComponentID( componentID );
 					refrence->SearchAlgorithum();
 					if( refrence->didNotFindResult == true )
-						compID++;
-					else
-					{
+						++componentID;
+					else {
 						j = refrence->componentTrack;
 						break;
 					}
 				}
 				if( refrence->didNotFindResult == true )
 				{
-					std::cerr<<"Failure to add object with Object - ID "<<objID;
-					std::cerr<<" and ID "<<id<<" to level "<<name<<std::endl;
-					std::cerr<<"Did you instantiate the object before trying to";
-					std::cerr<<"find it, or did you instaintate the level before ";
-					std::cerr<<"instantiating the object."<<std::endl;
+					std::cerr << "Failure to add object with Object - ID " << objID;
+					std::cerr << " and ID " << id << " to level " << name << std::endl;
+					std::cerr << "Did you instantiate the object before trying to";
+					std::cerr << "find it, or did you instaintate the level before ";
+					std::cerr << "instantiating the object." << std::endl;
 				}
 				else
 					objects.AddObject( j );
@@ -58,36 +57,26 @@ void WSL::Algorithmic::Level::AddObject( unsigned int id, unsigned int objID )
 			}
 			i++;
 			if( i == size )
-				std::cerr<<"Could not find an object with ID: "<<id<<"\nand Object - ID: "<<objID<<".\n";
+				std::cerr << "Could not find an object with ID: " << id << "\nand Object - ID: " << objID << ".\n";
 		}
 	}
 }
-void WSL::Algorithmic::Level::GetObject( unsigned int id, int objID, int componentID )
-{
+void WSL::Algorithmic::Level::GetObject( unsigned int id, int objID, int componentID ) {
 	refrence->SendObject( id, objID, componentID );
 }
-WSL::Framework::Standard::Base::BaseEntity* WSL::Algorithmic::Level::GetObject( unsigned int id, int objID, int componentID, bool null )
-{
-	return refrence->objects.Array[SearchAlgorithim( id, objID, componentID )];
+WSL::Framework::Standard::Base::BaseEntity* WSL::Algorithmic::Level::GetObject( unsigned int id, int objID, int componentID, bool null ) {
+	return refrence->objects.Array[ SearchAlgorithim( id, objID, componentID ) ];
 }
-void WSL::Algorithmic::Level::SetObject( unsigned int id, int objID, WSL::Framework::Standard::Base::BaseEntity *object )
-{
-	refrence->objects.Array[SearchAlgorithim( id, objID, object->GetComponentID())] = object;
+void WSL::Algorithmic::Level::SetObject( unsigned int id, int objID, WSL::Framework::Standard::Base::BaseEntity* object ) {
+	refrence->objects.Array[ SearchAlgorithim( id, objID, object->GetComponentID() ) ] = object;
 }
 unsigned int WSL::Algorithmic::Level::SearchAlgorithim( unsigned int id, int objID, int componentID )
 {
-	unsigned int size;
-	unsigned int i = 0;
+	const unsigned int SIZE = objects.GetObjects().size();
 	Update( refrence->objects.node );
-	size = objects.GetObjects().size();
-	if( size != 0 )
-	{
-		while( i < size )
-		{
-			if( objects.DoesObjectExist( i ) == true )
-				return objects.GetObjectElement( i );
-			i++;
-		}
+	for( unsigned int i = 0; i < SIZE; ++i ) {
+		if( objects.DoesObjectExist( i ) == true )
+			return objects.GetObjectElement( i );
 	}
 	return 0;
 }
@@ -103,8 +92,7 @@ bool WSL::Algorithmic::Level::ObjectIsInLevel( unsigned int i )
 	unsigned int j = 0;
 	while( exists == true )
 	{
-		if( objects.DoesObjectExist( j ) == true )
-		{
+		if( objects.DoesObjectExist( j ) == true ) {
 			if( objects.GetObjectElement( j ) == i )
 				return true;
 		}
@@ -114,20 +102,17 @@ bool WSL::Algorithmic::Level::ObjectIsInLevel( unsigned int i )
 	}
 	return false;
 }
-void WSL::Algorithmic::Level::Initialize()
-{
+void WSL::Algorithmic::Level::Initialize() {
 	if( initialize == true )
 		luaL_dofile( refrence->engine->luaContainer->State, initializeScript.c_str() );
 }
-void WSL::Algorithmic::Level::Refresh()
-{
+void WSL::Algorithmic::Level::Refresh() {
 	if( refresh == true )
 		luaL_dofile( refrence->engine->luaContainer->State, refreshScript.c_str() );
 }
 void WSL::Algorithmic::Level::Destroy()
 {
-	if( destroy == true )
-	{
+	if( destroy == true ) {
 		luaL_dofile( refrence->engine->luaContainer->State, destroyScript.c_str() );
 		DeleteRefrence();
 	}

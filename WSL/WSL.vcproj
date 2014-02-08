@@ -455,7 +455,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Range_Check.h"
+				RelativePath=".\Range Check.h"
 				>
 			</File>
 			<File
@@ -484,10 +484,6 @@
 			</File>
 			<File
 				RelativePath=".\Render Type.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Renders.h"
 				>
 			</File>
 			<File
@@ -570,12 +566,12 @@
 				RelativePath=".\XYZ.h"
 				>
 			</File>
-		</Filter>
-		<Filter
-			Name="Resource Files"
-			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
-			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
-			>
+			<Filter
+				Name="Resource Files"
+				Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
+				UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
+				>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>

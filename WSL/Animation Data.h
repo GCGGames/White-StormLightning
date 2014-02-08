@@ -33,12 +33,12 @@ namespace WSL
 				class AnimationData
 				{
 				protected:
-					std::vector<unsigned int> targates;
+					std::vector< unsigned int > targates;
 					int delay, count, inc;
 					bool animate, init, type;
 					unsigned int currentFrame, size, frame;
-					std::vector<sf::IntRect> frames;
-					void reset()
+					std::vector< sf::IntRect > frames;
+					void Reset__()
 					{
 						frame = 0;
 						type = true;
@@ -60,11 +60,11 @@ namespace WSL
 					int GetDelay();
 					bool GetType();
 					//"Setter's".//
-					void SetType( AnimationType SheetOrImageByImage );
-					void SetType( bool value );
-					void SetCurrentFrame( unsigned int value );
-					void SetAnimate( bool value );
-					void SetDelay( int value );
+					void SetType( AnimationType sheetOrImageByImage );
+					void SetType( bool type_ );
+					void SetCurrentFrame( unsigned int currentFrame_ );
+					void SetAnimate( bool animate_ );
+					void SetDelay( int delay_ );
 				};
 			}
 		}

@@ -26,8 +26,8 @@ namespace WSL
 			unsigned int size, i;
 			int xMouseChange, yMouseChange;
 			float cameraX, cameraY, cameraZ;
-			std::vector<WSL::Containers::Key> keys;
-			Input( WSL::Global::Camera *camera, WSL::Engine *refrence_ );
+			std::vector< WSL::Containers::Key > keys;
+			Input( WSL::Global::Camera* camera, WSL::Engine* refrence_ );
 			Input();
 			void Frame();
 			bool IsKeyDown( std::string key );
@@ -35,8 +35,8 @@ namespace WSL
 			bool GetMouseClick( std::string button );
 			int GetMouseEvent( std::string mouseEvent );
 			void Map();
-			void Update( WSL::Global::Camera *camera );
-			WSL::Engine *refrence;
+			void Update( WSL::Global::Camera* camera );
+			WSL::Engine* refrence;
 		};
 	}
 }

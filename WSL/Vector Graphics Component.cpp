@@ -17,157 +17,144 @@ This file is part of White - Storm: Lightning (alpha).
     along with White - Storm: Lightning (alpha).  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "Vector Graphics Component.h"
-void WSL::Components::VectorGraphicsComponent::AddPoint( float x, float y )
-{
-	representation.Add_Point( WSL::Containers::Base::XYZ( x, y, position.getZ() ) );
-	representation.Add_Magnitude( WSL::Containers::Base::XYZ( x, y, position.getZ() ) );
+void WSL::Components::VectorGraphicsComponent::AddPoint( float x, float y ) {
+	representation.AddPoint( WSL::Containers::Base::XYZ( x, y, position.GetZ() ) );
+	representation.AddMagnitude( WSL::Containers::Base::XYZ( x, y, position.GetZ() ) );
 }
-void WSL::Components::VectorGraphicsComponent::AddPoint( float x, float y, float z )
-{
-	representation.Add_Point( WSL::Containers::Base::XYZ( x, y, position.getZ() ) );
-	representation.Add_Magnitude( WSL::Containers::Base::XYZ( x, y, z ) );
+void WSL::Components::VectorGraphicsComponent::AddPoint( float x, float y, float z ) {
+	representation.AddPoint( WSL::Containers::Base::XYZ( x, y, position.GetZ() ) );
+	representation.AddMagnitude( WSL::Containers::Base::XYZ( x, y, z ) );
 }
-void WSL::Components::VectorGraphicsComponent::AddPoint( WSL::Containers::Base::XYZ Position )
-{
-	representation.Add_Point( WSL::Containers::Base::XYZ( Position ) );
-	representation.Add_Magnitude( WSL::Containers::Base::XYZ( Position ) );
+void WSL::Components::VectorGraphicsComponent::AddPoint( WSL::Containers::Base::XYZ position ) {
+	representation.AddPoint( WSL::Containers::Base::XYZ( position ) );
+	representation.AddMagnitude( WSL::Containers::Base::XYZ( position ) );
 }
 void WSL::Components::VectorGraphicsComponent::Build()
 {
-	std::vector<WSL::Containers::Base::XYZ> temp;
-	temp = B->Build( representation.getPoints() );
-	representation.setCollision_Coords( temp );
+	std::vector< WSL::Containers::Base::XYZ > temp;
+	temp = builder->Build( representation.GetPoints() );
+	representation.SetCollionsCoordinates( temp );
 }
-void WSL::Components::VectorGraphicsComponent::DeletePoint( unsigned int Elem )
+void WSL::Components::VectorGraphicsComponent::DeletePoint( unsigned int position )
 {
-	if( Elem >= 0 && Elem < representation.getPoints().size() )
+	if( position >= 0 && position < representation.GetPoints().size() )
 	{
-		std::vector<WSL::Containers::Base::XYZ> temp = representation.getPoints();
-		temp.erase( temp.begin() + Elem );
-		representation.setPoints( temp );
-		temp = representation.getMagnitudes();
-		temp.erase( temp.begin() + Elem );
-		representation.setMagnitudes( temp );
+		std::vector< WSL::Containers::Base::XYZ > temp = representation.GetPoints();
+		temp.erase( temp.begin() + position );
+		representation.SetPoints( temp );
+		temp = representation.GetMagnitudes();
+		temp.erase( temp.begin() + position );
+		representation.SetMagnitudes( temp );
 	}
 	else
 	{
-		std::cout<<"You have attempted to delete a non-existant"<<std::endl;
-		std::cout<<"element of the std::vector graphics. Please make sure"<<std::endl;
-		std::cout<<"you remain within the vector range."<<std::endl;
+		std::cout << "You have attempted to delete a non-existant" << std::endl;
+		std::cout << "positionent of the std::vector graphics. Please make sure" << std::endl;
+		std::cout << "you remain within the vector range." << std::endl;
 	}
 }
 void WSL::Components::VectorGraphicsComponent::Clear()
 {
-	std::vector<WSL::Containers::Base::XYZ> temp = representation.getPoints();
+	std::vector< WSL::Containers::Base::XYZ > temp = representation.GetPoints();
 	temp.clear();
-	representation.setPoints( temp );
-	representation.setMagnitudes( temp );
+	representation.SetPoints( temp );
+	representation.SetMagnitudes( temp );
 	graphics.clear();
 }
-void WSL::Components::VectorGraphicsComponent::Draw( sf::RenderWindow *window )
+void WSL::Components::VectorGraphicsComponent::Draw( sf::RenderWindow* window )
 {
 	Link();
 	i = 0;
 	size = graphics.size();
 	if( size != 0 )
 	{
-		while( i < size )
-		{
-			window->Draw( graphics[i] );
+		while( i < size ) {
+			window->Draw( graphics[ i ] );
 			i++;
 		}
 	}
 }
-std::vector<sf::Shape> WSL::Components::VectorGraphicsComponent::getGraphics()
-{
+std::vector< sf::Shape > WSL::Components::VectorGraphicsComponent::GetGraphics() {
 	return graphics;
 }
-sf::Shape WSL::Components::VectorGraphicsComponent::getLine( unsigned int Elem )
+sf::Shape WSL::Components::VectorGraphicsComponent::GetLine( unsigned int position )
 {
-	if( Elem >= 0 && Elem < graphics.size() )
-		return graphics[Elem];
+	if( position >= 0 && position < graphics.size() )
+		return graphics[ position ];
 	else
 	{
-		std::cout<<"You have attempted to accses a non-existant element"<<std::endl;
-		std::cout<<"of the std::vector Graphics. A defult value has been returned."<<std::endl;
+		std::cout << "You have attempted to accses a non-existant positionent" << std::endl;
+		std::cout << "of the std::vector Graphics. A defult value has been returned." << std::endl;
 		return sf::Shape();
 	}
 }
 void WSL::Components::VectorGraphicsComponent::Link()
 {
-	representation.setX( position.getX() );
-	representation.setY( position.getY() );
-	representation = U.Update( representation, true );
-	representation.setRotated( false );
-	size = representation.getPoints().size();
+	representation.SetX( position.GetX() );
+	representation.SetY( position.GetY() );
+	representation = updator.Update( representation, true );
+	representation.SetRotated( false );
+	size = representation.GetPoints().size();
 	graphics.clear();
-	i = 0;
-	sf::Shape temp;
-	while( i < size )
+	sf::Shape intermedaiteShape;
+	for( unsigned int i = 0; i < size; ++i )
 	{
 		if( i < size - 1 )
-			temp = sf::Shape::Line( representation.getPoint( i ).getX(), representation.getPoint( i ).getY(), representation.getPoint( i + 1 ).getX(), representation.getPoint( i + 1 ).getY(), thickness, color, outline, outlineColor );
+			intermedaiteShape = sf::Shape::Line( representation.GetPoint( i ).GetX(), representation.GetPoint( i ).GetY(), representation.GetPoint( i + 1 ).GetX(), representation.GetPoint( i + 1 ).GetY(), thickness, color, outline, outlineColor );
 		else
-			temp = sf::Shape::Line( representation.getPoint( i ).getX(), representation.getPoint( i ).getY(), representation.getPoint( 0 ).getX(), representation.getPoint( 0 ).getY(), thickness, color, outline, outlineColor );
-		graphics.push_back( temp );
-		i++;
+			intermedaiteShape = sf::Shape::Line( representation.GetPoint( i ).GetX(), representation.GetPoint( i ).GetY(), representation.GetPoint( 0 ).GetX(), representation.GetPoint( 0 ).GetY(), thickness, color, outline, outlineColor );
+		graphics.push_back( intermedaiteShape );
 	}
-	i = 0;
 }
-void WSL::Components::VectorGraphicsComponent::Reload( std::string directory )
-{
-	representation = I.Set_Point_Coordinates( representation, directory );
-	representation.setInitialized( true );
+void WSL::Components::VectorGraphicsComponent::Reload( std::string directory ) {
+	representation = scanAreaInitializer.SetPointCoordinates( representation, directory );
+	representation.SetInitialized( true );
 }
-void WSL::Components::VectorGraphicsComponent::Rotate( float Degrees )
-{
-	representation = R.Degree_Rotation( representation, Degrees );
+void WSL::Components::VectorGraphicsComponent::Rotate( float Degrees ) {
+	representation = rotationCalculator.DegreeRotation( representation, Degrees );
 	Link();
 }
-void WSL::Components::VectorGraphicsComponent::SetRotation( float degree )
-{
+void WSL::Components::VectorGraphicsComponent::SetRotation( float degree ) {
 	float td = degree - representation.GetRotation();
 	Rotate( td );
 }
 void WSL::Components::VectorGraphicsComponent::SetPosition( float x, float y )
 {
-	representation.setX( x );
-	representation.setY( y );
-	position.setX( x );
-	position.setY( y );
+	representation.SetX( x );
+	representation.SetY( y );
+	position.SetX( x );
+	position.SetY( y );
 }
 void WSL::Components::VectorGraphicsComponent::SetPosition( float x, float y, float z )
 {
-	representation.setX( x );
-	representation.setY( y );
-	representation.setZ( z );
-	position.setX( x );
-	position.setY( y );
-	position.setZ( z );
+	representation.SetX( x );
+	representation.SetY( y );
+	representation.SetZ( z );
+	position.SetX( x );
+	position.SetY( y );
+	position.SetZ( z );
 }
-void WSL::Components::VectorGraphicsComponent::SetPosition( WSL::Containers::Base::XYZ Position )
+void WSL::Components::VectorGraphicsComponent::SetPosition( WSL::Containers::Base::XYZ position )
 {
-	representation.setX( Position.getX() );
-	representation.setY( Position.getY() );
-	representation.setZ( Position.getZ() );
-	position = Position;
+	representation.SetX( position.GetX() );
+	representation.SetY( position.GetY() );
+	representation.SetZ( position.GetZ() );
+	position = position;
 }
-WSL::Components::VectorGraphicsComponent::VectorGraphicsComponent()
-{
+WSL::Components::VectorGraphicsComponent::VectorGraphicsComponent() {
 }
 void WSL::Components::VectorGraphicsComponent::Initialize( std::string file )
 {
-	B = new WSL::Collision::Scan_Area_Collision::Builder;
+	builder = new WSL::Collision::ScanAreaCollision::Builder;
 	thickness = 1;
 	outline = 1;
-	Scale = false;
+	scale = false;
 	outlineColor = sf::Color( 100, 100, 100 );
 	color = sf::Color( 100, 200, 100 );
-	Math::Vector::VectorCalculator *temp = new Math::Vector::VectorCalculator;
-	B->setCalculator( temp );
+	Math::Vector::VectorCalculator* temp = new Math::Vector::VectorCalculator;
+	builder->SetCalculator( temp );
 	Reload( file );
 }
-void WSL::Components::VectorGraphicsComponent::CleanUp()
-{
-	delete B;
+void WSL::Components::VectorGraphicsComponent::CleanUp() {
+	delete builder;
 }

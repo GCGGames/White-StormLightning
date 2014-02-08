@@ -21,79 +21,82 @@ namespace WSL
 {
 	namespace Collision
 	{
-		namespace Scan_Area_Collision
+		namespace ScanAreaCollision
 		{
-			struct Rudementary_Bounding_Box
+			struct RudementaryBoundingBox
 			{
-				float Offset;
-				float Points[6];
-				void Set_Up( WSL::Containers::Base::XYZ Coord, bool Z )
+				float offset;
+				float points[ 6 ];
+				void SetUp( WSL::Containers::Base::XYZ coordinate, bool Z )
 				{
-					Points[0] = Coord.getX() + Offset;
-					Points[1] = Coord.getX() - Offset;
-					Points[2] = Coord.getY() + Offset;
-					Points[3] = Coord.getY() - Offset;
-					if( Z == true )
-					{
-						Points[4] = Coord.getZ() + Offset;
-						Points[5] = Coord.getZ() - Offset;
+					points[ 0 ] = coordinate.GetX() + offset;
+					points[ 1 ] = coordinate.GetX() - offset;
+					points[ 2 ] = coordinate.GetY() + offset;
+					points[ 3 ] = coordinate.GetY() - offset;
+					if( Z == true ) {
+						points[ 4 ] = coordinate.GetZ() + offset;
+						points[ 5 ] = coordinate.GetZ() - offset;
 					}
-					else
-					{
-						Points[4] = 0;
-						Points[5] = 0;
+					else {
+						points[ 4 ] = 0;
+						points[ 5 ] = 0;
 					}
 				}
-				void Set_Up( float X, float Y )
+				void SetUp( float X, float Y )
 				{
-					Points[0] = X + Offset;
-					Points[1] = X - Offset;
-					Points[2] = Y + Offset;
-					Points[3] = Y - Offset;
-					Points[4] = 0;
-					Points[5] = 0;
+					points[ 0 ] = X + offset;
+					points[ 1 ] = X - offset;
+					points[ 2 ] = Y + offset;
+					points[ 3 ] = Y - offset;
+					points[ 4 ] = 0;
+					points[ 5 ] = 0;
 				}
-				void Set_Up( float X, float Y, float Z )
+				void SetUp( float X, float Y, float Z )
 				{
-					Points[0] = X + Offset;
-					Points[1] = X - Offset;
-					Points[2] = Y + Offset;
-					Points[3] = Y - Offset;
-					Points[4] = Z + Offset;
-					Points[5] = Z - Offset;
+					points[ 0 ] = X + offset;
+					points[ 1 ] = X - offset;
+					points[ 2 ] = Y + offset;
+					points[ 3 ] = Y - offset;
+					points[ 4 ] = Z + offset;
+					points[ 5 ] = Z - offset;
 				}
 				bool Check( float X, float Y, bool Debug )
 				{
-					if( X >= Points[1] && X <= Points[0] && Y >= Points[3] && Y <= Points[2] )
+					if( X >= points[ 1 ] && X <= points[ 0 ] && Y >= points[ 3 ] && Y <= points[ 2 ] )
 						return true;
-					if( X == Points[1] - Offset && Y == Points[3] + Offset )
+					if( X == points[ 1 ] - offset && Y == points[ 3 ] + offset )
 						return true;
 					else
-						if( Debug == true )
-								std::cout<<"if "<<X<<" >= "<<Points[1]<<" && "<<X<<" <= "<<Points[0]<<" && "<<Y<<" >= "<<Points[3]<<" && "<<Y<<" <= "<<Points[2]<<std::endl;
+					{
+						if( Debug == true ) {
+								std::cout << "if " << X << " >= " << points[ 1 ] << " && " << X << " <= " << 
+										points[ 0 ] << " && " << Y << " >= " << points[ 3 ] << " && " << Y << " <= " << points[ 2 ] << std::endl;
+						}
+					}
 					return false;
 				}
-				bool Check_X( float X )
+				bool CheckX( float X )
 				{
-					if( X >= Points[1] && X <= Points[0] )
+					if( X >= points[ 1 ] && X <= points[ 0 ] )
 						return true;
 					return false;
 				}
-				bool Check_Y( float Y )
+				bool CheckY( float Y )
 				{
-					if( Y >= Points[3] && Y <= Points[2] )
+					if( Y >= points[ 3 ] && Y <= points[ 2 ] )
 						return true;
 					return false;
 				}
-				bool Check_Z( float Z )
+				bool CheckZ( float Z )
 				{
-					if( Z >= Points[5] && Z <= Points[4] )
+					if( Z >= points[ 5 ] && Z <= points[ 4 ] )
 						return true;
 					return false;
 				}
 				bool Check( float X, float Y, float Z )
 				{
-					if( X >= Points[1] && X <= Points[0] && Y >= Points[3] && Y <= Points[2] && Z >= Points[5] && Z <= Points[4] )
+					if( X >= points[ 1 ] && X <= points[ 0 ] && Y >= points[ 3 ] && 
+								Y <= points[ 2 ] && Z >= points[ 5 ] && Z <= points[ 4 ] )
 						return true;
 					return false;
 				}

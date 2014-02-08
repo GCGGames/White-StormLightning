@@ -17,32 +17,25 @@ This file is part of White - Storm: Lightning (alpha).
     along with White - Storm: Lightning (alpha).  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "Component.h"
-unsigned int WSL::Components::Base::Component::GetElement()
-{
+unsigned int WSL::Components::Base::Component::GetElement() {
 	return element;
 }
-unsigned int WSL::Components::Base::Component::GetID()
-{
+unsigned int WSL::Components::Base::Component::GetID() {
 	return id;
 }
-int WSL::Components::Base::Component::GetComponentID()
-{
+int WSL::Components::Base::Component::GetComponentID() {
 	return componentID;
 }
-int WSL::Components::Base::Component::GetObjectID()
-{
+int WSL::Components::Base::Component::GetObjectID() {
 	return objectID;
 }
-bool  WSL::Components::Base::Component::GetUpdateData()
-{
+bool  WSL::Components::Base::Component::GetUpdateData() {
 	return updateData;
 }
-void WSL::Components::Base::Component::SetElement( unsigned int element_ )
-{
+void WSL::Components::Base::Component::SetElement( unsigned int element_ ) {
 	element = element_;
 }
-void WSL::Components::Base::Component::SetUpdateData( bool value )
-{
+void WSL::Components::Base::Component::SetUpdateData( bool value ) {
 	updateData = value;
 }
 void WSL::Components::Base::Component::Update( unsigned int id_, int objectID_, int componentID_ )

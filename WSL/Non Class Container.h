@@ -25,43 +25,35 @@ namespace WSL
 		{
 			namespace Lua
 			{
-				template<typename T>
+				template< typename T >
 				class LuaBindedType
 				{
 					std::string name;
 					T t;
 					int objID, ID;
 				public:
-					std::string GetName()
-					{
+					std::string GetName() {
 						return name;
 					}
-					void SetName( std::string name_ )
-					{
+					void SetName( std::string name_ ) {
 						name = name_;
 					}
-					void SetObjID( int objID_ )
-					{
+					void SetObjID( int objID_ ) {
 						objID = objID_;
 					}
-					void SetID( int ID_ )
-					{
+					void SetID( int ID_ ) {
 						ID = ID_;
 					}
-					int GetObjID()
-					{
+					int GetObjID() {
 						return objID;
 					}
-					int GetID()
-					{
+					int GetID() {
 						return ID;
 					}
-					T Get()
-					{
+					T Get() {
 						return t;
 					}
-					void Set( T t_ )
-					{
+					void Set( T t_ ) {
 						t = t_;
 					}
 				};

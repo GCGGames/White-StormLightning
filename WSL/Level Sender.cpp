@@ -17,16 +17,13 @@ This file is part of White - Storm: Lightning (alpha).
     along with White - Storm: Lightning (alpha).  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "Level Sender.h"
-void WSL::DataTransfer::Lua::LevelSender::SendToLua()
-{
+void WSL::DataTransfer::Lua::LevelSender::SendToLua() {
 	luabind::globals( refrence->luaContainer->State )[ level->name ] = level;
 }
-void WSL::DataTransfer::Lua::LevelSender::SetRefrence( WSL::Engine *engine )
-{
+void WSL::DataTransfer::Lua::LevelSender::SetRefrence( WSL::Engine* engine ) {
 	refrence = engine;
 }
-void WSL::DataTransfer::Lua::LevelSender::DeleteRefrence()
-{
+void WSL::DataTransfer::Lua::LevelSender::DeleteRefrence() {
 	refrence = NULL;
 	level = NULL;
 }

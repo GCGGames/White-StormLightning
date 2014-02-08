@@ -24,10 +24,9 @@ namespace WSL
 		struct MobileTranslator : public WSL::DataTranslation::Base::BaseTranslator
 		{
 			MobileTranslator();
-			void SendToLua( WSL::Framework::Standard::Base::BaseEntity *entity, WSL::Engine *engine );
-			WSL::Framework::Standard::Base::BaseEntity* Instantiate( std::string standardScripts[], std::vector<std::string> otherScripts, unsigned int size, 
+			void SendToLua( WSL::Framework::Standard::Base::BaseEntity* entity, WSL::Engine* engine );
+			WSL::Framework::Standard::Base::BaseEntity* Instantiate( std::string standardScripts[], std::vector< std::string > otherScripts, unsigned int size, 
 					bool initialize, bool refresh, bool destroy, bool destroyed, int objectID, WSL::Engine *engine );
-
 		};
 	}
 }

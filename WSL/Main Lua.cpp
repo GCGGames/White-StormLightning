@@ -17,72 +17,64 @@ This file is part of White - Storm: Lightning (alpha).
     along with White - Storm: Lightning (alpha).  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "Main Lua.h"
-void WSL::Containers::Scripting::Lua_Container::SetObjID( int objID_ )
-{
+void WSL::Containers::Scripting::LuaContainer::SetObjID( int objID_ ) {
 	objID = objID_;
 }
-void WSL::Containers::Scripting::Lua_Container::SetID( int ID_ )
-{
+void WSL::Containers::Scripting::LuaContainer::SetID( int ID_ ) {
 	ID = ID_;
 }
-void WSL::Containers::Scripting::Lua_Container::AddInt( std::string name, int value, bool global )
+void WSL::Containers::Scripting::LuaContainer::AddInt( std::string name, int value, bool global )
 {
-	WSL::Containers::Scripting::Lua::LuaBindedType<int> temp;
+	WSL::Containers::Scripting::Lua::LuaBindedType< int > temp;
 	temp.Set( value );
 	ints.push_back( temp );
 	unsigned int size =  ints.size() - 1;
-	ints[size].SetName( name );
-	if( global == false )
-	{
-		ints[size].SetObjID( objID );
-		ints[size].SetID( ID );
+	ints[ size ].SetName( name );
+	if( global == false ) {
+		ints[ size ].SetObjID( objID );
+		ints[ size ].SetID( ID );
 	}
-	else
-	{
-		ints[size].SetObjID( -1 );
-		ints[size].SetID( -1 );
+	else {
+		ints[ size ].SetObjID( -1 );
+		ints[ size ].SetID( -1 );
 	}
 	scripts.push_back( currentScript );
 }
-void WSL::Containers::Scripting::Lua_Container::AddLongInt( std::string name, long long signed int value, bool global )
+void WSL::Containers::Scripting::LuaContainer::AddLongInt( std::string name, long long signed int value, bool global )
 {
-	WSL::Containers::Scripting::Lua::LuaBindedType<long long signed int> temp;
+	WSL::Containers::Scripting::Lua::LuaBindedType< long long signed int > temp;
 	temp.Set( value );
 	bigInts.push_back( temp );
 	unsigned int size =  bigInts.size() - 1;
-	bigInts[size].SetName( name );
-	if( global == false )
-	{
-		bigInts[size].SetObjID( objID );
-		bigInts[size].SetID( ID );
+	bigInts[ size ].SetName( name );
+	if( global == false ) {
+		bigInts[ size ].SetObjID( objID );
+		bigInts[ size ].SetID( ID );
 	}
-	else
-	{
-		bigInts[size].SetObjID( -1 );
-		bigInts[size].SetID( -1 );
+	else {
+		bigInts[ size ].SetObjID( -1 );
+		bigInts[ size ].SetID( -1 );
 	}
 	scripts.push_back( currentScript );
 }
-void WSL::Containers::Scripting::Lua_Container::AddFloat( std::string name, double value, bool global )
+void WSL::Containers::Scripting::LuaContainer::AddFloat( std::string name, double value, bool global )
 {
-	WSL::Containers::Scripting::Lua::LuaBindedType<double> temp;
+	WSL::Containers::Scripting::Lua::LuaBindedType< double > temp;
 	temp.Set( value );
 	floats.push_back( temp );
 	unsigned int size =  floats.size() - 1;
-	floats[size].SetName( name );
-	if( global == false )
-	{
-		floats[size].SetObjID( objID );
-		floats[size].SetID( ID );
+	floats[ size ].SetName( name );
+	if( global == false ) {
+		floats[ size ].SetObjID( objID );
+		floats[ size ].SetID( ID );
 	}
-	else
-	{
-		floats[size].SetObjID( -1 );
-		floats[size].SetID( -1 );
+	else {
+		floats[ size ].SetObjID( -1 );
+		floats[ size ].SetID( -1 );
 	}
 	scripts.push_back( currentScript );
 }
-WSL::Containers::Scripting::Lua::LuaBindedType<int> WSL::Containers::Scripting::Lua_Container::GetInt( std::string name )
+WSL::Containers::Scripting::Lua::LuaBindedType< int > WSL::Containers::Scripting::LuaContainer::GetIntegervalue( std::string name )
 {
 	unsigned int size = ints.size();
 	unsigned int i = 0;
@@ -90,26 +82,24 @@ WSL::Containers::Scripting::Lua::LuaBindedType<int> WSL::Containers::Scripting::
 	{
 		while( i < size )
 		{
-			if( ints[i].GetName() == name )
+			if( ints[ i ].GetName() == name )
 			{
-				if( ints[i].GetObjID() == objID )
-				{
-					if( ints[i].GetID() == ID )
-						return ints[i];
+				if( ints[ i ].GetObjID() == objID ) {
+					if( ints[ i ].GetID() == ID )
+						return ints[ i ];
 				}
-				else
-				{
-					if( ints[i].GetObjID() == -1 )
-						return ints[i];
+				else {
+					if( ints[ i ].GetObjID() == -1 )
+						return ints[ i ];
 				}
 			}
 			i++;
 		}
 	}
 	std::cerr<<"There are no stored varibles named "<<name<<" a default value has been returned."<<std::endl;
-	return WSL::Containers::Scripting::Lua::LuaBindedType<int>();
+	return WSL::Containers::Scripting::Lua::LuaBindedType< int >();
 }
-WSL::Containers::Scripting::Lua::LuaBindedType<long long signed int> WSL::Containers::Scripting::Lua_Container::GetLongInt( std::string name )
+WSL::Containers::Scripting::Lua::LuaBindedType< long long signed int > WSL::Containers::Scripting::LuaContainer::GetLongInt( std::string name )
 {
 	unsigned int size, i;
 	i = 0;
@@ -119,26 +109,24 @@ WSL::Containers::Scripting::Lua::LuaBindedType<long long signed int> WSL::Contai
 	{
 		while( i < size )
 		{
-			if( bigInts[i].GetName() == name )
+			if( bigInts[ i ].GetName() == name )
 			{
-				if( bigInts[i].GetObjID() == objID )
-				{
-					if( bigInts[i].GetID() == ID )
-						return bigInts[i];
+				if( bigInts[ i ].GetObjID() == objID ) {
+					if( bigInts[ i ].GetID() == ID )
+						return bigInts[ i ];
 				}
-				else
-				{
-					if( bigInts[i].GetObjID() == -1 )
-						return bigInts[i];
+				else {
+					if( bigInts[ i ].GetObjID() == -1 )
+						return bigInts[ i ];
 				}
 			}
 			i++;
 		}
 	}
 	std::cerr<<"There are no stored varibles named "<<name<<" a default value has been returned."<<std::endl;
-	return WSL::Containers::Scripting::Lua::LuaBindedType<long long signed int>();
+	return WSL::Containers::Scripting::Lua::LuaBindedType< long long signed int >();
 }
-WSL::Containers::Scripting::Lua::LuaBindedType<double> WSL::Containers::Scripting::Lua_Container::GetFloat( std::string name )
+WSL::Containers::Scripting::Lua::LuaBindedType< double > WSL::Containers::Scripting::LuaContainer::GetFloat( std::string name )
 {
 	unsigned int i, size;
 	size = floats.size();
@@ -147,26 +135,24 @@ WSL::Containers::Scripting::Lua::LuaBindedType<double> WSL::Containers::Scriptin
 	{
 		while( i < size )
 		{
-			if( floats[i].GetName() == name )
+			if( floats[ i ].GetName() == name )
 			{
-				if( floats[i].GetObjID() == objID )
-				{
-					if( floats[i].GetID() == ID )
-						return floats[i];
+				if( floats[ i ].GetObjID() == objID ) {
+					if( floats[ i ].GetID() == ID )
+						return floats[ i ];
 				}
-				else
-				{
-					if( floats[i].GetObjID() == -1 )
-						return floats[i];
+				else {
+					if( floats[ i ].GetObjID() == -1 )
+						return floats[ i ];
 				}
 			}
 			i++;
 		}
 	}
 	std::cerr<<"There are no stored varibles named "<<name<<" a default value has been returned."<<std::endl;
-	return WSL::Containers::Scripting::Lua::LuaBindedType<double>();
+	return WSL::Containers::Scripting::Lua::LuaBindedType< double >();
 }
-void WSL::Containers::Scripting::Lua_Container::SetVarible( std::string name, int value )
+void WSL::Containers::Scripting::LuaContainer::SetVarible( std::string name, int value )
 {
 	unsigned int size = ints.size();
 	unsigned int i = 0;
@@ -174,19 +160,17 @@ void WSL::Containers::Scripting::Lua_Container::SetVarible( std::string name, in
 	{
 		while( i < size )
 		{
-			if( ints[i].GetName() == name )
+			if( ints[ i ].GetName() == name )
 			{
-				if( ints[i].GetObjID() == objID )
+				if( ints[ i ].GetObjID() == objID )
 				{
-					if( ints[i].GetID() == ID )
-					{
-						ints[i].Set( value );
+					if( ints[ i ].GetID() == ID ) {
+						ints[ i ].Set( value );
 						break;
 					}
 				}
-				else if( ints[i].GetObjID() == -1 )
-				{
-					ints[i].Set( value );
+				else if( ints[ i ].GetObjID() == -1 ) {
+					ints[ i ].Set( value );
 					break;
 				}
 			}
@@ -194,7 +178,7 @@ void WSL::Containers::Scripting::Lua_Container::SetVarible( std::string name, in
 		}
 	}
 }
-void WSL::Containers::Scripting::Lua_Container::SetVarible( std::string name, long long signed int value )
+void WSL::Containers::Scripting::LuaContainer::SetVarible( std::string name, long long signed int value )
 {
 	unsigned int size = bigInts.size();
 	unsigned int i = 0;
@@ -202,19 +186,17 @@ void WSL::Containers::Scripting::Lua_Container::SetVarible( std::string name, lo
 	{
 		while( i < size )
 		{
-			if( bigInts[i].GetName() == name )
+			if( bigInts[ i ].GetName() == name )
 			{
-				if( bigInts[i].GetObjID() == objID )
+				if( bigInts[ i ].GetObjID() == objID )
 				{
-					if( bigInts[i].GetID() == ID )
-					{
-						bigInts[i].Set( value );
+					if( bigInts[ i ].GetID() == ID ) {
+						bigInts[ i ].Set( value );
 						break;
 					}
 				}
-				else if( bigInts[i].GetObjID() == -1 )
-				{
-					bigInts[i].Set( value );
+				else if( bigInts[ i ].GetObjID() == -1 ) {
+					bigInts[ i ].Set( value );
 					break;
 				}
 			}
@@ -222,7 +204,7 @@ void WSL::Containers::Scripting::Lua_Container::SetVarible( std::string name, lo
 		}
 	}
 }
-void WSL::Containers::Scripting::Lua_Container::SetVarible( std::string name, double value )
+void WSL::Containers::Scripting::LuaContainer::SetVarible( std::string name, double value )
 {
 	unsigned int size = floats.size();
 	unsigned int i = 0;
@@ -230,19 +212,17 @@ void WSL::Containers::Scripting::Lua_Container::SetVarible( std::string name, do
 	{
 		while( i < size )
 		{
-			if( floats[i].GetName() == name )
+			if( floats[ i ].GetName() == name )
 			{
-				if( floats[i].GetObjID() == objID )
+				if( floats[ i ].GetObjID() == objID )
 				{
-					if( floats[i].GetID() == ID )
-					{
-						floats[i].Set( value );
+					if( floats[ i ].GetID() == ID ) {
+						floats[ i ].Set( value );
 						break;
 					}
 				}
-				else if( floats[i].GetObjID() == -1 )
-				{
-					floats[i].Set( value );
+				else if( floats[ i ].GetObjID() == -1 ) {
+					floats[ i ].Set( value );
 					break;
 				}
 			}
@@ -250,11 +230,9 @@ void WSL::Containers::Scripting::Lua_Container::SetVarible( std::string name, do
 		}
 	}
 }
-int WSL::Containers::Scripting::Lua_Container::GetObjID()
-{
+int WSL::Containers::Scripting::LuaContainer::GetObjID() {
 	return objID;
 }
-int WSL::Containers::Scripting::Lua_Container::GetID()
-{
+int WSL::Containers::Scripting::LuaContainer::GetID() {
 	return ID;
 }

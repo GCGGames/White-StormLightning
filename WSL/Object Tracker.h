@@ -27,48 +27,37 @@ namespace WSL
 			{
 				ObjID = objID;
 				componentID = componentID_;
-				IDs.push_back( 0 );
+			//	IDs.push_back( 0 );
 			}
-			inline RegisteredObject()
-			{
+			inline RegisteredObject() {
 			}
 			unsigned int ObjID;
 			int componentID;
-			std::vector<unsigned int> IDs;
+			std::vector< unsigned int > IDs;
 		};
 		struct ObjectTracker
 		{
 			
-			std::vector<RegisteredObject> ObjectRegisters;
+			std::vector< RegisteredObject > ObjectRegisters;
 			int AddObject( int ObjID, int componentID )
 			{
-				unsigned int size = ObjectRegisters.size();
-				unsigned int i = 0;
-				if( size != 0 )
+				const unsigned int SIZE = ObjectRegisters.size();
+				if( SIZE != 0 )
 				{
-					while( i < size )
+					for( unsigned int i = 0; i < SIZE; ++i )
 					{
-						if( ObjectRegisters[i].ObjID == ObjID )
+						if( ObjectRegisters[ i ].ObjID == ObjID )
 						{
-							int id = ObjectRegisters[i].IDs.size() - 1;
-							ObjectRegisters[i].IDs.push_back( id );
+							int id = ObjectRegisters[ i ].IDs.size();
+							ObjectRegisters[ i ].IDs.push_back( id );
 							return id;
 						}
-						i++;
 					}
 				}
-				if( size != 0 )
-				{
-					RegisteredObject temp;
-					temp = RegisteredObject( ObjID, componentID );
-					temp.IDs.push_back( 0 );
-					ObjectRegisters.push_back( temp );
-					return 0;
-				}
 				ObjectRegisters.push_back( RegisteredObject( ObjID, componentID ));
-				ObjectRegisters[0].IDs.push_back( 0 );
+				ObjectRegisters[ ( ObjectRegisters.size() - 1 ) ].IDs.push_back( 0 );
 				return 0;
-			}	
+			}
 		};
 	}
 }

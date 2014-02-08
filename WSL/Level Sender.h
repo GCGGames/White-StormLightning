@@ -26,10 +26,10 @@ namespace WSL
 			struct LevelSender : public WSL::DataTransfer::Lua::SenderBase
 			{
 				void SendToLua();
-				void SetRefrence( WSL::Engine *engine );
+				void SetRefrence( WSL::Engine* engine );
 				void DeleteRefrence();
-				WSL::Algorithmic::Level *level;
-				WSL::Engine *refrence;
+				WSL::Algorithmic::Level* level;
+				WSL::Engine* refrence;
 			};
 		}
 	}

@@ -27,40 +27,33 @@ namespace WSL
 			bool cycleDone;
 			std::vector<unsigned int> deletedPositions;
 		public:
-			SenderNode()
-			{
+			SenderNode() {
 				cycleDone = false;
 			}
-			inline void EndCycle()
-			{
+			inline void EndCycle() {
 				deletedPositions.clear();
 			}
 			/*Tracking added elements is not needed unless we are inserting elements
 				which I do not see a need to do.*/
-			inline void ElementDeleted( unsigned int element )
-			{
+			inline void ElementDeleted( unsigned int element ) {
 				deletedPositions.push_back( element );
 			}
 			unsigned int GetDeletedPosition( unsigned int pos )
 			{
-				if( WSL::Algorithmic::Range_Check_bool( pos, deletedPositions.size() ) == true )
-					return deletedPositions[pos];
-				else
-				{
+				if( WSL::Algorithmic::BoolRangeCheck( pos, deletedPositions.size() ) == true )
+					return deletedPositions[ pos ];
+				else {
 					std::cerr<<"Default value returned for method ''GetDeletedPos'' please remain withing the vector subscript range."<<std::endl;
 					return 0;
 				}
 			}
-			inline unsigned int Size()
-			{
+			inline unsigned int Size() {
 				return deletedPositions.size();
 			}
-			inline unsigned int GetArraySize()
-			{
-				return (arrSize);
+			inline unsigned int GetArraySize() {
+				return ( arrSize );
 			}
-			inline void SetArraSize( unsigned int arrSize_ )
-			{
+			inline void SetArrSize( unsigned int arrSize_ ) {
 				arrSize = arrSize_;
 			}
 			unsigned int Notify( unsigned int element )
@@ -73,7 +66,7 @@ namespace WSL
 				{
 					while( i < size )
 					{
-						if( element > deletedPositions[i] )
+						if( element > deletedPositions[ i ] )
 								change -= 1;
 						i++;
 					}

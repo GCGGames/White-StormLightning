@@ -17,28 +17,22 @@ This file is part of White - Storm: Lightning (alpha).
     along with White - Storm: Lightning (alpha).  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "Core Info Container.h"
-int WSL::Containers::CoreInfoContainer::GetObjID()
-{
+int WSL::Containers::CoreInfoContainer::GetObjID() {
 	return objID;
 }
-int WSL::Containers::CoreInfoContainer::GetComponentID()
-{
+int WSL::Containers::CoreInfoContainer::GetComponentID() {
 	return componentID;
 }
-unsigned int WSL::Containers::CoreInfoContainer::GetID()
-{
+unsigned int WSL::Containers::CoreInfoContainer::GetID() {
 	return id;
 }
-void WSL::Containers::CoreInfoContainer::SetObjID( int objID_ )
-{
+void WSL::Containers::CoreInfoContainer::SetObjID( int objID_ ) {
 	objID = objID_;
 }
-void WSL::Containers::CoreInfoContainer::SetComponentID( int componentID_ )
-{
+void WSL::Containers::CoreInfoContainer::SetComponentID( int componentID_ ) {
 	componentID = componentID_;
 }
-void WSL::Containers::CoreInfoContainer::SetID( unsigned int id_ )
-{
+void WSL::Containers::CoreInfoContainer::SetID( unsigned int id_ ) {
 	id = id_;
 }
 void WSL::Containers::CoreInfoContainer::Reset()

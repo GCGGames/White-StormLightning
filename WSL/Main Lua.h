@@ -26,26 +26,24 @@ namespace WSL
 			struct LuaState
 			{
 				lua_State *State;
-				inline LuaState()
-				{
+				inline LuaState() {
 					State = lua_open();
 					luaL_openlibs( State );
 				}
-				inline ~LuaState()
-				{
+				inline ~LuaState() {
 					lua_close( State );
 				}
 			};
-			class Lua_Container
+			class LuaContainer
 			{
 				int sentInts, sentBigInts, sentdoubles;
-				std::vector<unsigned int> intIndex;
-				std::vector<unsigned int> bigIntIndex;
-				std::vector<unsigned int> doubleIndex;
-				std::vector<std::string> scripts;
-				std::vector<WSL::Containers::Scripting::Lua::LuaBindedType<int>> ints;
-				std::vector<WSL::Containers::Scripting::Lua::LuaBindedType<long long signed int>> bigInts;
-				std::vector<WSL::Containers::Scripting::Lua::LuaBindedType<double>> floats;
+				std::vector< unsigned int > intIndex;
+				std::vector< unsigned int > bigIntIndex;
+				std::vector< unsigned int > doubleIndex;
+				std::vector< std::string > scripts;
+				std::vector< WSL::Containers::Scripting::Lua::LuaBindedType< int > > ints;
+				std::vector< WSL::Containers::Scripting::Lua::LuaBindedType< long long signed int > > bigInts;
+				std::vector< WSL::Containers::Scripting::Lua::LuaBindedType< double > > floats;
 				int objID;
 				int ID;
 			public:
@@ -62,9 +60,9 @@ namespace WSL
 				void AddInt( std::string name, int value, bool global );
 				void AddLongInt( std::string name, long long signed int value, bool global );
 				void AddFloat( std::string name, double value, bool global );
-				WSL::Containers::Scripting::Lua::LuaBindedType<int> GetInt( std::string name );
-				WSL::Containers::Scripting::Lua::LuaBindedType<long long signed int> GetLongInt( std::string name );
-				WSL::Containers::Scripting::Lua::LuaBindedType<double> GetFloat( std::string name );
+				WSL::Containers::Scripting::Lua::LuaBindedType< int > GetIntegervalue( std::string name );
+				WSL::Containers::Scripting::Lua::LuaBindedType< long long signed int > GetLongInt( std::string name );
+				WSL::Containers::Scripting::Lua::LuaBindedType< double > GetFloat( std::string name );
 				void SetVarible( std::string name, int value );
 				void SetVarible( std::string name, long long signed int value );
 				void SetVarible( std::string name, double value );

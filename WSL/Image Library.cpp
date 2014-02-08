@@ -17,20 +17,19 @@ This file is part of White - Storm: Lightning (alpha).
     along with White - Storm: Lightning (alpha).  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "Image Library.h"
-unsigned int WSL::Global::Image_Library::AddImage( std::string Name, std::string Dir )
+unsigned int WSL::Global::ImageLibrary::AddImage( std::string name, std::string dir )
 {
 	unsigned int i = 0;
 	bool confirm = false;
 	while( i < dirs.size() && confirm == false )
 	{
-		if( Dir == dirs[i] )
+		if( dir == dirs[ i ] )
 			confirm = true;
 		else
 			i++;
 	}
-	if( confirm == true )
-	{
-		std::cout<<"Image already loaded. Returning image index."<<std::endl;
+	if( confirm == true ) {
+		std::cout << "Image already loaded. Returning image index." << std::endl;
 		return i;
 	}
 	else
@@ -38,29 +37,25 @@ unsigned int WSL::Global::Image_Library::AddImage( std::string Name, std::string
 		i = 0;
 		while( i < names.size() && confirm == false )
 		{
-			if( Name == names[i] )
+			if( name == names[ i ] )
 				confirm = true;
 			else
 				i++;
 		}
 		if( confirm == true )
 		{
-			std::cout<<"The name "<<Name<<" has already been used"<<std::endl;
-			std::cout<<"to denotate a diffrent image, your image shall now be"<<std::endl;
-			std::cout<<"called "<<Name + "1"<<"."<<std::endl;
-			Name += "1";
+			std::cout << "The name " << name << " has already been used" << std::endl;
+			std::cout << "to denotate a diffrent image, your image shall now be" << std::endl;
+			std::cout << "called " << name + "1" << "." << std::endl;
+			name += "1";
 		}
 		sf::Image temp;
 		masterImages.push_back( temp );
-		dirs.push_back( Dir );
-		names.push_back( Name );
-		if( masterImages[masterImages.size() - 1].LoadFromFile( Dir ) )
-		{
-		}
-		else
-		{
-			std::cout<<"Failed to load image "<<Name<<" from file "<<Dir<<std::endl;
-			std::cout<<"Please make sure the file directory is correct and attempt to load the image again."<<std::endl;
+		dirs.push_back( dir );
+		names.push_back( name );
+		if( !( masterImages[ masterImages.size() - 1 ].LoadFromFile( dir ) ) ) {
+			std::cout << "Failed to load image " << name << " from file " << dir << std::endl;
+			std::cout << "Please make sure the file directory is correct and attempt to load the image again." << std::endl;
 		}	
 	}
 	return masterImages.size() - 1;
@@ -75,48 +70,47 @@ unsigned int WSL::Global::Image_Library::AddImage( std::string Name, std::string
 
 
 */
-unsigned int WSL::Global::Image_Library::GetImage( std::string Name )
+unsigned int WSL::Global::ImageLibrary::GetImage( std::string name )
 {
 	if( masterImages.size() >= 0 )
 	{
 		unsigned int i = 0;
 		unsigned int namesSize = names.size();
-		while(  i < namesSize && Name != names[i] )
+		while( i < namesSize && name.compare( names[ i ] ) != 0 )
 				i++;
 		if( i < names.size() )
 			return i;
-		else
-		{
-			std::cerr<<"No image found with the name "<<Name<<". Please enter a name for a valid image."<<std::endl;
+		else {
+			std::cerr << "No image found with the name " << name << ". Please enter a name for a valid image." << std::endl;
 			return 0;
 		}
 	}
 	else
 	{
-		std::cout<<"You have attempted to accses a non-existant image."<<std::endl;
-		std::cout<<"This message has occured beacuse you have not allocated any images."<<std::endl;
-		std::cout<<"A default value has been returned."<<std::endl;
+		std::cout << "You have attempted to accses a non-existant image." << std::endl;
+		std::cout << "This message has occured beacuse you have not allocated any images." << std::endl;
+		std::cout << "A default value has been returned." << std::endl;
 		return 0;
 	}
 }
-unsigned int WSL::Global::Image_Library::GetImage( unsigned int Elem )
+unsigned int WSL::Global::ImageLibrary::GetImage( unsigned int element )
 {
-	if( Elem >= 0 )
+	if( element >= 0 )
 	{
-		if( Elem < masterImages.size() )
-			return Elem;
+		if( element < masterImages.size() )
+			return element;
 		else
 		{
-			std::cout<<"You have attempted to accses a non-existant image"<<std::endl;
-			std::cout<<"A default has been returned."<<std::endl;
+			std::cout << "You have attempted to accses a non-existant image" << std::endl;
+			std::cout << "A default has been returned." << std::endl;
 			return 0;
 		}
-		return Elem;
+		return element;
 	}
 	else
 	{
-		std::cout<<"Please do not try to go out of the vector subscript range of images"<<std::endl;
-		std::cout<<"You entered "<<Elem<<", this number is invalid. A default value has been returned."<<std::endl;
+		std::cout << "Please do not try to go out of the vector subscript range of images" << std::endl;
+		std::cout << "You entered " << element << ", this number is invalid. A default value has been returned." << std::endl;
 		return 0;
 	}
 }

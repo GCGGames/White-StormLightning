@@ -21,8 +21,8 @@ WSL::Singleton::Singleton( bool null )
 {
 	debug = false;
 	engine = new WSL::Engine( true );
-	engine->window = new sf::RenderWindow( sf::VideoMode(1000, 600, 32), "White - Storm: Lightning" );
-	camera = new WSL::Global::Camera( (float)engine->window->GetWidth() / 2.f, (float)engine->window->GetHeight() / 2.f, 0, (float)engine->window->GetWidth(), (float)engine->window->GetHeight(), (float)101, &engine->window->GetDefaultView() );
+	engine->window = new sf::RenderWindow( sf::VideoMode( 1000, 600, 32 ), "White - Storm: Lightning" );
+	camera = new WSL::Global::Camera( ( float ) engine->window->GetWidth() / 2.f, ( float ) engine->window->GetHeight() / 2.f, 0, ( float ) engine->window->GetWidth(), ( float ) engine->window->GetHeight(), ( float ) 101, &engine->window->GetDefaultView() );
 	input = new WSL::Global::Input( camera, engine );
 	soundManager = new WSL::Global::SoundManager;
 	run = true;
@@ -30,176 +30,155 @@ WSL::Singleton::Singleton( bool null )
 	highestComponentID = 0;
 	threeDCollision = false;
 }
-WSL::Singleton::Singleton()
-{
+WSL::Singleton::Singleton() {
 }
 void WSL::Singleton::AddSprite( float x, float y, bool reScale )
 {
 	SearchAlgorithum();
-	if( componentInfo.GetComponentID() == 0 )
-	{
-		std::cerr<<"You can not add a sprite or anything that can be seen to a entity."<<std::endl;
-		std::cerr<<"In method AddSprite( float, float, bool )."<<std::endl;
+	if( componentInfo.GetComponentID() == 0 ) {
+		std::cerr << "You can not add a sprite or anything that can be seen to a entity." << std::endl;
+		std::cerr << "In method AddSprite( float, float, bool )." << std::endl;
 	}
 	else
 	{
-		WSL::Components::Lightning_Sprite temp( true );
-		temp.SetUpSprite( x, y, reScale );
-		BaseAddComponent( &temp, "src/Scripts/Engine/Component Control/Add Sprite.lua" );
+		WSL::Components::LightningSprite* spriteToAdd = new WSL::Components::LightningSprite( true );
+		spriteToAdd->SetUpSprite( x, y, reScale );
+		BaseAddComponent( spriteToAdd, "src/Scripts/Engine/Component Control/Add Sprite.lua" );
 	}
 }
 //-----=====-----//
 void WSL::Singleton::AddSprite( float x, float y, unsigned int image_, bool reScale )
 {
 	SearchAlgorithum();
-	if( componentInfo.GetComponentID() == 0 )
-	{
-		std::cerr<<"You can not add a sprite or anything that can be seen to a entity."<<std::endl;
-		std::cerr<<"In method AddSprite( float, float, unsigned int, bool )."<<std::endl;
+	if( componentInfo.GetComponentID() == 0 ) {
+		std::cerr << "You can not add a sprite or anything that can be seen to a entity." << std::endl;
+		std::cerr << "In method AddSprite( float, float, unsigned int, bool )." << std::endl;
 	}
 	else
 	{
-		WSL::Components::Lightning_Sprite temp( true );
-		temp.SetUpSprite( x, y, image_, reScale, engine->imageLibrary );
-		BaseAddComponent( &temp, "src/Scripts/Engine/Component Control/Add Sprite.lua" );
+		WSL::Components::LightningSprite* spriteToAdd = new WSL::Components::LightningSprite( true );
+		spriteToAdd->SetUpSprite( x, y, image_, reScale, engine->imageLibrary );
+		BaseAddComponent( spriteToAdd, "src/Scripts/Engine/Component Control/Add Sprite.lua" );
 	}
 }
 //-----=====-----//
 void WSL::Singleton::AddSprite( unsigned int image_, bool reScale )
 {
 	SearchAlgorithum();
-	if( componentInfo.GetComponentID() == 0 )
-	{
-		std::cerr<<"You can not add a sprite or anything that can be seen to a entity."<<std::endl;
-		std::cerr<<"In method AddSprite( unsigned int )."<<std::endl;
+	if( componentInfo.GetComponentID() == 0 ) {
+		std::cerr << "You can not add a sprite or anything that can be seen to a entity." << std::endl;
+		std::cerr << "In method AddSprite( unsigned int )." << std::endl;
 	}
 	else
 	{
-		WSL::Components::Lightning_Sprite temp( true );
-		temp.SetUpSprite( image_, reScale, engine->imageLibrary );
-		BaseAddComponent( &temp, "src/Scripts/Engine/Component Control/Add Sprite.lua" );
+		WSL::Components::LightningSprite* spriteToAdd = new WSL::Components::LightningSprite( true );
+		spriteToAdd->SetUpSprite( image_, reScale, engine->imageLibrary );
+		BaseAddComponent( spriteToAdd, "src/Scripts/Engine/Component Control/Add Sprite.lua" );
 	}
 }
 void WSL::Singleton::AddPolygon()
 {
 	SearchAlgorithum();
-	if( componentInfo.GetComponentID() == 0 )
-	{
-		std::cerr<<"You can not add a polygon or anything that can be seen or has a position to a entity."<<std::endl;
-		std::cerr<<"In method AddPolygon()."<<std::endl;
+	if( componentInfo.GetComponentID() == 0 ) {
+		std::cerr << "You can not add a polygon or anything that can be seen or has a position to a entity." << std::endl;
+		std::cerr << "In method AddPolygon()." << std::endl;
 	}
 	else
-	{
-		WSL::Components::Polygon temp;
-		BaseAddComponent( &temp, "src/Scripts/Engine/Component Control/Add Polygon.lua" );
-	}
+		BaseAddComponent( new WSL::Components::Polygon, "src/Scripts/Engine/Component Control/Add Polygon.lua" );
 }
 //-----=====-----//
 void WSL::Singleton::AddPolygon( std::string scanAreaFile )
 {
 	SearchAlgorithum();
-	if( componentInfo.GetComponentID() == 0 )
-	{
-		std::cerr<<"You can not add a polygon or anything that can be seen or has a position to a entity."<<std::endl;
-		std::cerr<<"In method AddPolygon( std::string )."<<std::endl;
+	if( componentInfo.GetComponentID() == 0 ) {
+		std::cerr << "You can not add a polygon or anything that can be seen or has a position to a entity." << std::endl;
+		std::cerr << "In method AddPolygon( std::string )." << std::endl;
 	}
 	else
 	{
-		WSL::Components::Polygon temp;
-		WSL::Collision::Scan_Area_Collision::Scan_Area loader;
+		WSL::Components::Polygon* polygonToAdd = new WSL::Components::Polygon;
+		WSL::Collision::ScanAreaCollision::ScanArea loader;
 		luabind::globals( engine->luaContainer->State )[ "loader" ] = &loader;
-		loader.setX( 0 );
-		loader.setY( 0 );
-		loader.setZ( 0 );
-		loader = scanInit.Set_Point_Coordinates( loader, scanAreaFile );
+		loader.SetX( 0 );
+		loader.SetY( 0 );
+		loader.SetZ( 0 );
+		loader = scanInit.SetPointCoordinates( loader, scanAreaFile );
 		unsigned int i = 0;
-		unsigned int size = loader.getPoints().size();
+		unsigned int size = loader.GetPoints().size();
 		if( size != 0 )
 		{
-			while( i < size )
-			{
-				temp.AddPoint( loader.getPoint( i ) );
+			while( i < size ) {
+				polygonToAdd->AddPoint( loader.GetPoint( i ) );
 				i++;
 			}
 		}
-		temp.SetCenter( ( -loader.GetLargeX() - loader.GetSmallX() ) / 2.f, ( -loader.GetLargeY() - loader.GetSmallY() ) / 2.f );
-		BaseAddComponent( &temp, "src/Scripts/Engine/Component Control/Add Polygon.lua" );
+		polygonToAdd->SetCenter( ( -loader.GetLargeX() - loader.GetSmallX() ) / 2.f, ( -loader.GetLargeY() - loader.GetSmallY() ) / 2.f );
+		BaseAddComponent( polygonToAdd, "src/Scripts/Engine/Component Control/Add Polygon.lua" );
 	}
 }
 void WSL::Singleton::AddVectorGraphic()
 {
 	SearchAlgorithum();
-	if( componentInfo.GetComponentID() == 0 )
-	{
-		std::cerr<<"You can not add a polygon or anything that can be seen or has a position to a entity."<<std::endl;
-		std::cerr<<"In method AddVectorGraphic()."<<std::endl;
+	if( componentInfo.GetComponentID() == 0 ) {
+		std::cerr << "You can not add a polygon or anything that can be seen or has a position to a entity." << std::endl;
+		std::cerr << "In method AddVectorGraphic()." << std::endl;
 	}
 	else
-	{
-		WSL::Components::Vector_Graphics temp;
-		BaseAddComponent( &temp, "src/Scripts/Engine/Component Control/Add Vector Graphic.lua" );
-	}
+		BaseAddComponent( new WSL::Components::VectorGraphics, "src/Scripts/Engine/Component Control/Add Vector Graphic.lua" );
 }
 void WSL::Singleton::AddVectorGraphic( std::string scanAreaFile )
 {
 	SearchAlgorithum();
-	if( componentInfo.GetComponentID() == 0 )
-	{
-		std::cerr<<"You can not add a polygon or anything that can be seen or has a position to a entity."<<std::endl;
-		std::cerr<<"In method AddVectorGraphic( std::string )."<<std::endl;
+	if( componentInfo.GetComponentID() == 0 ) {
+		std::cerr << "You can not add a polygon or anything that can be seen or has a position to a entity." << std::endl;
+		std::cerr << "In method AddVectorGraphic( std::string )." << std::endl;
 	}
 	else
 	{
-		WSL::Components::Vector_Graphics temp( scanAreaFile );
-		WSL::Collision::Scan_Area_Collision::Scan_Area loader;
-		loader.setX( 0 );
-		loader.setY( 0 );
-		loader.setZ( 0 );
-		loader = scanInit.Set_Point_Coordinates( loader, scanAreaFile );
+		WSL::Components::VectorGraphics* vectorGraphicsToAdd = new WSL::Components::VectorGraphics( scanAreaFile );
+		WSL::Collision::ScanAreaCollision::ScanArea loader;
+		loader.SetX( 0 );
+		loader.SetY( 0 );
+		loader.SetZ( 0 );
+		loader = scanInit.SetPointCoordinates( loader, scanAreaFile );
 		unsigned int i = 0;
-		unsigned int size = loader.getPoints().size();
+		unsigned int size = loader.GetPoints().size();
 		if( size != 0 )
 		{
-			while( i < size )
-			{
-				temp.AddPoint( loader.getPoint( i ) );
+			while( i < size ) {
+				vectorGraphicsToAdd->AddPoint( loader.GetPoint( i ) );
 				i++;
 			}
 		}
-		BaseAddComponent( &temp, "src/Scripts/Engine/Component Control/Add Vector Graphic.lua" );
+		BaseAddComponent( vectorGraphicsToAdd, "src/Scripts/Engine/Component Control/Add Vector Graphic.lua" );
 	}
 }
 void WSL::Singleton::AddScanArea()
 {
 	SearchAlgorithum();
-	if( componentInfo.GetComponentID() == 0 )
-	{
-		std::cerr<<"You can not add a scanArea or anything that has a position to a entity."<<std::endl;
-		std::cerr<<"In method AddScanArea()."<<std::endl;
+	if( componentInfo.GetComponentID() == 0 ) {
+		std::cerr << "You can not add a scanArea or anything that has a position to a entity." << std::endl;
+		std::cerr << "In method AddScanArea()." << std::endl;
 	}
 	else
-	{
-		WSL::Collision::Scan_Area_Collision::Scan_Area temp;
-		BaseAddComponent( &temp, "src/Scripts/Engine/Component Control/Add Scan Area.lua" );
-	}
+		BaseAddComponent( new WSL::Collision::ScanAreaCollision::ScanArea, "src/Scripts/Engine/Component Control/Add Scan Area.lua" );
 }
 void WSL::Singleton::AddScanArea( std::string scanAreaFile )
 {
 	SearchAlgorithum();
-	if( componentInfo.GetComponentID() == 0 )
-	{
-		std::cerr<<"You can not add a scanArea or anything that has a position to a entity."<<std::endl;
-		std::cerr<<"In method AddScanArea( std::string )."<<std::endl;
+	if( componentInfo.GetComponentID() == 0 ) {
+		std::cerr << "You can not add a scanArea or anything that has a position to a entity." << std::endl;
+		std::cerr << "In method AddScanArea( std::string )." << std::endl;
 	}
 	else
 	{
-		WSL::Collision::Scan_Area_Collision::Scan_Area temp;
-		temp = scanInit.Set_Point_Coordinates( temp, scanAreaFile );
-		BaseAddComponent( &temp, "src/Scripts/Engine/Component Control/Add Scan Area.lua" );
+		WSL::Collision::ScanAreaCollision::ScanArea* scanAreaToAdd = 
+				new WSL::Collision::ScanAreaCollision::ScanArea( scanInit.SetPointCoordinates( 
+				WSL::Collision::ScanAreaCollision::ScanArea(), scanAreaFile ) );
+		BaseAddComponent( scanAreaToAdd, "src/Scripts/Engine/Component Control/Add Scan Area.lua" );
 	}
 }
-void WSL::Singleton::GetObject( unsigned int id, int objID, int componentID )
-{
+void WSL::Singleton::GetObject( unsigned int id, int objID, int componentID ) {
 	SendObject( id, objID, componentID );
 }
 void WSL::Singleton::SearchAlgorithum()
@@ -216,11 +195,11 @@ void WSL::Singleton::SearchAlgorithum()
 		componentInfo = currentInfo;
 		while( i < size )
 		{
-			if( objects.Array[i]->GetComponentID() == compID )
+			if( objects.Array[ i ]->GetComponentID() == compID )
 			{
-				if( objects.Array[i]->GetObjID() == objID )
+				if( objects.Array[ i ]->GetObjID() == objID )
 				{
-					if( objects.Array[i]->GetID() == id )
+					if( objects.Array[ i ]->GetID() == id )
 					{
 						componentTrack = i;
 						found = true;
@@ -250,22 +229,22 @@ int WSL::Singleton::HeartBeat( unsigned int i )
 {
 	if( i < objects.Array.size() )
 	{
-		currentInfo.SetID( objects.Array[i]->GetID() );
-		currentInfo.SetObjID( objects.Array[i]->GetObjID() );
-		currentInfo.SetComponentID( objects.Array[i]->GetComponentID() );
+		currentInfo.SetID( objects.Array[ i ]->GetID() );
+		currentInfo.SetObjID( objects.Array[ i ]->GetObjID() );
+		currentInfo.SetComponentID( objects.Array[ i ]->GetComponentID() );
 		currentObject = i;
-		objects.Array[i]->SetRefrence( engine );
-		if( objects.Array[i]->GetDestroy() == false )
+		objects.Array[ i ]->SetRefrence( engine );
+		if( objects.Array[ i ]->GetDestroy() == false )
 		{
-			objects.Array[i]->Refresh();
-			objects.Array[i]->DeleteRefrence();
+			objects.Array[ i ]->Refresh();
+			objects.Array[ i ]->DeleteRefrence();
 			return 0;
 		}
 		else
 		{
-			objects.Array[i]->Destroy();
-			objects.Array[i]->DeleteRefrence();
-			WSL::Framework::Standard::Base::BaseEntity *temp = objects.Array[i];
+			objects.Array[ i ]->Destroy();
+			objects.Array[ i ]->DeleteRefrence();
+			WSL::Framework::Standard::Base::BaseEntity* temp = objects.Array[ i ];
 			objects.Array.erase( objects.Array.begin() + i );
 			objects.node.ElementDeleted( i );
 			delete temp;
@@ -284,28 +263,27 @@ void WSL::Singleton::LevelCycle()
 	{
 		while( c < size && break_ == false )
 		{
-			if( levels.Array[c]->active == true )
+			if( levels.Array[ c ]->active == true )
 			{
-				if( levels.Array[c]->destroy == true )
+				if( levels.Array[ c ]->destroy == true )
 				{
 					unsigned int objectSize = objects.Array.size();
-					for( unsigned int i = 0; i < objects.Array.size()/*objectSize*/ && break_ == false; i++ )
+					for( unsigned int i = 0; i < objects.Array.size() && break_ == false; i++ )
 					{
-						if( levels.Array[c]->ObjectIsInLevel( i ) == true )
-						{							
+						if( levels.Array[ c ]->ObjectIsInLevel( i ) == true ) {
 							if( HeartBeat( i ) == -1 && objects.Array.size() != 1 && i > 0 )
 								--objectSize;
 						}
 					}
-					WSL::Algorithmic::Level *temp = levels.Array[c];
+					WSL::Algorithmic::Level* temp = levels.Array[ c ];
 					temp->SetRefrence( this );
 					BaseSend();
 					unsigned int clear = temp->SendRenderLayer();
 					luabind::globals( engine->luaContainer->State )[ temp->name ] = temp;
 					temp->Destroy();
 					temp->DeleteRefrence();
-					WSL::Algorithmic::RenderLayer *r = renderLayers.Array[clear];
-					r->DeleteRefrence();
+					WSL::Algorithmic::RenderLayer* renderLayer = renderLayers.Array[ clear ];
+					renderLayer->DeleteRefrence();
 					temp->DeleteRenderLayer();
 					levels.Delete( c );
 					delete temp;
@@ -313,26 +291,25 @@ void WSL::Singleton::LevelCycle()
 				}
 				else
 				{
-					if( levels.Array[c]->refresh == true )
+					if( levels.Array[ c ]->refresh == true )
 					{
 						unsigned int objectSize = objects.Array.size();
-						for( unsigned int i = 0; i < objects.Array.size()/*objectSize*/ && break_ == false; i++ )
+						for( unsigned int i = 0; i < objects.Array.size() && break_ == false; i++ )
 						{
-							if( levels.Array[c]->ObjectIsInLevel( i ) == true )
-							{							
+							if( levels.Array[ c ]->ObjectIsInLevel( i ) == true ) {
 								if( HeartBeat( i ) == -1 && objects.Array.size() != 1 && i > 0 )
 									--objectSize;
 							}
 						}
-						if( levels.Array[c]->refreshScript != "NULL" )
+						if( levels.Array[ c ]->refreshScript != "NULL" )
 						{
 							BaseSend();
-							levels.Array[c]->SetRefrence( this );
-							unsigned int clear = levels.Array[c]->SendRenderLayer();
-							luabind::globals( engine->luaContainer->State )[ levels.Array[c]->name ] = levels.Array[c];
-							levels.Array[c]->Refresh();
-							levels.Array[c]->DeleteRefrence();
-							renderLayers.Array[clear]->DeleteRefrence();
+							levels.Array[ c ]->SetRefrence( this );
+							unsigned int clear = levels.Array[ c ]->SendRenderLayer();
+							luabind::globals( engine->luaContainer->State )[ levels.Array[ c ]->name ] = levels.Array[ c ];
+							levels.Array[ c ]->Refresh();
+							levels.Array[ c ]->DeleteRefrence();
+							renderLayers.Array[ clear ]->DeleteRefrence();
 						}
 					}
 				}
@@ -352,7 +329,7 @@ void WSL::Singleton::CleanUp()
 		{
 			input->refrence = engine;
 			{
-				WSL::Framework::Standard::Base::BaseEntity *temp = objects.Array[size - i];
+				WSL::Framework::Standard::Base::BaseEntity* temp = objects.Array[ size - i ];
 				currentInfo.SetID( temp->GetID() );
 				currentInfo.SetObjID( temp->GetObjID() );
 				currentInfo.SetComponentID( temp->GetComponentID() );
@@ -371,8 +348,8 @@ void WSL::Singleton::CleanUp()
 	{
 		input->refrence = engine;
 		{
-			WSL::Algorithmic::Level *temp;
-			temp = levels.Array[size - i];
+			WSL::Algorithmic::Level* temp;
+			temp = levels.Array[ size - i ];
 			temp->SetRefrence( this );
 			luabind::globals( engine->luaContainer->State )[ temp->name ] = temp;
 			temp->DeleteRefrence();
@@ -386,7 +363,7 @@ void WSL::Singleton::CleanUp()
 	while( ( size + 1 ) - i > 0 )
 	{
 		{
-			WSL::Algorithmic::RenderLayer *temp = renderLayers.Array[size - i];
+			WSL::Algorithmic::RenderLayer* temp = renderLayers.Array[ size - i ];
 			renderLayers.Delete( size - i );
 		}
 		++i;
@@ -406,34 +383,32 @@ void WSL::Singleton::DetectCollision()
 	if( size != 0 && size != 1 )
 	{
 		for( unsigned int i = 0; i < size; ++i ) {
-			engine->scanAreas.Array[i]->SetCollision( WSL::Containers::Bool_XYZ( false ) );
-			engine->scanAreas.Array[i]->ClearCollisionData();
+			engine->scanAreas.Array[ i ]->SetCollision( WSL::Containers::BoolXYZ( false ) );
+			engine->scanAreas.Array[ i ]->ClearCollisionData();
 		}
 		while( i1 < size )
 		{
-			//	*engine->scanAreas.Array[i1] = engine->Run( *engine->scanAreas.Array[i1], false, 0 );
-			while( i2 < size && engine->scanAreas.Array[i1]->GetCollision().getBool() == false )
+			while( i2 < size && engine->scanAreas.Array[ i1 ]->GetCollision().GetBooleanValue() == false )
 			{
 				if( i2 != i1 )
 				{
-					engine->scanAreas.Array[i1]->SetCollision( 
-						CheckCollision( *engine->scanAreas.Array[i1],
-						*engine->scanAreas.Array[i2], threeDCollision )
+					engine->scanAreas.Array[ i1 ]->SetCollision( 
+						CheckCollision( *engine->scanAreas.Array[ i1 ],
+						*engine->scanAreas.Array[ i2 ], threeDCollision )
 						);
-					engine->scanAreas.Array[i1]->SetVector( engine->scanAreas.Array[i1]->GetCollision().getCoords() );
-					if( engine->scanAreas.Array[i1]->GetCollision().getBool() == true )
+					engine->scanAreas.Array[ i1 ]->SetVector( engine->scanAreas.Array[ i1 ]->GetCollision().GetCoordinates() );
+					if( engine->scanAreas.Array[ i1 ]->GetCollision().GetBooleanValue() == true )
 					{
 						//It is a quick fix.//
-						engine->scanAreas.Array[i2]->AddCollisionData( WSL::Containers::IDXYZ( engine->scanAreas.Array[i1]->GetID(), engine->scanAreas.Array[i1]->GetObjectID(), 
-							engine->scanAreas.Array[i1]->GetComponentID(), WSL::Containers::Base::XYZ( engine->scanAreas.Array[i1]->getX(), engine->scanAreas.Array[i1]->getY(), engine->scanAreas.Array[i1]->getZ() ) ) );
+						engine->scanAreas.Array[ i2 ]->AddCollisionData( WSL::Containers::IDXYZ( engine->scanAreas.Array[ i1 ]->GetID(), engine->scanAreas.Array[ i1 ]->GetObjectID(), 
+								engine->scanAreas.Array[ i1 ]->GetComponentID(), WSL::Containers::Base::XYZ( engine->scanAreas.Array[ i1 ]->GetX(), engine->scanAreas.Array[ i1 ]->GetY(), 
+								engine->scanAreas.Array[ i1 ]->GetZ() ) ) );
 						
-						engine->scanAreas.Array[i1]->AddCollisionData( WSL::Containers::IDXYZ( engine->scanAreas.Array[i2]->GetID(), engine->scanAreas.Array[i2]->GetObjectID(), 
-							engine->scanAreas.Array[i2]->GetComponentID(), WSL::Containers::Base::XYZ( engine->scanAreas.Array[i2]->getX(), engine->scanAreas.Array[i2]->getY(), engine->scanAreas.Array[i2]->getZ() ) ) );
+						engine->scanAreas.Array[ i1 ]->AddCollisionData( WSL::Containers::IDXYZ( engine->scanAreas.Array[ i2 ]->GetID(), engine->scanAreas.Array[ i2 ]->GetObjectID(), 
+								engine->scanAreas.Array[ i2 ]->GetComponentID(), WSL::Containers::Base::XYZ( engine->scanAreas.Array[ i2 ]->GetX(), engine->scanAreas.Array[ i2 ]->GetY(), 
+								engine->scanAreas.Array[ i2 ]->GetZ() ) ) );
 
-						engine->scanAreas.Array[i2]->SetCollision( WSL::Containers::Bool_XYZ( engine->scanAreas.Array[i2]->GetCollision().getCoords(), true ) );
-
-						//engine->scanAreas.Array.erase( engine->scanAreas.Array.begin() + i1 );
-						//--size;
+						engine->scanAreas.Array[ i2 ]->SetCollision( WSL::Containers::BoolXYZ( engine->scanAreas.Array[ i2 ]->GetCollision().GetCoordinates(), true ) );
 						break;
 					}
 				}
@@ -457,13 +432,11 @@ void WSL::Singleton::Draw()
 			for( unsigned int j = 0; j < rsize; ++j )
 			{
 				if( engine->renders[ j ]->GetRenderLayerName() == renderLayers.Array[ i ]->GetName() &&
-					renderLayers.Array[ i ]->GetActive() == true )
+						renderLayers.Array[ i ]->GetActive() == true )
 					engine->renders[ j ]->Draw( engine->window );
 			}
 		}
 	}
-	/*	for( unsigned int i = 0; i < size; ++i )
-			renderLayers.Array[ i ]->Render( engine->window ); */
 	engine->window->Display();
 }
 void WSL::Singleton::LoadAlgorithim( std::string info )
@@ -532,7 +505,7 @@ void WSL::Singleton::LoadAlgorithim( std::string info )
 				if( i < 45)
 				{
 					file >> pass;		
-					standardScripts[i] = pass;
+					standardScripts[ i ] = pass;
 					i++;
 				}
 			}
@@ -542,14 +515,14 @@ void WSL::Singleton::LoadAlgorithim( std::string info )
 		{
 			while( i < 5 )
 			{
-				standardScripts[i] = "NULL";
+				standardScripts[ i ] = "NULL";
 				i++;
 			}
 		}
 		file.close();
 	}
 	else
-		std::cerr<<"Failure to open file "<<info<<".\nPlease make sure you typed the path correctly and the\nfile exists and or exists in the directory specified."<<std::endl;
+		std::cerr << "Failure to open file " << info << ".\nPlease make sure you typed the path correctly and the\nfile exists and or exists in the directory specified." << std::endl;
 }
 void WSL::Singleton::BaseSend()
 {
@@ -566,9 +539,9 @@ void WSL::Singleton::SendObject( unsigned int id, int objID,  int componentID )
 	currentInfo.SetObjID( objID );
 	currentInfo.SetComponentID( componentID );
 	SearchAlgorithum();
-	objects.Array[componentTrack]->SetRefrence( engine );
+	objects.Array[ componentTrack ]->SetRefrence( engine );
 	BaseSend();
-	objects.Array[componentTrack]->SendSelf();
+	objects.Array[ componentTrack ]->SendSelf();
 }
 void WSL::Singleton::ThreadObject( unsigned int id, int objID,  int componentID )
 {
@@ -576,24 +549,22 @@ void WSL::Singleton::ThreadObject( unsigned int id, int objID,  int componentID 
 	currentInfo.SetObjID( objID );
 	currentInfo.SetComponentID( componentID );
 	SearchAlgorithum();
-	objects.Array[componentTrack]->SetRefrence( engine );
-	objects.Array[componentTrack]->SendSelf();
+	objects.Array[ componentTrack ]->SetRefrence( engine );
+	objects.Array[ componentTrack ]->SendSelf();
 }
 void WSL::Singleton::EndObjectThread()
 {
 	unsigned int size =  objects.Array.size();
-	for( unsigned int i = 0; i < size; ++i )
-	{
-		objects.Array[i]->RunSubClassMethodEnd();
-		objects.Array[i]->DeleteRefrence();
+	for( unsigned int i = 0; i < size; ++i ) {
+		objects.Array[ i ]->RunSubClassMethodEnd();
+		objects.Array[ i ]->DeleteRefrence();
 	}
 }
 void WSL::Singleton::GetLevel( unsigned int i )
 {
-	if( WSL::Algorithmic::Range_Check_bool( i, levels.Array.size() ) == true )
-	{
-		levels.Array[i]->SetRefrence( reinterpret_cast<WSL::Base::SingletonBase*>( this ) );
-		luabind::globals( engine->luaContainer->State )[ levels.Array[i]->name ] = levels.Array[i];
+	if( WSL::Algorithmic::BoolRangeCheck( i, levels.Array.size() ) == true ) {
+		levels.Array[ i ]->SetRefrence( reinterpret_cast< WSL::Base::SingletonBase* >( this ) );
+		luabind::globals( engine->luaContainer->State )[ levels.Array[ i ]->name ] = levels.Array[ i ];
 	}
 }
 void WSL::Singleton::GetLevel( std::string name )
@@ -601,39 +572,38 @@ void WSL::Singleton::GetLevel( std::string name )
 	unsigned int size = levels.Array.size();
 	for( unsigned int i = 0; i < size; i++ )
 	{
-		if( name == levels.Array[i]->name )
+		if( name == levels.Array[ i ]->name )
 		{
-			levels.Array[i]->SetRefrence( reinterpret_cast<WSL::Base::SingletonBase*>( this ) );
-			luabind::globals( engine->luaContainer->State )[ levels.Array[i]->name ] = levels.Array[i];
+			levels.Array[ i ]->SetRefrence( reinterpret_cast< WSL::Base::SingletonBase* >( this ) );
+			luabind::globals( engine->luaContainer->State )[ levels.Array[ i ]->name ] = levels.Array[ i ];
 			break;
 		}
 		else if( i + 1 == size ) {
-			std::cerr<<"No level found with the name "<<name<<" a NULL value has been returned in method GetLevel( std::string )."<<std::endl;
+			std::cerr << "No level found with the name " << name << " a NULL value has been returned in method GetLevel( std::string )." << std::endl;
 			break;
 		}
 	}
 }
-void WSL::Singleton::SetLevel( WSL::Algorithmic::Level *level, unsigned int i )
+void WSL::Singleton::SetLevel( WSL::Algorithmic::Level* level, unsigned int i )
 {
-	if( WSL::Algorithmic::Range_Check_bool( i, levels.Array.size() ) == true )
-		levels.Array[i] = level;
+	if( WSL::Algorithmic::BoolRangeCheck( i, levels.Array.size() ) == true )
+		levels.Array[ i ] = level;
 	else
-		std::cerr<<"Element "<<i<<" no such levels, there are currently "<<levels.Array.size()<<" in existance."<<std::endl;
+		std::cerr << "Element " << i << " no such levels, there are currently " << levels.Array.size() << " in existance." << std::endl;
 }
-void WSL::Singleton::SetLevel( WSL::Algorithmic::Level *level, std::string name )
+void WSL::Singleton::SetLevel( WSL::Algorithmic::Level* level, std::string name )
 {
 	unsigned int size = levels.Array.size();
 	for( unsigned int i = 0; i < size; i++ )
 	{
-		if( name == levels.Array[i]->name )
-			levels.Array[i] = level;
+		if( name == levels.Array[ i ]->name )
+			levels.Array[ i ] = level;
 		else if( i + 1 == size )
-			std::cerr<<"No level found with the name "<<name<<" no level was set for method SetLevel( Level*, std::string )."<<std::endl;
+			std::cerr << "No level found with the name " << name << " no level was set for method SetLevel( Level*, std::string )." << std::endl;
 			
 	}
 }
-void WSL::Singleton::LoadImage( std::string name, std::string directory )
-{
+void WSL::Singleton::LoadImage( std::string name, std::string directory ) {
 	engine->imageLibrary->AddImage( name, directory );
 }
 void WSL::Singleton::SendObjectToLua()
@@ -644,9 +614,8 @@ void WSL::Singleton::SendObjectToLua()
 		unsigned int i = 0;
 		while( i < size )
 		{
-			if( translators[i]->GetComponentID() == currentInfo.GetComponentID() )
-			{
-				translators[i]->SendToLua( objects.Array[currentObject], engine );
+			if( translators[ i ]->GetComponentID() == currentInfo.GetComponentID() ) {
+				translators[ i ]->SendToLua( objects.Array[ currentObject ], engine );
 				break;
 			}
 			i++;
@@ -662,22 +631,22 @@ int WSL::Singleton::Instantiate( std::string info )
 		unsigned int i = 0;
 		while( i < size )
 		{
-			if( translators[i]->GetComponentID() == currentInfo.GetComponentID() )
+			if( translators[ i ]->GetComponentID() == currentInfo.GetComponentID() )
 			{
 				EndObjectThread();
 				currentObject = objects.Array.size();
-				objects.Add( translators[i]->Instantiate( standardScripts, startScripts, startScripts.size(),  
+				objects.Add( translators[ i ]->Instantiate( standardScripts, startScripts, startScripts.size(),  
 					initialize, refresh, runDestroy, destroy, currentInfo.GetObjID(), engine ) );
 				unsigned int j = objects.Array.size() - 1;
-				int compID = objects.Array[j]->GetComponentID();
+				int compID = objects.Array[ j ]->GetComponentID();
 				if( compID > highestComponentID )
 					highestComponentID = compID;
 				currentInfo.SetComponentID( compID );
-				currentInfo.SetObjID( objects.Array[j]->GetObjID() );
-				currentInfo.SetID( objects.Array[j]->GetID() );
-				objects.Array[j]->SetRefrence( engine );
-				objects.Array[j]->Initialize();
-				objects.Array[j]->DeleteRefrence();
+				currentInfo.SetObjID( objects.Array[ j ]->GetObjID() );
+				currentInfo.SetID( objects.Array[ j ]->GetID() );
+				objects.Array[ j ]->SetRefrence( engine );
+				objects.Array[ j ]->Initialize();
+				objects.Array[ j ]->DeleteRefrence();
 				break;
 			}
 			i++;
@@ -690,16 +659,15 @@ int WSL::Singleton::InstantiateLevel( std::string info )
 	std::ifstream file;
 	file.open( info.c_str() );
 	unsigned short int i = 0;
-	while( file.eof() != true && file.is_open() == true )
-	{
-		file >> levelScripts[i];
+	while( file.eof() != true && file.is_open() == true ) {
+		file >> levelScripts[ i ];
 		i++;
 	}
-	WSL::Algorithmic::Level *temp = new WSL::Algorithmic::Level( true );
-	temp->initializeScript = levelScripts[0];
-	temp->refreshScript = levelScripts[1];
-	temp->destroyScript = levelScripts[2];
-	if( levelScripts[0] != "NULL" )
+	WSL::Algorithmic::Level* temp = new WSL::Algorithmic::Level( true );
+	temp->initializeScript = levelScripts[ 0 ];
+	temp->refreshScript = levelScripts[ 1 ];
+	temp->destroyScript = levelScripts[ 2 ];
+	if( levelScripts[ 0 ] != "NULL" )
 	{
 		std::stringstream renderLayerName;
 		renderLayerName << "levelRenderLayer";
@@ -728,8 +696,7 @@ int WSL::Singleton::InstantiateLevel( std::string info )
 	levels.Add( temp );
 	return levels.Array.size() - 1;
 }
-int WSL::Singleton::InstantiateRenderLayer()
-{
+int WSL::Singleton::InstantiateRenderLayer() {
 	renderLayers.Add( new WSL::Algorithmic::RenderLayer() );
 	return renderLayers.Array.size() - 1;
 }
@@ -742,44 +709,42 @@ int WSL::Singleton::InstantiateRenderLayer( std::string name )
 		if( name == renderLayers.Array[ i ]->GetName() )
 		{
 			std::stringstream s;
-			s << name;
-			s << times;
+			s  <<  name;
+			s  <<  times;
 			name = s.str();
-			std::cerr << "In method InstantiateRenderLayer( std::string ) render layer name " << name << "\n";
-			std::cerr << "Already taken replacing with " << name << std::endl;
+			std::cerr  <<  "In method InstantiateRenderLayer( std::string ) render layer name "  <<  name  <<  "\n";
+			std::cerr  <<  "Already taken replacing with "  <<  name  <<  std::endl;
 			++times;
 			i = 0;
 		}
 	}
-
-	WSL::Algorithmic::RenderLayer *layer = new WSL::Algorithmic::RenderLayer;
+	WSL::Algorithmic::RenderLayer* layer = new WSL::Algorithmic::RenderLayer;
 	layer->SetName( name );
 	renderLayers.Add( layer );
 	return renderLayers.Array.size() - 1;
 }
-void WSL::Singleton::InitializeTranslators()
-{
+void WSL::Singleton::InitializeTranslators() {
 	translators = SetUpTranslators( translators );
 }
 void WSL::Singleton::GetRenderLayer( unsigned int layer )
 {
-	if( WSL::Algorithmic::Range_Check_bool( layer, renderLayers.Array.size() ) == true )
-	{
-		renderLayers.Array[layer]->SetRefrence( this );
-		luabind::globals( engine->luaContainer->State )[ "renderLayer" ] = renderLayers.Array[layer];
+	if( WSL::Algorithmic::BoolRangeCheck( layer, renderLayers.Array.size() ) == true ) {
+		renderLayers.Array[ layer ]->SetRefrence( this );
+		luabind::globals( engine->luaContainer->State )[ "renderLayer" ] = renderLayers.Array[ layer ];
 	}
 	else
-		std::cerr<<"No render layer found with index "<<layer<<" please remain within the vector\nsubscript range for method GetRenderLayer( unsigned int )."<<std::endl;
+		std::cerr << "No render layer found with index " << layer << " please remain within the vector\nsubscript range for method GetRenderLayer( unsigned int )." << std::endl;
 }
 void WSL::Singleton::GetRenderLayerByLevel( unsigned int level )
 {
-	if( WSL::Algorithmic::Range_Check_bool( level, levels.Array.size() ) == true ) {
-		levels.Array[level]->SetRefrence( reinterpret_cast<WSL::Base::SingletonBase*>( this ) );
-		levels.Array[level]->SendRenderLayer();
-		levels.Array[level]->DeleteRefrence();
+	if( WSL::Algorithmic::BoolRangeCheck( level, levels.Array.size() ) == true )
+	{
+		levels.Array[ level ]->SetRefrence( reinterpret_cast< WSL::Base::SingletonBase* >( this ) );
+		levels.Array[ level ]->SendRenderLayer();
+		levels.Array[ level ]->DeleteRefrence();
 	}
 	else
-		std::cerr<<"No level found with index "<<level<<" please remain within the vector\nsubscript range for method GetRenderLayerByLevel( unsigned int )."<<std::endl;
+		std::cerr << "No level found with index " << level << " please remain within the vector\nsubscript range for method GetRenderLayerByLevel( unsigned int )." << std::endl;
 }
 void WSL::Singleton::GetRenderLayerByLevel( std::string levelName )
 {
@@ -789,35 +754,32 @@ void WSL::Singleton::GetRenderLayerByLevel( std::string levelName )
 		unsigned int i = 0;
 		while( i < size )
 		{
-			if( levelName == levels.Array[i]->name )
+			if( levelName == levels.Array[ i ]->name )
 			{
-				levels.Array[i]->SetRefrence( reinterpret_cast<WSL::Base::SingletonBase*>( this ) );
-				levels.Array[i]->SendRenderLayer();
-				levels.Array[i]->DeleteRefrence();
+				levels.Array[ i ]->SetRefrence( reinterpret_cast< WSL::Base::SingletonBase* >( this ) );
+				levels.Array[ i ]->SendRenderLayer();
+				levels.Array[ i ]->DeleteRefrence();
 				break;
 			}
 			++i;
 		}
 		if( i == size )
-			std::cerr<<"No level found with the name "<<levelName<<" in method GetRenderLayerByLevel( std::string )."<<std::endl;
+			std::cerr << "No level found with the name " << levelName << " in method GetRenderLayerByLevel( std::string )." << std::endl;
 	}
 	else
-		std::cerr<<"You attempted to accsess a level when none exist! For method GetRenderLayerByLevel( std::string )."<<std::endl;
+		std::cerr << "You attempted to accsess a level when none exist! For method GetRenderLayerByLevel( std::string )." << std::endl;
 }
-void WSL::Singleton::GetCamera()
-{
+void WSL::Singleton::GetCamera() {
 	luabind::globals( engine->luaContainer->State )[ "camera" ] = camera;
 }
-WSL::Containers::Base::XYZ WSL::Singleton::GetMousePosition()
-{
+WSL::Containers::Base::XYZ WSL::Singleton::GetMousePosition() {
 	sf::Vector2f coords = engine->window->ConvertCoords( engine->window->GetInput().GetMouseX(), engine->window->GetInput().GetMouseY() );
 	return WSL::Containers::Base::XYZ( coords.x, coords.y, camera->z );
 }
-void WSL::Singleton::GetSoundManager()
-{
+void WSL::Singleton::GetSoundManager() {
 	luabind::globals( engine->luaContainer->State )[ "soundManager" ] = soundManager;
 }
-bool WSL::Singleton::Check_Collision( WSL::Collision::Scan_Area_Collision::Rectangle rect1, WSL::Collision::Scan_Area_Collision::Rectangle rect2)
+bool WSL::Singleton::CheckCollision( WSL::Collision::ScanAreaCollision::Rectangle rect1, WSL::Collision::ScanAreaCollision::Rectangle rect2)
 {
 	//Temporary code but
 	//I needed it for the time beaing thank you Lightdark from the Elysian Shadows chat room!!!!!
@@ -859,9 +821,9 @@ bool WSL::Singleton::Check_Collision( WSL::Collision::Scan_Area_Collision::Recta
 	//////////////////////////////
 	return true;
 }
-WSL::Containers::Bool_XYZ WSL::Singleton::CheckCollision( WSL::Collision::Scan_Area_Collision::Scan_Area a, WSL::Collision::Scan_Area_Collision::Scan_Area b, bool ThreeD )
+WSL::Containers::BoolXYZ WSL::Singleton::CheckCollision( WSL::Collision::ScanAreaCollision::ScanArea a, WSL::Collision::ScanAreaCollision::ScanArea b, bool ThreeD )
 {
-	if( Check_Collision( a.GetR() , b.GetR() ) == true )
-		return WSL::Containers::Bool_XYZ( b.GetVector(), true );
-	return WSL::Containers::Bool_XYZ( WSL::Containers::Base::XYZ( 0, 0, 0 ), false );
+	if( CheckCollision( a.GetR() , b.GetR() ) == true )
+		return WSL::Containers::BoolXYZ( b.GetVector(), true );
+	return WSL::Containers::BoolXYZ( WSL::Containers::Base::XYZ( 0, 0, 0 ), false );
 }

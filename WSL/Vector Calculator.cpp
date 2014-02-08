@@ -19,24 +19,20 @@ This file is part of White - Storm: Lightning (alpha).
 
 
 #include "Vector Calculator.h"
-WSL::Math::Vector::VectorCalculator::VectorCalculator()
-{
+WSL::Math::Vector::VectorCalculator::VectorCalculator() {
 	WSL::Containers::Base::XYZ temp;
-	//temp.setX( 1.f );
-	//temp.setY( 1.f );
-	//temp.setZ( 1.f );
 	default_ = temp;
 }
 WSL::Containers::Base::XYZ WSL::Math::Vector::VectorCalculator::VectorCalculation( WSL::Containers::Base::XYZ goTo, WSL::Containers::Base::XYZ position, float speed, bool td )
 {
-	float epsilon = std::numeric_limits<float>::epsilon();
+	float epsilon = std::numeric_limits< float >::epsilon();
 	WSL::Containers::Base::XYZ vector;
 	//Make sure that the vector doesent have any stray values lying around.//
 	vector = default_;
 	//Calculate Magnitude.//
-	x = goTo.getX() - position.getX();
-	y = goTo.getY() - position.getY();
-	z = goTo.getZ() - position.getZ();
+	x = goTo.GetX() - position.GetX();
+	y = goTo.GetY() - position.GetY();
+	z = goTo.GetZ() - position.GetZ();
 	if( td == true )
 		magnitude = magn.DotProduct( x, y, z, magnitude );
 	else
@@ -59,21 +55,21 @@ WSL::Containers::Base::XYZ WSL::Math::Vector::VectorCalculator::VectorCalculatio
 	//TO DO: FIX!!//
 	if( td == true )
 		z *= speed;
-	vector.setX( x );
-	vector.setY( y );
-	vector.setZ( z );
+	vector.SetX( x );
+	vector.SetY( y );
+	vector.SetZ( z );
 	return vector;
 }
-WSL::Containers::Base::XYZ WSL::Math::Vector::VectorCalculator::VectorCalculation( WSL::Containers::Base::XYZ goTo, WSL::Containers::Base::XYZ *position, float speed, bool td )
+WSL::Containers::Base::XYZ WSL::Math::Vector::VectorCalculator::VectorCalculation( WSL::Containers::Base::XYZ goTo, WSL::Containers::Base::XYZ* position, float speed, bool td )
 {
 	float epsilon = std::numeric_limits<float>::epsilon();
 	WSL::Containers::Base::XYZ vector;
 	//Make sure that the vector doesent have any stray values lying around.//
 	vector = default_;
 	//Calculate Magnitude.//
-	x = goTo.getX() - position->getX();
-	y = goTo.getY() - position->getY();
-	z = goTo.getZ() - position->getZ();
+	x = goTo.GetX() - position->GetX();
+	y = goTo.GetY() - position->GetY();
+	z = goTo.GetZ() - position->GetZ();
 	if( td == true )
 		magnitude = magn.DotProduct( x, y, z, magnitude );
 	else
@@ -89,23 +85,20 @@ WSL::Containers::Base::XYZ WSL::Math::Vector::VectorCalculator::VectorCalculatio
 			z /= magnitude;
 	}
 	//Go The Desired Speed.//
-	if( speed >= 0 + epsilon )
-	{
+	if( speed >= 0 + epsilon ) {
 		x *= speed;
 		y *= speed;
 	}
 	if( td == true )
 		z *= speed;
-	vector.setX( x );
-	vector.setY( y );
-	vector.setZ( z );
+	vector.SetX( x );
+	vector.SetY( y );
+	vector.SetZ( z );
 	return vector;
 }
-inline float WSL::Math::Formulas::Dot::DotProduct( float x, float y, float mag )
-{
+inline float WSL::Math::Formulas::Dot::DotProduct( float x, float y, float mag ) {
 	return ( mag = ( ( x ) * ( x ) + ( y ) * ( y ) ) );
 }
-inline float WSL::Math::Formulas::Dot::DotProduct( float x, float y, float z, float mag )
-{
+inline float WSL::Math::Formulas::Dot::DotProduct( float x, float y, float z, float mag ) {
 	return ( mag = ( ( x ) * ( x ) + ( y ) * ( y ) + ( z ) * ( z ) ) );
 }

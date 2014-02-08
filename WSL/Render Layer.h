@@ -17,6 +17,7 @@ This file is part of White - Storm: Lightning (alpha).
     along with White - Storm: Lightning (alpha).  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "Sub Singleton Base.h"
+//TODO: //
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -36,39 +37,14 @@ namespace WSL
 			* : Fix "quick and dirty hack".
 		*/
 		
-		typedef WSL::Containers::Finder< WSL::Components::Rendering_System::Base::Render_Functonal > RFINDER;
+		typedef WSL::Containers::Finder< WSL::Components::Rendering_System::Base::RenderFunctonal > RFINDER;
 
 		struct RenderLayer : public WSL::Algorithmic::Base::SubSingletonFoundation, public WSL::Algorithmic::BubbleSort
 		{
-			//bool GetActive();
 			std::string GetName();
-			//void SetActive( bool active_ );
 			void SetName( std::string name_ );
 			protected:
 				std::string name;
-				//bool active;
-			/*RenderLayer() {}
-			~RenderLayer();
-			void IndexRender( unsigned int render, std::string type );
-			void UnIndexRender( unsigned int render, std::string type );
-			void Render( sf::RenderWindow *window );
-			protected:
-				void SearchAndDestroy( unsigned int render, std::string type )
-				{
-					bool found = false;
-					for( unsigned int i = 0; i < toRender.size(); ++i )
-					{
-						if( toRender[ i ]->type == type && toRender[ i ]->originalElement == render )
-						{
-							found = true;
-							toRender.erase( toRender.begin() + i );
-							break;
-						}
-					}
-					if( found == false )
-						std::cerr << "In method SearchAndDestroy( unsigned int render, std::string type ), no render of type " << type << "and original element " << render << "could be found.\n";
-				}
-				std::vector< RFINDER* > toRender;*/
 		};
 	}
 }

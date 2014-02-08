@@ -70,7 +70,7 @@ namespace WSL
 	}
 	namespace Collision
 	{
-		namespace Scan_Area_Collision
+		namespace ScanAreaCollision
 		{
 			//Temporary code but
 			//I needed it for the time beaing thank you Lightdark from the Elysian Shadows chat room!!!!!
@@ -84,29 +84,29 @@ namespace WSL
 					float l;
 			} Rectangle;
 			//This class is for the most part deprocated. It will be re-implemented in a future release.//
-			class Scan_Area : public WSL::Components::Base::Component
+			class ScanArea : public WSL::Components::Base::Component
 			{
-				std::vector< WSL::Containers::IDXYZ  > collisionData;
+				std::vector< WSL::Containers::IDXYZ > collisionData;
 				float X, Y, Z;
-				WSL::Containers::Bool_XYZ collision;
-				std::vector<WSL::Containers::Base::XYZ> Points;
-				std::vector<WSL::Containers::Base::XYZ> Collision_Coords;
-				std::vector<sf::Sprite> Debug_Markers;
-				std::vector<WSL::Containers::Base::XYZ> Magnitudes;
-				std::vector<WSL::Containers::Base::XYZ> Back_Up;
-				WSL::Containers::Base::XYZ Origin;
+				WSL::Containers::BoolXYZ collision;
+				std::vector< WSL::Containers::Base::XYZ > points;
+				std::vector< WSL::Containers::Base::XYZ > collionsCoordinates;
+				std::vector< sf::Sprite > debugMarkers;
+				std::vector< WSL::Containers::Base::XYZ > magnitudes;
+				std::vector< WSL::Containers::Base::XYZ > backUp;
+				WSL::Containers::Base::XYZ origin;
 				bool initialized;
-				bool Rotated;
+				bool rotated;
 				float rotation;
 				bool collide;
-				std::vector<bool> Checked;
-				float Last_Move, xLarge, yLarge, zLarge, xSmall, ySmall, zSmall;
+				std::vector< bool > checked;
+				float lastMove, xLarge, yLarge, zLarge, xSmall, ySmall, zSmall;
 				bool destroy;
 				WSL::Containers::Base::XYZ vector;
 				bool boundingBox;
-				Rectangle r;
+				Rectangle rectangle;
 			public:
-				Scan_Area( float x, float y, float z )
+				ScanArea( float x, float y, float z )
 				{
 					boundingBox = false;
 					destroy = false;
@@ -120,21 +120,42 @@ namespace WSL
 					Y = y;
 					Z = z;
 					initialized = false;
-					Rotated = false;
-					Last_Move = 0;
+					rotated = false;
+					lastMove = 0;
 					rotation = 0;
 					collide = true;
 				}
-				Scan_Area()
+				ScanArea() {
+				}
+				ScanArea( const ScanArea& scanAreaToCopy )
 				{
-					/*if( boundingBox != true )
-						boundingBox = false;
-					collide = true;
-					destroy = false;
-					X = 0; Y = 0; Z = 0; initialized = false;
-					Rotated = false;
-					Last_Move = 0;
-					rotation = 0;*/
+					collisionData = scanAreaToCopy.collisionData;
+					X = scanAreaToCopy.X;
+					Y = scanAreaToCopy.Y;
+					Z = scanAreaToCopy.Z;
+					collision = scanAreaToCopy.collision;
+					points = scanAreaToCopy.points;
+					collionsCoordinates = scanAreaToCopy.collionsCoordinates;
+					debugMarkers = scanAreaToCopy.debugMarkers;
+					magnitudes = scanAreaToCopy.magnitudes;
+					backUp = scanAreaToCopy.backUp;
+					origin = scanAreaToCopy.origin;
+					initialized = scanAreaToCopy.initialized;
+					rotated = scanAreaToCopy.rotated;
+					rotation = scanAreaToCopy.rotation;
+					collide = scanAreaToCopy.collide;
+					checked = scanAreaToCopy.checked;
+					lastMove = scanAreaToCopy.lastMove;
+					xLarge = scanAreaToCopy.xLarge;
+					yLarge = scanAreaToCopy.yLarge;
+					zLarge = scanAreaToCopy.zLarge;
+					xSmall = scanAreaToCopy.xSmall;
+					ySmall = scanAreaToCopy.ySmall;
+					zSmall = scanAreaToCopy.zSmall;
+					destroy = scanAreaToCopy.destroy;
+					vector = scanAreaToCopy.vector;
+					boundingBox = scanAreaToCopy.boundingBox;
+					rectangle = scanAreaToCopy.rectangle;
 				}
 				WSL::Containers::IDXYZ GetACollisionData( unsigned int index )
 				{
@@ -151,136 +172,129 @@ namespace WSL
 				inline void ClearCollisionData() {
 					collisionData.clear();
 				}
-				inline Rectangle GetR()
-				{
-					return r;
+				inline Rectangle GetR() {
+					return rectangle;
 				}
-				inline void SetR( Rectangle r_ )
-				{
-					r = r_;
+				inline void SetR( Rectangle rectangle_ ) {
+					rectangle = rectangle_;
 				}
-				inline void SetBoundingBox( bool value )
-				{
+				inline void SetBoundingBox( bool value ) {
 					boundingBox = value;
 				}
-				inline bool GetBoundingBox()
-				{
+				inline bool GetBoundingBox() {
 					return boundingBox;
 				}
-				inline float getX()
-				{
+				inline float GetX() {
 					return X;
 				}
-				inline float getY()
-				{
+				inline float GetY() {
 					return Y;
 				}
-				inline float getZ()
-				{
+				inline float GetZ() {
 					return Z;
 				}
-				inline void setX( float x_ )
-				{
+				inline void SetX( float x_ ) {
 					X = x_;
 				}
-				inline void setY( float y_ )
-				{
+				inline void SetY( float y_ ) {
 					Y = y_;
 				}
-				inline void setZ( float z_ )
-				{
+				inline void SetZ( float z_ ) {
 					Z = z_;
 				}
-				inline WSL::Containers::Base::XYZ GetVector()
-				{
+				inline WSL::Containers::Base::XYZ GetVector() {
 					return vector;
 				}
-				inline void SetVector( WSL::Containers::Base::XYZ vector_ )
-				{
+				inline void SetVector( WSL::Containers::Base::XYZ vector_ ) {
 					vector = vector_;
 				}
-				inline void SetCollide( bool collide_ )
-				{
+				inline void SetCollide( bool collide_ ) {
 					collide = collide_;
 				}
-				inline bool GetCollide()
-				{
+				inline bool GetCollide() {
 					return collide;
 				}
-				inline void SetDestroy( bool destroy_ )
-				{
+				inline void SetDestroy( bool destroy_ ) {
 					destroy = destroy_;
 				}
-				inline bool GetDestroy()
-				{
+				inline bool GetDestroy() {
 					return destroy;
 				}
-				inline void SetCollision( WSL::Containers::Bool_XYZ collision_ )
-				{
+				inline void SetCollision( WSL::Containers::BoolXYZ collision_ ) {
 					collision = collision_;
 				}
-				inline WSL::Containers::Bool_XYZ GetCollision()
-				{
+				inline WSL::Containers::BoolXYZ GetCollision() {
 					return collision;
 				}
-				inline void SetLargeX( float x )
-				{
+				inline void SetLargeX( float x ) {
 					xLarge = x;
 				}
-				inline void SetLargeY( float y )
-				{
+				inline void SetLargeY( float y ) {
 					yLarge = y;
 				}
-				inline void SetLargeZ( float z )
-				{
+				inline void SetLargeZ( float z ) {
 					zLarge = z;
 				}
-				inline void SetSmallX( float x )
-				{
+				inline void SetSmallX( float x ) {
 					xSmall = x;
 				}
-				inline void SetSmallY( float y )
-				{
+				inline void SetSmallY( float y ) {
 					ySmall = y;
 				}
-				inline void SetSmallZ( float z )
-				{
+				inline void SetSmallZ( float z ) {
 					zSmall = z;
 				}
-				inline float GetLargeX()
-				{
+				inline float GetLargeX() {
 					return xLarge;
 				}
-				inline float GetLargeY()
-				{
+				inline float GetLargeY() {
 					return yLarge;
 				}
-				inline float GetLargeZ()
-				{
+				inline float GetLargeZ() {
 					return zLarge;
 				}
-				inline float GetSmallX()
-				{
+				inline float GetSmallX() {
 					return xSmall;
 				}
-				inline float GetSmallY()
-				{
+				inline float GetSmallY() {
 					return ySmall;
 				}
-				inline float GetSmallZ()
-				{
+				inline float GetSmallZ() {
 					return zSmall;
 				}
-				inline void setOrigin( WSL::Containers::Base::XYZ Value ) { Origin = Value; }
-				inline WSL::Containers::Base::XYZ getOrigin() { return Origin; }
-				inline void setInitialized( bool Value ) { initialized = Value; }
-				inline std::vector<WSL::Containers::Base::XYZ> getPoints() { return Points; }
-				inline float getLast_Move() { return Last_Move; }
-				inline void setLast_Move( float z ) { Last_Move = z; }
-				inline void setRotated( bool Value ) { Rotated = Value; }
-				inline bool getRotated() { return Rotated; }
-				inline unsigned int Back_Up_Size() { return Back_Up.size(); }
-				inline void Set_Coordinates( float x, float y, float z ) { X = x; Y = y; Z = z; }
+				inline void SetOrigin( WSL::Containers::Base::XYZ origin_ ) {
+					origin = origin_;
+				}
+				inline WSL::Containers::Base::XYZ GetOrigin() {
+					return origin;
+				}
+				inline void SetInitialized( bool initialized_ ) {
+					initialized = initialized_;
+				}
+				inline std::vector< WSL::Containers::Base::XYZ > GetPoints() {
+					return points;
+				}
+				inline float GetLastMove() {
+					return lastMove;
+				}
+				inline void SetLastMove( float z ) {
+					lastMove = z;
+				}
+				inline void SetRotated( bool rotated_ ) {
+					rotated = rotated_;
+				}
+				inline bool GetRotated() {
+					return rotated;
+				}
+				inline unsigned int BackUpSize() {
+					return backUp.size();
+				}
+				inline void SetCoordinates( float x, float y, float z )
+				{
+					X = x;
+					Y = y;
+					Z = z;
+				}
 				inline void SetRotation( float degree )
 				{
 					rotation = degree;
@@ -297,186 +311,175 @@ namespace WSL
 						rotation *= -1;
 					return rotation;
 				}
-				inline WSL::Containers::Base::XYZ getCoordinates()
-				{
+				inline WSL::Containers::Base::XYZ getCoordinates() {
 					WSL::Containers::Base::XYZ Returner( X, Y, Z );
 					return Returner;
 				}
-				inline void Add_Point( WSL::Containers::Base::XYZ X )
-				{
-					Points.push_back( X );
+				inline void AddPoint( WSL::Containers::Base::XYZ X ) {
+					points.push_back( X );
 				}
-				inline void Add_Magnitude( WSL::Containers::Base::XYZ mag )
-				{
-					Magnitudes.push_back( mag );
+				inline void AddMagnitude( WSL::Containers::Base::XYZ mag ) {
+					magnitudes.push_back( mag );
 				}
-				inline std::vector<WSL::Containers::Base::XYZ> getMagnitudes()
-				{
-					return Magnitudes;
+				inline std::vector<WSL::Containers::Base::XYZ> GetMagnitudes() {
+					return magnitudes;
 				}
-				inline void setMagnitudes( std::vector<WSL::Containers::Base::XYZ> Value )
-				{
-					Magnitudes = Value;
+				inline void SetMagnitudes( std::vector<WSL::Containers::Base::XYZ> value ) {
+					magnitudes = value;
 				}
-				inline void Reset_Scan_Area()
-				{
-					Magnitudes = Back_Up;
+				inline void Reset_ScanArea() {
+					magnitudes = backUp;
 					initialized = true;
 				}
-				void setaMagnitude( WSL::Containers::Base::XYZ Value, unsigned int i )
+				void SetAMagnitude( WSL::Containers::Base::XYZ value, unsigned int i )
 				{
-					if( initialized == false || Magnitudes.size() == 0 )
+					if( initialized == false || magnitudes.size() == 0 )
 					{
-						std::cout<<"Please add elements to the std::vector"<<std::endl;
-						std::cout<<"''magnitudes'' before trying to accses them."<<std::endl;
-						std::cout<<"(Have you tried using the Initialize scan area method?"<<std::endl;
-						std::cout<<"for method ''setaMagnitude''."<<std::endl;
+						std::cout << "Please add elements to the std::vector" << std::endl;
+						std::cout << "''mmagnitudes'' before trying to accses them." << std::endl;
+						std::cout << "(Have you tried using the Initialize scan area method?" << std::endl;
+						std::cout << "for method ''SetAMagnitude''." << std::endl;
 					}
-					else
-					{
-						if( i >= 0 && i < Magnitudes.size() )
-							Magnitudes[i] = Value;
+					else {
+						if( i >= 0 && i < magnitudes.size() )
+							magnitudes[ i ] = value;
 					}
 				}
-				WSL::Containers::Base::XYZ getaMagnitude( unsigned int i )
+				WSL::Containers::Base::XYZ GetAMagnitude( unsigned int i )
 				{
-					if( initialized == false || Magnitudes.size() == 0 )
+					if( initialized == false || magnitudes.size() == 0 )
 					{
-						std::cout<<"Please add elements to the std::vector"<<std::endl;
-						std::cout<<"''magnitudes'' before trying to accses them."<<std::endl;
-						std::cout<<"(Have you tried using the Initialize scan area method?"<<std::endl;
-						std::cout<<"for method ''getaMagnitude''."<<std::endl;
-						WSL::Containers::Base::XYZ f;
-						return f;
+						std::cout << "Please add elements to the std::vector" << std::endl;
+						std::cout << "''mmagnitudes'' before trying to accses them." << std::endl;
+						std::cout << "(Have you tried using the Initialize scan area method?" << std::endl;
+						std::cout << "for method ''getaMagnitude''." << std::endl;
+						WSL::Containers::Base::XYZ failed;
+						return failed;
 					}
 					else
 					{
-						if( i >= 0 && i < Magnitudes.size() )
-							return Magnitudes[i];
+						if( i >= 0 && i < magnitudes.size() )
+							return magnitudes[ i ];
 						else
 						{
-							std::cout<<"You have attempted to accses a"<<std::endl;
-							std::cout<<"non - existant element of the"<<std::endl;
-							std::cout<<"std::vector ''Magnitudes''"<<std::endl;
-							std::cout<<"a default value has been returned"<<std::endl;
-							std::cout<<"please enter a valid unsigned int"<<std::endl;
-							std::cout<<"to accses a existant element."<<std::endl;
-							std::cout<<"(is your unsigned int less than zero"<<std::endl;
-							std::cout<<"or greater than or equil to the size"<<std::endl;
-							std::cout<<"of ''Magnitudes'')? For method getaMagnitude"<<std::endl;
-							WSL::Containers::Base::XYZ Default( 0, 0, 0 );
-							return Default;
+							std::cout << "You have attempted to accses a" << std::endl;
+							std::cout << "non - existant element of the" << std::endl;
+							std::cout << "std::vector ''mmagnitudes''" << std::endl;
+							std::cout << "a default value has been returned" << std::endl;
+							std::cout << "please enter a valid unsigned int" << std::endl;
+							std::cout << "to accses a existant element." << std::endl;
+							std::cout << "(is your unsigned int less than zero" << std::endl;
+							std::cout << "or greater than or equil to the size" << std::endl;
+							std::cout << "of ''mmagnitudes'')? For method getaMagnitude" << std::endl;
+							WSL::Containers::Base::XYZ default___( 0, 0, 0 );
+							return default___;
 						}
 					}
 				}
-				inline std::vector<WSL::Containers::Base::XYZ> getCollision_Coords()
-				{
-					return Collision_Coords;
+				inline std::vector< WSL::Containers::Base::XYZ > GetCollionsCoordinates() {
+					return collionsCoordinates;
 				}
-				inline std::vector<sf::Sprite> getDebug_Markers()
-				{
-					return Debug_Markers;
+				inline std::vector< sf::Sprite > GetDebugMarkers() {
+					return debugMarkers;
 				}
-				inline void setPoints( std::vector<WSL::Containers::Base::XYZ> Value )
-				{
-					Points = Value;
+				inline void SetPoints( std::vector<WSL::Containers::Base::XYZ> value ) {
+					points = value;
 				}
-				inline void setCollision_Coords( std::vector<WSL::Containers::Base::XYZ> Value )
-				{
-					Collision_Coords = Value;
+				inline void SetCollionsCoordinates( std::vector<WSL::Containers::Base::XYZ> value ) {
+					collionsCoordinates = value;
 				}
-				inline void setDebug_Markers( std::vector<sf::Sprite> Value )
-				{
-					Debug_Markers = Value;
+				inline void SetDebugMarkers( std::vector<sf::Sprite> value ) {
+					debugMarkers = value;
 				}
-				sf::Sprite getMarker( unsigned int i )
+				sf::Sprite GetMarker( unsigned int i )
 				{
-					if( i < Debug_Markers.size() && i >= 0 )
-						return Debug_Markers[i];
+					if( i < debugMarkers.size() && i >= 0 )
+						return debugMarkers[ i ];
 					else
 					{
-						std::cout<<"You have attempeted to accses"<<std::endl;
-						std::cout<<"a element of the std::vector"<<std::endl;
-						std::cout<<"''Debug_Markers'' please attempt"<<std::endl;
-						std::cout<<"to accses a valid element."<<std::endl;
-						std::cout<<"A default value has been returned"<<std::endl;
-						std::cout<<"for method ''getMarker''."<<std::endl;
-						sf::Sprite S;
-						return S;
+						std::cout << "You have attempeted to accses" << std::endl;
+						std::cout << "a element of the std::vector" << std::endl;
+						std::cout << "''debugMarkers'' please attempt" <<  std::endl;
+						std::cout << "to accses a valid element." << std::endl;
+						std::cout << "A default value has been returned" <<  std::endl;
+						std::cout << "for method ''getMarker''." << std::endl;
+						sf::Sprite sprite;
+						return sprite;
 					}
 				}
-				void setMarker( sf::Sprite Value, unsigned int i )
+				void SetMarker( sf::Sprite debugMarker, unsigned int i )
 				{
-					if( i < Debug_Markers.size() && i >= 0 )
-						Debug_Markers[i] = Value;
+					if( i < debugMarkers.size() && i >= 0 )
+						debugMarkers[ i ] = debugMarker;
 					else
 					{
-						std::cout<<"You have attempeted to accses"<<std::endl;
-						std::cout<<"a element of the std::vector"<<std::endl;
-						std::cout<<"''Debug_Markers'' please attempt"<<std::endl;
-						std::cout<<"to accses a valid element in"<<std::endl;
-						std::cout<<"method ''setMarker''."<<std::endl;
+						std::cout << "You have attempeted to accses" << std::endl;
+						std::cout << "a element of the std::vector" << std::endl;
+						std::cout << "''debugMarkers'' please attempt" << std::endl;
+						std::cout << "to accses a valid element in" << std::endl;
+						std::cout << "method ''setMarker''." << std::endl;
 					}
 				}
-				WSL::Containers::Base::XYZ getCollision_Coord( unsigned int i )
+				WSL::Containers::Base::XYZ GetCollisionCoord( unsigned int i )
 				{
-					if( i < Collision_Coords.size() && i >= 0 )
-						return Collision_Coords[i];
+					if( i < collionsCoordinates.size() && i >= 0 )
+						return collionsCoordinates[ i ];
 					else
 					{
-						std::cout<<"You have attempeted to accses"<<std::endl;
-						std::cout<<"a element of the std::vector"<<std::endl;
-						std::cout<<"''Collision_Coords'' please attempt"<<std::endl;
-						std::cout<<"to accses a valid element."<<std::endl;
-						std::cout<<"A default value has been returned"<<std::endl;
-						std::cout<<"for method ''setCollision_Coord''."<<std::endl;
-						WSL::Containers::Base::XYZ X;
-						return X;
+						std::cout << "You have attempeted to accses" << std::endl;
+						std::cout << "a element of the std::vector" << std::endl;
+						std::cout << "''collionsCoordinates'' please attempt" << std::endl;
+						std::cout << "to accses a valid element." << std::endl;
+						std::cout << "A default value has been returned" << std::endl;
+						std::cout << "for method ''setCollision_Coord''." << std::endl;
+						WSL::Containers::Base::XYZ defualt__;
+						return defualt__;
 					}
 				}
-				void setCollision_Coord( WSL::Containers::Base::XYZ Value, unsigned int i )
+				void SetCollisionCoord( WSL::Containers::Base::XYZ collisionCoordinate, unsigned int i )
 				{
-					if( i < Collision_Coords.size() && i >= 0 )
-						Collision_Coords[i] = Value;
+					if( i < collionsCoordinates.size() && i >= 0 )
+						collionsCoordinates[ i ] = collisionCoordinate;
 					else
 					{
-						std::cout<<"You have attempeted to accses"<<std::endl;
-						std::cout<<"a element of the std::vector"<<std::endl;
-						std::cout<<"''Collision_Coords'' please attempt"<<std::endl;
-						std::cout<<"to accses a valid element in"<<std::endl;
-						std::cout<<"method ''getCollision_Coord''."<<std::endl;
+						std::cout << "You have attempeted to accses" << std::endl;
+						std::cout << "a element of the std::vector" << std::endl;
+						std::cout << "''collionsCoordinates'' please attempt" << std::endl;
+						std::cout << "to accses a valid element in" << std::endl;
+						std::cout << "method ''GetCollisionCoord''." << std::endl;
 					}
 				}
-				WSL::Containers::Base::XYZ getPoint( unsigned int i )
+				WSL::Containers::Base::XYZ GetPoint( unsigned int i )
 				{
-					if( i < Points.size() && i >= 0 )
-						return Points[i];
+					if( i < points.size() && i >= 0 )
+						return points[ i ];
 					else
 					{
-						std::cout<<"You have attempeted to accses"<<std::endl;
-						std::cout<<"a element of the std::vector"<<std::endl;
-						std::cout<<"''Points'' please attempt"<<std::endl;
-						std::cout<<"to accses a valid element."<<std::endl;
-						std::cout<<"A default value has been returned"<<std::endl;
-						std::cout<<"for method ''getPoint''."<<std::endl;
-						WSL::Containers::Base::XYZ X;
-						return X;
+						std::cout << "You have attempeted to accses" << std::endl;
+						std::cout << "a element of the std::vector" << std::endl;
+						std::cout << "''points'' please attempt" << std::endl;
+						std::cout << "to accses a valid element." << std::endl;
+						std::cout << "A default value has been returned" << std::endl;
+						std::cout << "for method ''GetPoint''." << std::endl;
+						WSL::Containers::Base::XYZ default___;
+						return default___;
 					}
 				}
-				void setPoint( WSL::Containers::Base::XYZ Value, unsigned int i )
+				void SetPoint( WSL::Containers::Base::XYZ point, unsigned int i )
 				{
-					if( i < Points.size() && i >= 0 )
-						Points[i] = Value;
+					if( i < points.size() && i >= 0 )
+						points[ i ] = point;
 					else
 					{
-						std::cout<<"You have attempeted to accses"<<std::endl;
-						std::cout<<"a element of the std::vector"<<std::endl;
-						std::cout<<"''Points'' please attempt"<<std::endl;
-						std::cout<<"to accses a valid element in"<<std::endl;
-						std::cout<<"method ''setPoint''."<<std::endl;
+						std::cout << "You have attempeted to accses" << std::endl;
+						std::cout << "a element of the std::vector" << std::endl;
+						std::cout << "''points'' please attempt" << std::endl;
+						std::cout << "to accses a valid element in" << std::endl;
+						std::cout << "method ''setPoint''." << std::endl;
 					}
 				}
 				friend class Initializer;
+				friend class ScanArea;
 			};
 		}
 	}

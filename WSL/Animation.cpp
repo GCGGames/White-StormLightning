@@ -4,9 +4,8 @@ void WSL::Components::Algorithimic::Animation::AddImage( unsigned int image )
 	targates.push_back( image );
 	size = targates.size();
 };
-WSL::Components::Algorithimic::Animation::Animation()
-{
-	reset();
+WSL::Components::Algorithimic::Animation::Animation() {
+	Reset__();
 }
 unsigned int WSL::Components::Algorithimic::Animation::AnimateImages( bool firstToLast )
 {
@@ -42,7 +41,7 @@ unsigned int WSL::Components::Algorithimic::Animation::AnimateImages( bool first
 			else
 				count++;
 		}
-		return targates[currentFrame];
+		return targates[ currentFrame ];
 	}
 	else
 		return 0;
@@ -65,12 +64,11 @@ sf::IntRect WSL::Components::Algorithimic::Animation::AnimateSheet( bool firstTo
 				}
 				else
 					frame = 1;
-				return frames[frame - 1];
+				return frames[ frame - 1 ];
 			}
 			else
 			{
-				if( init == false )
-				{
+				if( init == false ) {
 					init = true;
 					inc = FS;
 				}
@@ -78,22 +76,26 @@ sf::IntRect WSL::Components::Algorithimic::Animation::AnimateSheet( bool firstTo
 				if( inc < 0 )
 					inc = FS - 1;
 				frame = inc;
-				return frames[inc];
+				return frames[ inc ];
 			}
 		}
 		else
 		{
 			count++;
 			if( firstToLast == true )
+			{
 				if( frame == 0 )
-					return frames[0];
+					return frames[ 0 ];
 				else
-					return frames[frame - 1];
+					return frames[ frame - 1 ];
+			}
 			else
+			{
 				if( frame == FS )
-					return frames[FS - 1];
+					return frames[ FS - 1 ];
 				else
-					return frames[frame];
+					return frames[ frame ];
+			}
 		}
 	}
 	else
@@ -126,9 +128,8 @@ void WSL::Components::Algorithimic::Animation::ReplaceData( WSL::Components::Alg
 	init = data.GetInitialized();
 }
 //Reset animation.//
-void WSL::Components::Algorithimic::Animation::Reset()
-{
-	reset();
+void WSL::Components::Algorithimic::Animation::Reset() {
+	Reset();
 }
 //Return the data to its original state.//
 void WSL::Components::Algorithimic::Animation::Restore()
@@ -141,57 +142,57 @@ void WSL::Components::Algorithimic::Animation::Restore()
 	inc = storage.GetIncrement();
 	init = storage.GetInitialized();
 }
-void WSL::Components::Algorithimic::Animation::SetUpSpriteSheet( int Sprite_Width, int Sprite_Height, int Sprite_X, int Sprite_Y, int Offset_X, int Offset_Y, int Param_Width, int Param_Height, bool Change_X, bool Change_Y )
+void WSL::Components::Algorithimic::Animation::SetUpSpriteSheet( int spriteWidth, int spriteHeight, int spriteX, int spriteY, int offsetX, int offsetY, int parameterWidth, int parameterHeight, bool changeX, bool changeY )
 {
-	int Curr_X, Curr_Y;
-	Curr_X = Sprite_Width + Sprite_X + Offset_X;
-	Curr_Y = Sprite_Height + Sprite_Y + Offset_Y;
+	int currentX, currentY;
+	currentX = spriteWidth + spriteX + offsetX;
+	currentY = spriteHeight + spriteY + offsetY;
 	while( true )
 	{
-		frames.push_back(sf::IntRect( Sprite_X, Sprite_Y, Sprite_X + Sprite_Width, Sprite_Y + Sprite_Height ) );
-		if( Change_X == true )
+		frames.push_back( sf::IntRect( spriteX, spriteY, spriteX + spriteWidth, spriteY + spriteHeight ) );
+		if( changeX == true )
 		{
-			Curr_X += Sprite_Width + Offset_X;
-			Sprite_X = Curr_X;
-			if( Curr_X >= Param_Width )
+			currentX += spriteWidth + offsetX;
+			spriteX = currentX;
+			if( currentX >= parameterWidth )
 				break;
 		}
-		if( Change_Y == true )
+		if( changeY == true )
 		{
-			Curr_Y += Sprite_Height + Offset_Y;
-			Sprite_Y = Curr_Y;
-			if( Curr_Y >= Param_Height )
+			currentY += spriteHeight + offsetY;
+			spriteY = currentY;
+			if( currentY >= parameterHeight )
 				break;
 		}
-		if( Param_Width <= 0 || Param_Height <= 0 )
+		if( parameterWidth <= 0 || parameterHeight <= 0 )
 			break;
 	}
 }
-void WSL::Components::Algorithimic::Animation::SetUpSpriteSheet( int Sprite_Width, int Sprite_Height, int Offset_X, int Offset_Y, int Param_Width, int Param_Height, bool Change_X, bool Change_Y )
+void WSL::Components::Algorithimic::Animation::SetUpSpriteSheet( int spriteWidth, int spriteHeight, int offsetX, int offsetY, int parameterWidth, int parameterHeight, bool changeX, bool changeY )
 {
-	int Curr_X, Curr_Y;
-	int Sprite_X = 0;
-	int Sprite_Y = 0;
-	Curr_X = Sprite_Width + Sprite_X + Offset_X;
-	Curr_Y = Sprite_Height + Sprite_Y + Offset_Y;
+	int currentX, currentY;
+	int spriteX = 0;
+	int spriteY = 0;
+	currentX = spriteWidth + spriteX + offsetX;
+	currentY = spriteHeight + spriteY + offsetY;
 	while( true )
 	{
-		frames.push_back(sf::IntRect( Sprite_X, Sprite_Y, Sprite_X + Sprite_Width, Sprite_Y + Sprite_Height ) );
-		if( Change_X == true )
+		frames.push_back(sf::IntRect( spriteX, spriteY, spriteX + spriteWidth, spriteY + spriteHeight ) );
+		if( changeX == true )
 		{
-			Curr_X += Sprite_Width + Offset_X;
-			Sprite_X = Curr_X;
-			if( Curr_X >= Param_Width )
+			currentX += spriteWidth + offsetX;
+			spriteX = currentX;
+			if( currentX >= parameterWidth )
 				break;
 		}
-		if( Change_Y == true )
+		if( changeY == true )
 		{
-			Curr_Y += Sprite_Height + Offset_Y;
-			Sprite_Y = Curr_Y;
-			if( Curr_Y >= Param_Height )
+			currentY += spriteHeight + offsetY;
+			spriteY = currentY;
+			if( currentY >= parameterHeight )
 				break;
 		}
-		if( Param_Width <= 0 || Param_Height <= 0 )
+		if( parameterWidth <= 0 || parameterHeight <= 0 )
 			break;
 	}
 }

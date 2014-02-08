@@ -21,18 +21,20 @@ namespace WSL
 {
 	namespace Collision
 	{
-		namespace Scan_Area_Collision
+		namespace ScanAreaCollision
 		{
-			struct Collision_Detector
+			struct CollisionDetector
 			{
-				Collision::Scan_Area_Collision::Rudementary_Bounding_Box BB;
+				Collision::ScanAreaCollision::RudementaryBoundingBox boundingBox;
 				bool x, y, z, collision;
 				float X1, Y1, X2, Y2, Z1, Z2;
-				WSL::Containers::Bool_XYZ bx;
+				WSL::Containers::BoolXYZ bx;
 				unsigned int ia, ib, sizea, sizeb;
 				std::vector< WSL::Containers::Base::XYZ > A, B;
 			public:
-				inline Collision_Detector() { BB.Offset = 4; }
+				inline CollisionDetector() {
+					boundingBox.offset = 4;
+				}
 				/*		I found that the collision data
 					can not be compaired properly
 					with a logicle and oporator therefore
@@ -42,18 +44,18 @@ namespace WSL
 					value.*/
 				void Check( WSL::Containers::Base::XYZ b )
 				{
-					BB.Set_Up( b, false );
-					x = BB.Check_X( X1 );
-					y = BB.Check_Y( Y1 );
+					boundingBox.SetUp( b, false );
+					x = boundingBox.CheckX( X1 );
+					y = boundingBox.CheckY( Y1 );
 				}
-				void Check_Z( WSL::Containers::Base::XYZ b )
+				void CheckZ( WSL::Containers::Base::XYZ b )
 				{
-					BB.Set_Up( b, true );
-					x = BB.Check_X( X1 );
-					y = BB.Check_Y( Y1 );
-					z = BB.Check_Z( Z1 );
+					boundingBox.SetUp( b, true );
+					x = boundingBox.CheckX( X1 );
+					y = boundingBox.CheckY( Y1 );
+					z = boundingBox.CheckZ( Z1 );
 				}
-				WSL::Containers::Bool_XYZ Detect_Collision( Collision::Scan_Area_Collision::Scan_Area a, Collision::Scan_Area_Collision::Scan_Area b, bool Z, bool Debug )
+				WSL::Containers::BoolXYZ DetectCollision( Collision::ScanAreaCollision::ScanArea a, Collision::ScanAreaCollision::ScanArea b, bool Z, bool Debug )
 				{
 					//Set varibles to default values.//
 					ia = 0;
@@ -62,12 +64,12 @@ namespace WSL
 					x = y;
 					z = x;
 					collision = false;
-					bx.setBool( false );
+					bx.SetBooleanValue( false );
 					/*Calling these std::vectors lags beacuse they
 					  contain so much data so this eliminates
 					  any furthur calls to them for this method.*/
-					A = a.getCollision_Coords();
-					B = b.getCollision_Coords();
+					A = a.GetCollionsCoordinates();
+					B = b.GetCollionsCoordinates();
 					//This is done for the same reason as the last.//
 					sizea = A.size();
 					sizeb = B.size();
@@ -75,14 +77,14 @@ namespace WSL
 					{
 						while( ia < sizea )
 						{
-							X1 = A[ia].getX();
-							Y1 = A[ia].getY();
+							X1 = A[ ia ].GetX();
+							Y1 = A[ ia ].GetY();
 							if( Z == true )
 							{
-								Z1 = A[ia].getZ();
+								Z1 = A[ ia ].GetZ();
 								while( ib < sizeb )
 								{
-									Check_Z( B[ib] );
+									CheckZ( B[ ib ] );
 									if( x == true && y == true && z == true )
 										collision = true;
 									if( collision == true )
@@ -95,7 +97,7 @@ namespace WSL
 							{
 								while( ib < sizeb )
 								{
-									Check( B[ib] );
+									Check( B[ ib ] );
 									if( x == true && y == true )
 										collision = true;
 									if( collision == true )
@@ -111,20 +113,20 @@ namespace WSL
 							//For debugging.//
 							if( Debug == true )
 								std::cerr<<"Collision"<<std::endl;
-							if( ia >= a.getCollision_Coords().size() )
+							if( ia >= a.GetCollionsCoordinates().size() )
 								ia -= 1;
 							WSL::Containers::Base::XYZ vec( b.GetVector() );
-							bx.setCoords( vec );
-							bx.setBool( collision );
+							bx.SetCoordinates( vec );
+							bx.SetBooleanValue( collision );
 							return bx;
 						}
-						bx.getCoords().setX( 0 );
-						bx.getCoords().setY( 0 );
-						bx.getCoords().setZ( 0 );
+						bx.GetCoordinates().SetX( 0 );
+						bx.GetCoordinates().SetY( 0 );
+						bx.GetCoordinates().SetZ( 0 );
 					}
-					bx.getCoords().setX( 0 );
-					bx.getCoords().setY( 0 );
-					bx.getCoords().setZ( 0 );
+					bx.GetCoordinates().SetX( 0 );
+					bx.GetCoordinates().SetY( 0 );
+					bx.GetCoordinates().SetZ( 0 );
 					return (bx);
 				}
 			};

@@ -29,25 +29,25 @@ namespace WSL
 				std::string physicalBehavior;
 				WSL::Containers::Base::XYZ position;
 				float rotation;
-				WSL::Components::Lightning_Sprite *spr;
-				WSL::Components::Polygon *poly;
-				WSL::Collision::Scan_Area_Collision::Scan_Area *sca;
-				WSL::Components::Vector_Graphics *vec;
+				WSL::Components::LightningSprite* spr;
+				WSL::Components::Polygon* poly;
+				WSL::Collision::ScanAreaCollision::ScanArea* sca;
+				WSL::Components::VectorGraphics* vec;
 				std::vector<WSL::Containers::CoreInfoContainer> reactors;
 				void SetScanAreaProperties()
 				{
 					if( sca != NULL )
 					{
-						WSL::Collision::Scan_Area_Collision::Rectangle r = sca->GetR();
-						r.x = (int)position.getX() - r.w;
-						r.y = (int)position.getY() - r.h;
+						WSL::Collision::ScanAreaCollision::Rectangle r = sca->GetR();
+						r.x = ( int ) position.GetX() - r.w;
+						r.y = ( int ) position.GetY() - r.h;
 						sca->SetR( r );
 					}
 				}
 			public:
-				Positional( int obj_ID, bool Refresh, bool Destroy, bool initialize_, bool RDestroy,
-						std::string refesh_Script, std::string initialize_Script, std::string destroy_Script,
-						std::string other_Script, std::string physicalBehavior_, WSL::Engine *refrence_ );
+				Positional( int objectID, bool Refresh, bool Destroy, bool initialize_, bool runDestroy,
+						std::string refeshScript, std::string initializeScript, std::string destroyScript,
+						std::string otherScript, std::string physicalBehavior_, WSL::Engine* refrence_ );
 				Positional();
 				~Positional();
 				virtual void DeleteRefrence();
@@ -55,10 +55,10 @@ namespace WSL
 				float GetRotation();
 				std::string GetPhysicalBehavior();
 				void SetPhysicalBehavior( std::string physicalBehavior_ );
-				void AddSprite( WSL::Components::Lightning_Sprite sprite_ );
-				void AddPolygon( WSL::Components::Polygon polygon_ );
-				void AddScanArea( WSL::Collision::Scan_Area_Collision::Scan_Area scanArea_ );
-				void AddVectorGraphic( WSL::Components::Vector_Graphics vectorGraphi_ );
+				void AddSprite( WSL::Components::LightningSprite* sprite_ );
+				void AddPolygon( WSL::Components::Polygon* polygon_ );
+				void AddScanArea( WSL::Collision::ScanAreaCollision::ScanArea* scanArea_ );
+				void AddVectorGraphic( WSL::Components::VectorGraphics* vectorGraphi_ );
 				virtual void Initialize();
 				virtual void Refresh();
 				virtual void Destroy();

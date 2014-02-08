@@ -17,11 +17,9 @@ This file is part of White - Storm: Lightning (alpha).
     along with White - Storm: Lightning (alpha).  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "Singleton Sender.h"
-void WSL::DataTransfer::Lua::SingletonSender::SendToLua()
-{
+void WSL::DataTransfer::Lua::SingletonSender::SendToLua() {
 	luabind::globals( singleton->engine->luaContainer->State )[ "singleton" ] = singleton;
 }
-void WSL::DataTransfer::Lua::SingletonSender::DeleteRefrence()
-{
+void WSL::DataTransfer::Lua::SingletonSender::DeleteRefrence() {
 	singleton = NULL;
 }

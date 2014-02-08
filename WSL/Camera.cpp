@@ -17,69 +17,53 @@ This file is part of White - Storm: Lightning (alpha).
     along with White - Storm: Lightning (alpha).  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "Camera.h"
-void WSL::Global::Camera::SetX( float x_ )
-{
+void WSL::Global::Camera::SetX( float x_ ) {
 	x = x_;
 }
-void WSL::Global::Camera::SetY( float y_ )
-{
+void WSL::Global::Camera::SetY( float y_ ) {
 	y = y_;
 }
-void WSL::Global::Camera::SetZ( float z_ )
-{
+void WSL::Global::Camera::SetZ( float z_ ) {
 	z = z_;
 }
-void WSL::Global::Camera::SetWidth( float width_ )
-{
+void WSL::Global::Camera::SetWidth( float width_ ) {
 	width = width_;
 }
-void WSL::Global::Camera::SetHeight( float height_ )
-{
+void WSL::Global::Camera::SetHeight( float height_ ) {
 	height = height_;
 }
-void WSL::Global::Camera::SetDepth( float depth_ )
-{
+void WSL::Global::Camera::SetDepth( float depth_ ) {
 	depth = depth_;
 }
-void WSL::Global::Camera::SetCamera( sf::View *camera_ )
-{
+void WSL::Global::Camera::SetCamera( sf::View *camera_ ) {
 	camera = camera_;
 }
-float WSL::Global::Camera::GetX()
-{
+float WSL::Global::Camera::GetX() {
 	return x;
 }
-float WSL::Global::Camera::GetY()
-{
+float WSL::Global::Camera::GetY() {
 	return y;
 }
-float WSL::Global::Camera::GetZ()
-{
+float WSL::Global::Camera::GetZ() {
 	return z;
 }
-float WSL::Global::Camera::GetWidth()
-{
+float WSL::Global::Camera::GetWidth() {
 	return width;
 }
-float WSL::Global::Camera::GetHeight()
-{
+float WSL::Global::Camera::GetHeight() {
 	return height;
 }
-float WSL::Global::Camera::GetDepth()
-{
+float WSL::Global::Camera::GetDepth() {
 	return depth;
 }
-sf::View* WSL::Global::Camera::GetCamera()
-{
+sf::View* WSL::Global::Camera::GetCamera() {
 	return camera;
 }
-void WSL::Global::Camera::Zoom( float zOffset )
-{
+void WSL::Global::Camera::Zoom( float zOffset ) {
 	z += zOffset;
 	//Scale zooming will come later.//
 }
-void WSL::Global::Camera::SetZoom( float z_ )
-{
+void WSL::Global::Camera::SetZoom( float z_ ) {
 	z -= z_;
 	//Scale zooming will come later.//
 }

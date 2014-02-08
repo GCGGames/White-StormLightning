@@ -17,20 +17,18 @@ This file is part of White - Storm: Lightning (alpha).
     along with White - Storm: Lightning (alpha).  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "Positional Translator.h"
-WSL::DataTranslation::PositionalTranslator::PositionalTranslator()
-{
+WSL::DataTranslation::PositionalTranslator::PositionalTranslator() {
 	componentID = 1;
 }
-void WSL::DataTranslation::PositionalTranslator::SendToLua( WSL::Framework::Standard::Base::BaseEntity *entity, WSL::Engine *engine )
-{
-	WSL::Framework::Standard::Positional *temp = dynamic_cast<WSL::Framework::Standard::Positional*>(entity);
+void WSL::DataTranslation::PositionalTranslator::SendToLua( WSL::Framework::Standard::Base::BaseEntity* entity, WSL::Engine* engine ) {
+	WSL::Framework::Standard::Positional* temp = dynamic_cast< WSL::Framework::Standard::Positional* >( entity );
 	luabind::globals( engine->luaContainer->State )[ "object" ] = temp;
 }
-WSL::Framework::Standard::Base::BaseEntity* WSL::DataTranslation::PositionalTranslator::Instantiate( std::string standardScripts[], std::vector<std::string> otherScripts, unsigned int size, 
-					bool initialize, bool refresh, bool destroy, bool destroyed, int objectID, WSL::Engine *engine )
+WSL::Framework::Standard::Base::BaseEntity* WSL::DataTranslation::PositionalTranslator::Instantiate( std::string standardScripts[ ], std::vector<std::string> otherScripts, unsigned int size, 
+					bool initialize, bool refresh, bool destroy, bool destroyed, int objectID, WSL::Engine* engine )
 {
-	WSL::Framework::Standard::Positional *temp = new WSL::Framework::Standard::Positional( objectID, refresh, destroyed, initialize, destroy, standardScripts[1], 
-		standardScripts[0], standardScripts[2], standardScripts[3], standardScripts[4], engine );
+	WSL::Framework::Standard::Positional* temp = new WSL::Framework::Standard::Positional( objectID, refresh, destroyed, initialize, destroy, standardScripts[ 1 ], 
+		standardScripts[ 0 ], standardScripts[ 2 ], standardScripts[ 3 ], standardScripts[ 4 ], engine );
 	temp->SendSelf = SendObject;
 	unsigned int i = 0;
 	if( size != 0 )
@@ -40,14 +38,14 @@ WSL::Framework::Standard::Base::BaseEntity* WSL::DataTranslation::PositionalTran
 			temp->SetRefrence( engine );
 			BaseSend();
 			{
-				WSL::Framework::Standard::Base::BaseEntity *base = &*temp;
+				WSL::Framework::Standard::Base::BaseEntity* base = &*temp;
 				SendToLua( base, engine );
 			}
-			temp->RunScript( otherScripts[i] );
+			temp->RunScript( otherScripts[ i ] );
 			temp->DeleteRefrence();
 			i++;
 		}
 	}
-	WSL::Framework::Standard::Base::BaseEntity *base = &*temp;
+	WSL::Framework::Standard::Base::BaseEntity* base = &*temp;
 	return base;
 }

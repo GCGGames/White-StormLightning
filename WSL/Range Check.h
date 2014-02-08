@@ -21,36 +21,35 @@ namespace WSL
 {
 	namespace Algorithmic
 	{
-		struct Store
-		{
+		struct Store {
 			unsigned int Size, i;
 		};
-		static Store Values;
-		static unsigned int Range_Check( unsigned int size, unsigned int iterator )
+		static Store values;
+		static unsigned int RangeCheck( unsigned int size, unsigned int iterator )
 		{
 			if( iterator < size && size != 0 && iterator >= 0 )
 				return iterator;
 			else
 				return 0;
 		}
-		//Make sure you assigned Values.Size to a value.//
-		static unsigned int Range_Check( unsigned int iterator )
+		//Make sure you assigned values.Size to a value.//
+		static unsigned int RangeCheck( unsigned int iterator )
 		{
-			if( iterator < Values.Size && Values.Size != 0 && iterator >= 0 )
+			if( iterator < values.Size && values.Size != 0 && iterator >= 0 )
 				return iterator;
 			else
 				return 0;
 		}
-		//Make sure you assigned Values.Size and Values.i to a value.//
-		static unsigned int Range_Check()
+		//Make sure you assigned values.Size and values.i to a value.//
+		static unsigned int RangeCheck()
 		{
-			if( Values.i < Values.Size && Values.Size != 0 && Values.i >= 0 )
-				return Values. i;
+			if( values.i < values.Size && values.Size != 0 && values.i >= 0 )
+				return values. i;
 			else
 				return 0;
 		}
 		//To check before attempting to accsess.//
-		static bool Range_Check_bool( unsigned int iterator, unsigned int size )
+		static bool BoolRangeCheck( unsigned int iterator, unsigned int size )
 		{
 			if( iterator < size && size != 0 && iterator >= 0 )
 				return true;

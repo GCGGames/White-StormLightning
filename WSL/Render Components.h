@@ -24,13 +24,12 @@ namespace WSL
 		struct RenderComponents
 		{
 			WSL::Algorithmic::SenderNode node;
-			std::vector<WSL::Member_Components::Lightning_Sprite> sprites;
-			std::vector<WSL::Member_Components::Vector_Graphics> vectorGraphi;
-			std::vector<WSL::Member_Components::Polygone> polygons;
+			std::vector< WSL::MemberotationCalculatoromponents::LightningSprite > sprites;
+			std::vector< WSL::MemberotationCalculatoromponents::VectorGraphics > vectorGraphi;
+			std::vector< WSL::MemberotationCalculatoromponents::Polygone > polygons;
 			inline void DeleteSprite( unsigned int sprite )
 			{
-				if( WSL::Algorithmic::Range_Check_bool( sprite, sprites.size() ) == true )
-				{
+				if( WSL::Algorithmic::BoolRangeCheck( sprite, sprites.size() ) == true ) {
 					node.ElementDeleted( sprite );
 					sprites.erase( sprites.begin() + sprite );
 				}
@@ -42,28 +41,24 @@ namespace WSL
 			}
 			inline void DeleteVectorGraphic( unsigned int vectorGraphic )
 			{
-				if( WSL::Algorithmic::Range_Check_bool( vectorGraphic, vectorGraphi.size() ) == true )
-				{
+				if( WSL::Algorithmic::BoolRangeCheck( vectorGraphic, vectorGraphi.size() ) == true ) {
 					node.ElementDeleted( vectorGraphic );
 					vectorGraphi.erase( vectorGraphi.begin() + vectorGraphic );
 				}
-				else
-				{
-					std::cout<<"In method ''DeleteSprite'' you have attempted to accses a non-existant sprite."<<std::endl;
-					std::cout<<"You have tried to accses "<<vectorGraphic<<" when there are only "<<vectorGraphi.size()<<" sprites."<<std::endl;
+				else {
+					std::cout << "In method ''DeleteSprite'' you have attempted to accses a non-existant sprite." << std::endl;
+					std::cout << "You have tried to accses " << vectorGraphic << " when there are only " << vectorGraphi.size() << " sprites." << std::endl;
 				}
 			}
 			inline void DeletePolygon( unsigned int polygon )
 			{
-				if( WSL::Algorithmic::Range_Check_bool( polygon, polygons.size() ) == true )
-				{
+				if( WSL::Algorithmic::BoolRangeCheck( polygon, polygons.size() ) == true ) {
 					node.ElementDeleted( polygon );
 					polygones.erase( polygones.begin() + polygon );
 				}
-				else
-				{
-					std::cout<<"In method ''DeleteSprite'' you have attempted to accses a non-existant sprite."<<std::endl;
-					std::cout<<"You have tried to accses "<<polygon<<" when there are only "<<polygones.size()<<" sprites."<<std::endl;
+				else {
+					std::cout << "In method ''DeleteSprite'' you have attempted to accses a non-existant sprite." << std::endl;
+					std::cout << "You have tried to accses " << polygon << " when there are only " << polygones.size() << " sprites." << std::endl;
 				}
 			}
 		};

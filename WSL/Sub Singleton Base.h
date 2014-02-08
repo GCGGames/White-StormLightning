@@ -25,26 +25,32 @@ namespace WSL
 		{
 			struct SubSingletonFoundation
 			{
-				WSL::DataTransfer::Lua::SenderBase *sender;
-				void DeleteRefrence(){ refrence = NULL; sender = NULL; }
-				void SetRefrence( WSL::Base::SingletonBase *singleton ){ refrence = singleton; }
 				bool active;
-				inline bool GetActive()
-				{
+				WSL::DataTransfer::Lua::SenderBase* sender;
+				void DeleteRefrence() {
+					refrence = NULL;
+					sender = NULL;
+				}
+				void SetRefrence( WSL::Base::SingletonBase* singleton ) {
+					refrence = singleton;
+				}
+				inline bool GetActive() {
 					return active;
 				}
-				inline void SetActive( bool active_ )
-				{
+				inline void SetActive( bool active_ ) {
 					active = active_;
 				}
 			protected:
-				WSL::Base::SingletonBase *refrence;
+				WSL::Base::SingletonBase* refrence;
 			};
 			struct SubSingleBase : public SubSingletonFoundation
 			{
-				virtual void Initialize(){}
-				virtual void Refresh(){}
-				virtual void Destroy(){}
+				virtual void Initialize() {
+				}
+				virtual void Refresh() {
+				}
+				virtual void Destroy() {
+				}
 				bool initialize, refresh, destroy;
 				std::string initializeScript, refreshScript, destroyScript;
 			};

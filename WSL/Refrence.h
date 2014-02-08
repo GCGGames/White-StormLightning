@@ -18,18 +18,18 @@ This file is part of White - Storm: Lightning (alpha).
 */
 /*
 	Collision::Collision_Engine_Base Engine;
-	Collision::Scan_Area_Collision::Scan_Area Scan( 100, 200, 0 );
-	Collision::Scan_Area_Collision::Scan_Area Scan2( 500, 400, 0 );
-	Collision::Scan_Area_Collision::Scan_Area Scan3( 100, 300, 0 );
-	Collision::Scan_Area_Collision::Collision_Detector CD;
-	Scan = Engine.Initialize_Scan_Area( Scan, "Scan Areas/Test.txt" );
-	Scan2 = Engine.Initialize_Scan_Area( Scan2, "Scan Areas/Odd.txt" );
-	Scan3 = Engine.Initialize_Scan_Area( Scan3, "Scan Areas/Scan3.txt" );
+	Collision::ScanAreaCollision::ScanArea Scan( 100, 200, 0 );
+	Collision::ScanAreaCollision::ScanArea Scan2( 500, 400, 0 );
+	Collision::ScanAreaCollision::ScanArea Scan3( 100, 300, 0 );
+	Collision::ScanAreaCollision::Collision_Detector CD;
+	Scan = Engine.Initialize_ScanArea( Scan, "Scan Areas/Test.txt" );
+	Scan2 = Engine.Initialize_ScanArea( Scan2, "Scan Areas/Odd.txt" );
+	Scan3 = Engine.Initialize_ScanArea( Scan3, "Scan Areas/Scan3.txt" );
 	bool Run = true;
 	float x, y, z;
-	x = Scan.getX();
-	y = Scan.getY();
-	z = Scan.getZ();
+	x = Scan.GetX();
+	y = Scan.GetY();
+	z = Scan.GetZ();
 	float Speed = 6;
 	sf::Event E;
 	float Degree = 0;
@@ -70,18 +70,18 @@ This file is part of White - Storm: Lightning (alpha).
 				{ std::cout<<"Debug Mode Disabled."<<std::endl;
 				Debug = false; }
 			}
-			Scan.setX( x );
-			Scan.setY( y );
-			Scan.setZ( z );
+			Scan.SetX( x );
+			Scan.SetY( y );
+			Scan.SetZ( z );
 			break;
 		}
 		Graphics::SFML::App.Clear();
 		Scan = Engine.Run( Scan, true, Degree, true );
 		Scan2 = Engine.Run( Scan2, true, 3, true );
 		Scan3 = Engine.Run( Scan3, true, 10, true );
-		Scan2.setZ( Scan.getZ() );
-		CD.Detect_Collision( Scan, Scan2, false, true );
-		CD.Detect_Collision( Scan3, Scan, false, true );
+		Scan2.SetZ( Scan.GetZ() );
+		CD.DetectCollision( Scan, Scan2, false, true );
+		CD.DetectCollision( Scan3, Scan, false, true );
 		Graphics::SFML::App.Display();
 		Degree = 0;
 	}
@@ -91,38 +91,38 @@ This file is part of White - Storm: Lightning (alpha).
 }*/
 /*
 float xc, yc;
-		xc = Scan.getX() + V.getX();
-		yc = Scan.getY() + V.getY();
+		xc = Scan.GetX() + V.GetX();
+		yc = Scan.GetY() + V.GetY();
 		VO << xc;
 		VO << yc;
-		Scan.setX( xc );
-		Scan.setY( yc );
+		Scan.SetX( xc );
+		Scan.SetY( yc );
 		float x, y, a, PI2;
-		x = V.getX();
-		y = V.getY();
+		x = V.GetX();
+		y = V.GetY();
 		PI2 = 3.14 * 2;
 		a = atan2(x, y);
 		if(a < 0)
 			a+=PI2;
 		a *= 180 / 3.14;*/
-		//std::cout<<V.getX()<<V.getY()<<std::endl;
+		//std::cout<<V.GetX()<<V.GetY()<<std::endl;
 
 
 
 
 
-	/*WSL::White_Storm_Lightning.Image_Library.Add_Image( "Knight", "Images/Test_Sheet.png" );
+	/*WSL::White_Storm_Lightning.ImageLibrary.Add_Image( "Knight", "Images/Test_Sheet.png" );
 	WSL::Main::Viewable Vbl;
 	Vbl.Add_Image( 0 );
 	Vbl.Set_Image( 0 );
 	Vbl.Set_Up_Sprite( 200, 300, 28, 56 );
 	unsigned int CA = Vbl.Add_Animation();
-	Vbl.setAnimate( CA, true );
+	Vbl.SetFirstXYZnimate( CA, true );
 	Vbl.Add_Image_To_Animation( CA, 0 );
-	Vbl.setAnimate_Beginning_To_End( true );
+	Vbl.SetFirstXYZnimate_Beginning_To_End( true );
 	Vbl.set_Animation_Type( false, CA );
 	Vbl.Set_Up_Sprite_Sheet( 28, 56, 32, 0, 4, 6, 192, 112, true, false, CA );
-	Vbl.setAnimation_Animation_Delay( CA, 50 );
+	Vbl.SetFirstXYZnimation_Animation_Delay( CA, 50 );
 	while( true )
 	{
 		Graphics::SFML::App.Clear();
@@ -141,15 +141,15 @@ void WSL::Algorithmic::Level::AddObject( unsigned int id, unsigned int objID )
 	{
 		while( i < size )
 		{
-			if( refrence->engine->objectTracker.ObjectRegisters[i].componentID == 0 )
+			if( refrence->engine->objectTracker.ObjectRegisters[ i ].componentID == 0 )
 			{
 				i2 = 0;
 				size2 = refrence->entities.Array.size();
 				while( i2 < size2 )
 				{
-					if( objID == refrence->entities.Array[i2]->GetObjID() )
+					if( objID == refrence->entities.Array[ i2 ]->GetObjID() )
 					{
-						if( id == refrence->entities.Array[i2]->GetID() )
+						if( id == refrence->entities.Array[ i2 ]->GetID() )
 						{
 							entities.AddObject( i2 );
 						}
@@ -157,15 +157,15 @@ void WSL::Algorithmic::Level::AddObject( unsigned int id, unsigned int objID )
 					i2++;
 				}
 			}
-			if( refrence->engine->objectTracker.ObjectRegisters[i].componentID == 1 )
+			if( refrence->engine->objectTracker.ObjectRegisters[ i ].componentID == 1 )
 			{
 				i2 = 0;
 				size2 = refrence->positionals.Array.size();
 				while( i2 < size2 )
 				{
-					if( objID == refrence->positionals.Array[i2]->GetObjID() )
+					if( objID == refrence->positionals.Array[ i2 ]->GetObjID() )
 					{
-						if( id == refrence->positionals.Array[i2]->GetID() )
+						if( id == refrence->positionals.Array[ i2 ]->GetID() )
 						{
 							positionals.AddObject( i2 );
 						}
@@ -173,15 +173,15 @@ void WSL::Algorithmic::Level::AddObject( unsigned int id, unsigned int objID )
 					i2++;
 				}
 			}
-			if( refrence->engine->objectTracker.ObjectRegisters[i].componentID == 2 )
+			if( refrence->engine->objectTracker.ObjectRegisters[ i ].componentID == 2 )
 			{
 				i2 = 0;
 				size2 = refrence->mobiles.Array.size();
 				while( i2 < size2 )
 				{
-					if( objID == refrence->mobiles.Array[i2]->GetObjID() )
+					if( objID == refrence->mobiles.Array[ i2 ]->GetObjID() )
 					{
-						if( id == refrence->mobiles.Array[i2]->GetID() )
+						if( id == refrence->mobiles.Array[ i2 ]->GetID() )
 						{
 							mobiles.AddObject( i2 );
 						}
@@ -200,7 +200,7 @@ WSL::Framework::Standard::Base::Entity* WSL::Algorithmic::Level::GetEntity( unsi
 	refrence->currentInfo.SetObjID( objID );
 	unsigned int element = SearchAlgorithim( id, objID, 0 );
 	refrence->ThreadEntity();
-	return refrence->entities.Array[element];
+	return refrence->entities.Array[ element ];
 }
 WSL::Framework::Standard::Positional* WSL::Algorithmic::Level::GetPositional( unsigned int id, int objID )
 {
@@ -209,7 +209,7 @@ WSL::Framework::Standard::Positional* WSL::Algorithmic::Level::GetPositional( un
 	refrence->currentInfo.SetObjID( objID );
 	unsigned int element = SearchAlgorithim( id, objID, 1 );
 	refrence->ThreadPositional();
-	return refrence->positionals.Array[element];
+	return refrence->positionals.Array[ element ];
 }
 WSL::Framework::Standard::Mobile* WSL::Algorithmic::Level::GetMobile( unsigned int id, int objID )
 {
@@ -218,24 +218,24 @@ WSL::Framework::Standard::Mobile* WSL::Algorithmic::Level::GetMobile( unsigned i
 	refrence->currentInfo.SetObjID( objID );
 	unsigned int element = SearchAlgorithim( id, objID, 2 );
 	refrence->ThreadMobile();
-	return refrence->mobiles.Array[element];
+	return refrence->mobiles.Array[ element ];
 }
 void WSL::Algorithmic::Level::SetObject( unsigned int id, int objID, WSL::Framework::Standard::Base::Entity *object )
 {
 	unsigned int element = SearchAlgorithim( id, objID, 0 );
-	WSL::Framework::Standard::Base::Entity *temp = refrence->entities.Array[element];
+	WSL::Framework::Standard::Base::Entity *temp = refrence->entities.Array[ element ];
 	temp = object;
 }
 void WSL::Algorithmic::Level::SetObject( unsigned int id, int objID, WSL::Framework::Standard::Positional *object )
 {
 	unsigned int element = SearchAlgorithim( id, objID, 1 );
-	WSL::Framework::Standard::Positional *temp = refrence->positionals.Array[element];
+	WSL::Framework::Standard::Positional *temp = refrence->positionals.Array[ element ];
 	temp = object;
 }
 void WSL::Algorithmic::Level::SetObject( unsigned int id, int objID, WSL::Framework::Standard::Mobile *object )
 {
 	unsigned int element = SearchAlgorithim( id, objID, 1 );
-	WSL::Framework::Standard::Base::Entity *temp = refrence->mobiles.Array[element];
+	WSL::Framework::Standard::Base::Entity *temp = refrence->mobiles.Array[ element ];
 	temp = object;
 }
 /*
@@ -313,8 +313,8 @@ void WSL::Singleton::InstantiateEntity( std::string info )
 {
 	LoadAlgorithim( info );
 	WSL::Framework::Standard::Base::Entity *temp = new WSL::Framework::Standard::Base::Entity( currentInfo.GetObjID(), refresh, 
-						destroy, Initialize, runDestroy, standardScripts[1], standardScripts[0],
-						standardScripts[2], standardScripts[3], engine );
+						destroy, Initialize, runDestroy, standardScripts[ 1 ], standardScripts[ 0 ],
+						standardScripts[ 2 ], standardScripts[ 3 ], engine );
 	RunEntitiyScripts( temp );
 	BaseSend();
 	temp->SetRefrence( engine );
@@ -327,8 +327,8 @@ void WSL::Singleton::InstantiatePositional( std::string info )
 {
 	LoadAlgorithim( info );
 	WSL::Framework::Standard::Positional *temp = new WSL::Framework::Standard::Positional( currentInfo.GetObjID(), refresh, 
-						destroy, Initialize, runDestroy, standardScripts[1], standardScripts[0],
-						standardScripts[2], standardScripts[3], standardScripts[4], engine );
+						destroy, Initialize, runDestroy, standardScripts[ 1 ], standardScripts[ 0 ],
+						standardScripts[ 2 ], standardScripts[ 3 ], standardScripts[ 4 ], engine );
 	RunPositionalScripts( temp );
 	BaseSend();
 	temp->SetRefrence( engine );
@@ -341,8 +341,8 @@ void WSL::Singleton::InstantiateMobile( std::string info )
 {
 	LoadAlgorithim( info );
 	WSL::Framework::Standard::Mobile *temp = new WSL::Framework::Standard::Mobile( currentInfo.GetObjID(), refresh, 
-						destroy, Initialize, runDestroy, standardScripts[1], standardScripts[0],
-						standardScripts[2], standardScripts[3], standardScripts[4], engine );
+						destroy, Initialize, runDestroy, standardScripts[ 1 ], standardScripts[ 0 ],
+						standardScripts[ 2 ], standardScripts[ 3 ], standardScripts[ 4 ], engine );
 	RunMobileScripts( temp );
 	BaseSend();
 	temp->SetRefrence( engine );
@@ -375,9 +375,9 @@ This file is part of White - Storm: Lightning (alpha).
 WSL::Math::Vector::VectorCalculator::VectorCalculator()
 {
 	WSL::Containers::Base::XYZ temp;
-	temp.setX( 1.f );
-	temp.setY( 1.f );
-	temp.setZ( 1.f );
+	temp.SetX( 1.f );
+	temp.SetY( 1.f );
+	temp.SetZ( 1.f );
 	default_ = temp;
 }
 WSL::Containers::Base::XYZ WSL::Math::Vector::VectorCalculator::VectorCalculation( WSL::Containers::Base::XYZ destination, WSL::Containers::Base::XYZ position, float speed, bool td )
@@ -385,31 +385,31 @@ WSL::Containers::Base::XYZ WSL::Math::Vector::VectorCalculator::VectorCalculatio
 	WSL::Containers::Base::XYZ magnitude;
 	if( speed <= 0 + std::numeric_limits<float>::epsilon() )
 		speed = 1;
-    magnitude.setX( destination.getX() - position.getX() );
-    magnitude.setY( destination.getY() - position.getY() );
-    magnitude.setZ( destination.getZ() - position.getZ() );
+    magnitude.SetX( destination.GetX() - position.GetX() );
+    magnitude.SetY( destination.GetY() - position.GetY() );
+    magnitude.SetZ( destination.GetZ() - position.GetZ() );
     
-    if( magnitude.getX() <= 0 + std::numeric_limits<float>::epsilon()
-		&& magnitude.getY() <= 0 + std::numeric_limits<float>::epsilon()
-		&& magnitude.getZ() <= 0 + std::numeric_limits<float>::epsilon() )
+    if( magnitude.GetX() <= 0 + std::numeric_limits<float>::epsilon()
+		&& magnitude.GetY() <= 0 + std::numeric_limits<float>::epsilon()
+		&& magnitude.GetZ() <= 0 + std::numeric_limits<float>::epsilon() )
 		return ( WSL::Containers::Base::XYZ() );
-    float mag = ( magnitude.getY() * magnitude.getY() ) +
-        ( magnitude.getX() * magnitude.getX() ) +
-        ( magnitude.getZ() * magnitude.getZ() );
+    float mag = ( magnitude.GetY() * magnitude.GetY() ) +
+        ( magnitude.GetX() * magnitude.GetX() ) +
+        ( magnitude.GetZ() * magnitude.GetZ() );
     
     mag = sqrt( mag );
     
-    magnitude.setX( ( magnitude.getX() / mag ) * speed );
-    magnitude.setY( ( magnitude.getY() / mag ) * speed );
-    magnitude.setZ( ( magnitude.getZ() / mag ) * speed );
+    magnitude.SetX( ( magnitude.GetX() / mag ) * speed );
+    magnitude.SetY( ( magnitude.GetY() / mag ) * speed );
+    magnitude.SetZ( ( magnitude.GetZ() / mag ) * speed );
  */   
    // return magnitude;
 	/*//Make sure that the vector doesent have any stray values lying around.//
 	vector = default_;
 	//Calculate Magnitude.//
-	x = goTo.getX() - position.getX();
-	y = goTo.getY() - position.getY();
-	z = goTo.getZ() - position.getZ();
+	x = goTo.GetX() - position.GetX();
+	y = goTo.GetY() - position.GetY();
+	z = goTo.GetZ() - position.GetZ();
 	if( td == true )
 		magnitude = magn.DotProduct( x, y, z, magnitude );
 	else
@@ -439,9 +439,9 @@ WSL::Containers::Base::XYZ WSL::Math::Vector::VectorCalculator::VectorCalculatio
 	}
 	if( td == true )
 		z *= speed;
-	vector.setX( x );
-	vector.setY( y );
-	vector.setZ( z );
+	vector.SetX( x );
+	vector.SetY( y );
+	vector.SetZ( z );
 	return vector;*/
 /*}
 WSL::Containers::Base::XYZ WSL::Math::Vector::VectorCalculator::VectorCalculation( WSL::Containers::Base::XYZ destination, WSL::Containers::Base::XYZ *position, float speed, bool td )
@@ -449,32 +449,32 @@ WSL::Containers::Base::XYZ WSL::Math::Vector::VectorCalculator::VectorCalculatio
 	WSL::Containers::Base::XYZ magnitude;
 	if( speed <= 0 + std::numeric_limits<float>::epsilon() )
 		speed = 1;
-    magnitude.setX( destination.getX() - position->getX() );
-    magnitude.setY( destination.getY() - position->getY() );
-    magnitude.setZ( destination.getZ() - position->getZ() );
+    magnitude.SetX( destination.GetX() - position->GetX() );
+    magnitude.SetY( destination.GetY() - position->GetY() );
+    magnitude.SetZ( destination.GetZ() - position->GetZ() );
     
-    if( magnitude.getX() <= 0 + std::numeric_limits<float>::epsilon()
-		&& magnitude.getY() <= 0 + std::numeric_limits<float>::epsilon()
-		&& magnitude.getZ() <= 0 + std::numeric_limits<float>::epsilon() )
+    if( magnitude.GetX() <= 0 + std::numeric_limits<float>::epsilon()
+		&& magnitude.GetY() <= 0 + std::numeric_limits<float>::epsilon()
+		&& magnitude.GetZ() <= 0 + std::numeric_limits<float>::epsilon() )
         return ( WSL::Containers::Base::XYZ() );
-    float mag = ( magnitude.getY() * magnitude.getY() ) +
-        ( magnitude.getX() * magnitude.getX() ) +
-        ( magnitude.getZ() * magnitude.getZ() );
+    float mag = ( magnitude.GetY() * magnitude.GetY() ) +
+        ( magnitude.GetX() * magnitude.GetX() ) +
+        ( magnitude.GetZ() * magnitude.GetZ() );
     
     mag = sqrt( mag );
     
-    magnitude.setX( ( magnitude.getX() / mag ) * speed );
-    magnitude.setY( ( magnitude.getY() / mag ) * speed );
-    magnitude.setZ( ( magnitude.getZ() / mag ) * speed );
+    magnitude.SetX( ( magnitude.GetX() / mag ) * speed );
+    magnitude.SetY( ( magnitude.GetY() / mag ) * speed );
+    magnitude.SetZ( ( magnitude.GetZ() / mag ) * speed );
     
     return magnitude;
 */
 	/*//Make sure that the vector doesent have any stray values lying around.//
 	vector = default_;
 	//Calculate Magnitude.//
-	x = goTo.getX() - position->getX();
-	y = goTo.getY() - position->getY();
-	z = goTo.getZ() - position->getZ();
+	x = goTo.GetX() - position->GetX();
+	y = goTo.GetY() - position->GetY();
+	z = goTo.GetZ() - position->GetZ();
 	if( td == true )
 		magnitude = magn.DotProduct( x, y, z, magnitude );
 	else
@@ -499,9 +499,9 @@ WSL::Containers::Base::XYZ WSL::Math::Vector::VectorCalculator::VectorCalculatio
 	}
 	if( td == true )
 		z *= speed;
-	vector.setX( x );
-	vector.setY( y );
-	vector.setZ( z );
+	vector.SetX( x );
+	vector.SetY( y );
+	vector.SetZ( z );
 	return vector;*/
 /*}
 inline float WSL::Math::Formulas::Dot::DotProduct( float x, float y, float mag )

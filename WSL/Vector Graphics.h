@@ -21,74 +21,58 @@ namespace WSL
 {
 	namespace Components
 	{
-		class Vector_Graphics : public WSL::Components::Rendering_System::Base::Render_Base<WSL::Components::VectorGraphicsComponent>
+		class VectorGraphics : public WSL::Components::Rendering_System::Base::Render_Base<WSL::Components::VectorGraphicsComponent>
 		{
 			bool delete_;
 		public:
-			inline Vector_Graphics( std::string file )
-			{
+			inline VectorGraphics( std::string file ) {
 				t.Initialize( file );
 			}
-			inline Vector_Graphics()
-			{
+			inline VectorGraphics() {
 			}
-			inline void AddPoint( float x, float y )
-			{
+			inline void AddPoint( float x, float y ) {
 				t.AddPoint( x, y );
 			}
-			inline void AddPoint( float x, float y, float z )
-			{
+			inline void AddPoint( float x, float y, float z ) {
 				t.AddPoint( x, y, z );
 			}
-			inline void AddPoint( WSL::Containers::Base::XYZ point )
-			{
+			inline void AddPoint( WSL::Containers::Base::XYZ point ) {
 				t.AddPoint( point );
 			}
-			inline void DeletePoint( unsigned int Elem )
-			{
+			inline void DeletePoint( unsigned int Elem ) {
 				t.DeletePoint( Elem );
 			}
-			inline void Clear()
-			{
+			inline void Clear() {
 				t.Clear();
 			}
-			inline void Build()
-			{
+			inline void Build() {
 				t.Build();
 			}
-			void SetPosition( float x, float y )
-			{
+			void SetPosition( float x, float y ) {
 				t.SetPosition( x, y );
 			}
-			void SetPosition( float x, float y, float z )
-			{
+			void SetPosition( float x, float y, float z ) {
 				t.SetPosition( x, y, z );
 			}
-			void SetPosition( WSL::Containers::Base::XYZ Position )
-			{
+			void SetPosition( WSL::Containers::Base::XYZ Position ) {
 				t.SetPosition( Position );
 			}
-			void Rotate( float Degree )
-			{
+			void Rotate( float Degree ) {
 				t.Rotate( Degree );
 			}
-			void SetRotation( float degree )
-			{
+			void SetRotation( float degree ) {
 				t.SetRotation( degree );
 			}
-			void Draw( sf::RenderWindow *window )
-			{
+			void Draw( sf::RenderWindow* window ) {
 				t.Draw( window );
 			}
-			void setColor( sf::Color color_ )
-			{
+			void SetColor( sf::Color color_ ) {
 				color = color;
-				t.setColor( color );
+				t.SetColor( color );
 			}
-			void setColor( WSL::Containers::Scripting::Lua::ColorWrap color_ )
-			{
+			void SetColor( WSL::Containers::Scripting::Lua::ColorWrap color_ ) {
 				color = color_.GetColor();
-				t.setColor( color );
+				t.SetColor( color );
 			}
 		};
 	}

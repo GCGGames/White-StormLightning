@@ -25,42 +25,37 @@ namespace WSL
 		{
 			namespace Base
 			{
-				template<typename T>
-				class Render_Base : public Render_Functonal
+				template< typename T >
+				class Render_Base : public RenderFunctonal
 				{
 				protected:
 					T t;
 					float scaleX, scaleY;
 					bool draw;
 				public:
-					Render_Base()
-					{
+					Render_Base() {
 						InitializeRB();
 					}
-					inline void SetDraw( bool draw_ )
-					{
+					inline void SetDraw( bool draw_ ) {
 						draw = draw_;
 					}
-					inline bool GetDraw()
-					{
+					inline bool GetDraw() {
 						return draw;
 					}
 					inline void InitializeRB()
 					{
 						render = true;
-						scale_to_z = false;
+						scaleToZ = false;
 						scaleX = 1.f;
 						scaleY = 1.f;
 						color = sf::Color( 100, 100, 100 );
-						position.setX( 0 );
-						position.setY( 0 );
+						position.SetX( 0 );
+						position.SetY( 0 );
 					}
-					inline T getComponent()
-					{
+					inline T GetComponent() {
 						return t;
 					}
-					inline void setComponent( T value )
-					{
+					inline void SetComponent( T value ) {
 						t = value;
 					}
 				};

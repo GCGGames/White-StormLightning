@@ -26,13 +26,15 @@ namespace WSL
 			//Recomended as a base struct.//
 			struct BaseTranslator
 			{
-				virtual void SendToLua( WSL::Framework::Standard::Base::BaseEntity *entity, WSL::Engine *engine ){}
-				virtual WSL::Framework::Standard::Base::BaseEntity* Instantiate( std::string standardScripts[], std::vector<std::string> otherScripts, unsigned int size, 
-					bool initialize, bool refresh, bool destroy, bool destroyed, int objectID, WSL::Engine *engine ){ return NULL; }
-				void (*BaseSend)();
-				void (*SendObject)();
-				int GetComponentID()
-				{
+				virtual void SendToLua( WSL::Framework::Standard::Base::BaseEntity *entity, WSL::Engine *engine ) {
+				}
+				virtual WSL::Framework::Standard::Base::BaseEntity* Instantiate( std::string standardScripts[], std::vector< std::string > otherScripts, unsigned int size, 
+					bool initialize, bool refresh, bool destroy, bool destroyed, int objectID, WSL::Engine *engine ) {
+						return NULL;
+				}
+				void (* BaseSend )();
+				void (* SendObject )();
+				int GetComponentID() {
 					return componentID;
 				}
 			protected:

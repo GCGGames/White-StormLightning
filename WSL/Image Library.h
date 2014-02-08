@@ -21,11 +21,11 @@ namespace WSL
 {
 	namespace Global
 	{
-		struct Image_Library
+		struct ImageLibrary
 		{
-			std::vector<sf::Image> masterImages;
-			std::vector<std::string> dirs;
-			std::vector<std::string> names;
+			std::vector< sf::Image > masterImages;
+			std::vector< std::string > dirs;
+			std::vector< std::string > names;
 			//Image Allocation.//
 			unsigned int AddImage( std::string Name, std::string Dir );
 			/*

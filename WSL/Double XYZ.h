@@ -21,23 +21,29 @@ namespace WSL
 {
 	namespace Containers
 	{
-		class Double_XYZ
+		class DoubleXYZ
 		{
-			Containers::Base::XYZ A;
-			Containers::Base::XYZ B;
+			Containers::Base::XYZ first;
+			Containers::Base::XYZ second;
 		public:
-			inline Double_XYZ( WSL::Containers::Base::XYZ a, WSL::Containers::Base::XYZ b )
-			{
-				A = a;
-				B = b;
+			inline DoubleXYZ( WSL::Containers::Base::XYZ first_, WSL::Containers::Base::XYZ second_ ) {
+				first = first_;
+				second = second_;
 			}
-			inline Double_XYZ()
-			{
+			inline DoubleXYZ() {
 			}
-			inline void setA( Containers::Base::XYZ Value ) { A = Value; }
-			inline void setB( Containers::Base::XYZ Value ) { B = Value; }
-			inline Containers::Base::XYZ getA() { return A; }
-			inline Containers::Base::XYZ getB() { return B; }
+			inline void SetFirstXYZ( Containers::Base::XYZ first_ ) {
+				first = first_;
+			}
+			inline void SetSecondXYZ( Containers::Base::XYZ second_ ) {
+				second = second_;
+			}
+			inline Containers::Base::XYZ GetFirstXYZ() {
+				return first;
+			}
+			inline Containers::Base::XYZ GetSecondXYZ() {
+				return second;
+			}
 		};
 	}
 }

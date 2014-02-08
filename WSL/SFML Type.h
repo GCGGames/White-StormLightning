@@ -27,54 +27,46 @@ namespace WSL
 			{
 				namespace SubBase
 				{
-					template<typename sfmlType>
-					class SFMLType : public WSL::Components::Rendering_System::Base::Render_Base<sfmlType>
+					template< typename sfmlType >
+					class SFMLType : public WSL::Components::Rendering_System::Base::Render_Base< sfmlType >
 					{
 					public:
-						inline void SetRotation( float degree )
-						{
+						inline void SetRotation( float degree ) {
 							t.SetRotation( degree );
 						}
-						inline void SetCenter( float x, float y )
-						{
+						inline void SetCenter( float x, float y ) {
 							t.SetCenter( x, y );
 						}
-						inline void SetCenter( WSL::Containers::Base::XYZ center )
-						{
-							t.SetCenter( center.getX(), center.getY() );
+						inline void SetCenter( WSL::Containers::Base::XYZ center ) {
+							t.SetCenter( center.GetX(), center.GetY() );
 						}
-						void Draw( sf::RenderWindow *window )
-						{
+						void Draw( sf::RenderWindow *window ) {
 							window->Draw( t );
 						}
 						inline void SetPosition( float x, float y )
 						{
 							t.SetPosition( x, y );
-							position.setX( x );
-							position.setY( y );
+							position.SetX( x );
+							position.SetY( y );
 						}
 						inline void SetPosition( float x, float y, float z )
 						{
 							t.SetPosition( x, y );
-							position.setX( x );
-							position.setY( y );
-							position.setZ( z );
+							position.SetX( x );
+							position.SetY( y );
+							position.SetZ( z );
 						}
-						inline void SetPosition( WSL::Containers::Base::XYZ Position )
-						{
-							t.SetPosition( Position.getX(), Position.getY() );
-							position = Position;
+						inline void SetPosition( WSL::Containers::Base::XYZ position_ ) {
+							t.SetPosition( position_.GetX(), position_.GetY() );
+							position = position_;
 						}
-						inline void Scale( float x, float y )
-						{
+						inline void Scale( float x, float y ) {
 							t.Scale( x, y );
 						}
-						inline void Scale( float value )
-						{
+						inline void Scale( float value ) {
 							t.Scale( value, value );
 						}
-						inline void Rotate( float degree )
-						{
+						inline void Rotate( float degree ) {
 							t.Rotate( degree );
 						}
 					};

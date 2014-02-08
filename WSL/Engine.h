@@ -16,21 +16,20 @@ This file is part of White - Storm: Lightning (alpha).
     You should have received a copy of the GNU General Public License
     along with White - Storm: Lightning (alpha).  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "Renders.h"
+#include "Lightning Sprite.h"
 namespace WSL
 {
 	struct Engine : public WSL::Base::EngineBase
 	{
 		inline Engine( bool null )
 		{
-			lua = new WSL::Containers::Scripting::Lua_Container;
-			imageLibrary = new WSL::Global::Image_Library;
+			lua = new WSL::Containers::Scripting::LuaContainer;
+			imageLibrary = new WSL::Global::ImageLibrary;
 			luaContainer = new WSL::Containers::Scripting::LuaState;
-			WSL::Math::Vector::VectorCalculator *temp = new WSL::Math::Vector::VectorCalculator;
-			Constructor.setCalculator( temp );
+			WSL::Math::Vector::VectorCalculator* temp = new WSL::Math::Vector::VectorCalculator;
+			constructor.SetCalculator( temp );
 		}
-		inline Engine()
-		{
+		inline Engine() {
 		}
 		~Engine()
 		{
@@ -38,11 +37,11 @@ namespace WSL
 			delete luaContainer;
 			delete lua;
 		}
-		void (*luaRegister)(void);
-		sf::RenderWindow *window;
+		void (* luaRegister )();
+		sf::RenderWindow* window;
 		WSL::Algorithmic::ObjectTracker objectTracker;
-		WSL::Containers::Scripting::Lua_Container *lua;
-		std::vector< WSL::Components::Rendering_System::Base::Render_Functonal* > renders;
-		WSL::Global::Stack<WSL::Collision::Scan_Area_Collision::Scan_Area*> scanAreas;
+		WSL::Containers::Scripting::LuaContainer* lua;
+		std::vector< WSL::Components::Rendering_System::Base::RenderFunctonal* > renders;
+		WSL::Global::Stack< WSL::Collision::ScanAreaCollision::ScanArea* > scanAreas;
 	};
 }

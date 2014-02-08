@@ -1,3 +1,4 @@
+print( "Initializing 'SpaceShip' object." )
 singleton:AddSprite( 0, false )
 singleton:AddScanArea()
 position:SetY( 300 )
@@ -12,3 +13,4 @@ r.h = 64
 r.x = position:GetX() + 1
 r.y = position:GetY() + 1
 scanArea:SetR( r )
+print( "Finished initializing 'SpaceShip' object." )

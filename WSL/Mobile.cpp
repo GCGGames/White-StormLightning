@@ -17,81 +17,68 @@ This file is part of White - Storm: Lightning (alpha).
     along with White - Storm: Lightning (alpha).  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "Mobile.h"
-WSL::Framework::Standard::Mobile::Mobile( int obj_ID, bool Refresh, bool Destroy, bool initialize_, bool RDestroy,
-						std::string refresh_Script, std ::string initialize_Script, std::string destroy_Script,
-						std::string other_Script, std::string physicalBehavior_, WSL::Engine *refrence_ )
+WSL::Framework::Standard::Mobile::Mobile( int objectID, bool refresh_, bool destroy_, bool initialize_, bool runDestroy,
+						std::string refreshScript_, std ::string initializeScript_, std::string destroyScript_,
+						std::string otherScript_, std::string physicalBehavior_, WSL::Engine* refrence_ )
 {
 	physicalBehavior = physicalBehavior_;
-	Construct( obj_ID, Refresh, Destroy, initialize_, RDestroy, refresh_Script, initialize_Script, destroy_Script,
-		other_Script, refrence_ );
+	Construct( objectID, refresh_, destroy_, initialize_, runDestroy, refreshScript_, initializeScript_, destroyScript_,
+		otherScript_, refrence_ );
 	componentID = 2;
 	spr = NULL;
 	poly = NULL;
 	sca = NULL;
 	vec = NULL;
 }
-WSL::Framework::Standard::Mobile::Mobile()
-{
+WSL::Framework::Standard::Mobile::Mobile() {
 }
-WSL::Framework::Standard::Mobile::~Mobile()
-{
+WSL::Framework::Standard::Mobile::~Mobile() {
 }
-void WSL::Framework::Standard::Mobile::Calculate()
-{
+void WSL::Framework::Standard::Mobile::Calculate() {
 	vector.CalculateVector();
 }
-bool WSL::Framework::Standard::Mobile::GetAutoCalculate()
-{
+bool WSL::Framework::Standard::Mobile::GetAutoCalculate() {
 	return autoCalculate.Get();
 }
-bool WSL::Framework::Standard::Mobile::GetAutoMove()
-{
+bool WSL::Framework::Standard::Mobile::GetAutoMove() {
 	return autoMove.Get();
 }
-WSL::Containers::Math::Vector WSL::Framework::Standard::Mobile::GetVector()
-{
+WSL::Containers::Math::Vector WSL::Framework::Standard::Mobile::GetVector() {
 	return vector;
 }
-void WSL::Framework::Standard::Mobile::SetAutoCalculate( bool autoCalculate_ )
-{
+void WSL::Framework::Standard::Mobile::SetAutoCalculate( bool autoCalculate_ ) {
 	autoCalculate.Set( autoCalculate_ );
 }
-void WSL::Framework::Standard::Mobile::SetAutoMove( bool autoMove_ )
-{
+void WSL::Framework::Standard::Mobile::SetAutoMove( bool autoMove_ ) {
 	autoMove.Set( autoMove_ );
 }
-void WSL::Framework::Standard::Mobile::SetDestination( WSL::Containers::Base::XYZ destination )
-{
+void WSL::Framework::Standard::Mobile::SetDestination( WSL::Containers::Base::XYZ destination ) {
 	vector.SetDestination( destination );
 }
-void WSL::Framework::Standard::Mobile::SetDestination( float x, float y, float z )
-{
+void WSL::Framework::Standard::Mobile::SetDestination( float x, float y, float z ) {
 	vector.SetDestination( x, y, z );
 }
-void WSL::Framework::Standard::Mobile::SetDestination( float x, float y )
-{
+void WSL::Framework::Standard::Mobile::SetDestination( float x, float y ) {
 	vector.SetDestination( x, y );
 }
-void WSL::Framework::Standard::Mobile::SetDestination( float allCoords )
-{
+void WSL::Framework::Standard::Mobile::SetDestination( float allCoords ) {
 	vector.SetDestination( allCoords );
 }
-void WSL::Framework::Standard::Mobile::SendToLua()
-{
+void WSL::Framework::Standard::Mobile::SendToLua() {
 	MobileSend();
 }
 void WSL::Framework::Standard::Mobile::SetPosition( float x, float y, float z )
 {
-	position.setX( x );
-	position.setY( y );
-	position.setZ( z );
+	position.SetX( x );
+	position.SetY( y );
+	position.SetZ( z );
 	vector.SetPosition( position );
 	SetComponentPosition( false );
 }
 void WSL::Framework::Standard::Mobile::SetPosition( float x, float y )
 {
-	position.setX( x );
-	position.setY( y );
+	position.SetX( x );
+	position.SetY( y );
 	vector.SetPosition( position );
 	SetComponentPosition( true );
 }
@@ -100,10 +87,8 @@ void WSL::Framework::Standard::Mobile::SetPosition( WSL::Containers::Base::XYZ p
 	position = position_;
 	vector.SetPosition( position );
 	SetComponentPosition( false );
-
 }
-void WSL::Framework::Standard::Mobile::SetVector( WSL::Containers::Math::Vector vector_ )
-{
+void WSL::Framework::Standard::Mobile::SetVector( WSL::Containers::Math::Vector vector_ ) {
 	vector = vector_;
 }
 void WSL::Framework::Standard::Mobile::Move()
@@ -152,22 +137,19 @@ void WSL::Framework::Standard::Mobile::MobileDestroy()
 		DeleteIdentification();
 	}
 }
-void WSL::Framework::Standard::Mobile::Initialize()
-{
+void WSL::Framework::Standard::Mobile::Initialize() {
 	MobileInitialize();
 }
-void WSL::Framework::Standard::Mobile::Refresh()
-{
+void WSL::Framework::Standard::Mobile::Refresh() {
 	MobileRefresh();
 }
-void WSL::Framework::Standard::Mobile::Destroy()
-{
+void WSL::Framework::Standard::Mobile::Destroy() {
 	MobileDestroy();
 }
 void WSL::Framework::Standard::Mobile::MobileSend()
 {
 	PositionalSend();
-	luabind::globals( refrence[0]->luaContainer->State )[ "vector" ] = &vector;
-	luabind::globals( refrence[0]->luaContainer->State )[ "autoMove" ] = &autoMove;
-	luabind::globals( refrence[0]->luaContainer->State )[ "autoCalculate" ] = &autoCalculate;
+	luabind::globals( refrence->luaContainer->State )[ "vector" ] = &vector;
+	luabind::globals( refrence->luaContainer->State )[ "autoMove" ] = &autoMove;
+	luabind::globals( refrence->luaContainer->State )[ "autoCalculate" ] = &autoCalculate;
 }

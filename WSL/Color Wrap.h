@@ -27,23 +27,18 @@ namespace WSL
 			{
 				struct ColorWrap
 				{
-					inline ColorWrap( unsigned short r, unsigned short g, unsigned short b )
-					{
-						color = sf::Color( (sf::Uint8)r, (sf::Uint8)g, (sf::Uint8)b );
+					inline ColorWrap( unsigned short red, unsigned short green, unsigned short blue ) {
+						color = sf::Color( ( sf::Uint8 ) red, ( sf::Uint8 ) green, ( sf::Uint8 ) blue );
 					}
-					inline ColorWrap( sf::Color value )
-					{
+					inline ColorWrap( sf::Color value ) {
 						color = value;
 					}
-					inline ColorWrap()
-					{
+					inline ColorWrap() {
 					}
-					inline sf::Color GetColor()
-					{
+					inline sf::Color GetColor() {
 						return color;
 					}
-					inline void SetColor( sf::Color color_ )
-					{
+					inline void SetColor( sf::Color color_ ) {
 						color = color_;
 					}
 				protected:

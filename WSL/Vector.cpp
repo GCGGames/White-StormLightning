@@ -17,8 +17,7 @@ This file is part of White - Storm: Lightning (alpha).
     along with White - Storm: Lightning (alpha).  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "Vector.h"
-WSL::Containers::Math::Vector::Vector()
-{
+WSL::Containers::Math::Vector::Vector() {
 	destinationInitialize = false;
 	threeDimentional = false;
 }
@@ -34,79 +33,65 @@ WSL::Containers::Math::Vector::Vector( WSL::Containers::Base::XYZ position_, boo
 	destinationInitialize = false;
 	threeDimentional = threeDimentional_;
 }
-float WSL::Containers::Math::Vector::GetDestinationX()
-{
-	return destination.getX();
+float WSL::Containers::Math::Vector::GetDestinationX() {
+	return destination.GetX();
 }
-float WSL::Containers::Math::Vector::GetDestinationY()
-{
-	return destination.getY();
+float WSL::Containers::Math::Vector::GetDestinationY() {
+	return destination.GetY();
 }
-float WSL::Containers::Math::Vector::GetDestinationZ()
-{
-	return destination.getZ();
+float WSL::Containers::Math::Vector::GetDestinationZ() {
+	return destination.GetZ();
 }
-WSL::Containers::Base::XYZ WSL::Containers::Math::Vector::GetDestination()
-{
+WSL::Containers::Base::XYZ WSL::Containers::Math::Vector::GetDestination() {
 	return destination;
 }
-WSL::Containers::Base::XYZ WSL::Containers::Math::Vector::GetPosition()
-{
+WSL::Containers::Base::XYZ WSL::Containers::Math::Vector::GetPosition() {
 	return position;
 }
-float WSL::Containers::Math::Vector::GetX()
-{
-	return position.getX();
+float WSL::Containers::Math::Vector::GetX() {
+	return position.GetX();
 }
-float WSL::Containers::Math::Vector::GetY()
-{
-	return position.getY();
+float WSL::Containers::Math::Vector::GetY() {
+	return position.GetY();
 }
-float WSL::Containers::Math::Vector::GetZ()
-{
-	return position.getZ();
+float WSL::Containers::Math::Vector::GetZ() {
+	return position.GetZ();
 }
-void WSL::Containers::Math::Vector::SetThreeDimentional( bool value )
-{
+void WSL::Containers::Math::Vector::SetThreeDimentional( bool value ) {
 	threeDimentional = value;
 }
-bool WSL::Containers::Math::Vector::GetThreeDimentional()
-{
+bool WSL::Containers::Math::Vector::GetThreeDimentional() {
 	return threeDimentional;
 }
-void WSL::Containers::Math::Vector::CalculateVector()
-{
+void WSL::Containers::Math::Vector::CalculateVector() {
 	vector = vectorCalculator.VectorCalculation( destination, position, speed, threeDimentional );
 }
 void WSL::Containers::Math::Vector::Move()
 {
-	position.setX( position.getX() + vector.getX() );
-	position.setY( position.getY() + vector.getY() );
-	position.setZ( position.getZ() + vector.getZ() );
+	position.SetX( position.GetX() + vector.GetX() );
+	position.SetY( position.GetY() + vector.GetY() );
+	position.SetZ( position.GetZ() + vector.GetZ() );
 }
-void WSL::Containers::Math::Vector::SetPosition( WSL::Containers::Base::XYZ position_ )
-{
+void WSL::Containers::Math::Vector::SetPosition( WSL::Containers::Base::XYZ position_ ) {
 	position = position_;
 }
-void WSL::Containers::Math::Vector::SetSpeed( float speed_ )
-{
+void WSL::Containers::Math::Vector::SetSpeed( float speed_ ) {
 	speed = speed_;
 }
 void WSL::Containers::Math::Vector::SetDestination( float x, float y )
 {
-	destination.setX( x );
-	destination.setY( y );
-	if( destinationInitialize == false )
-	{
+	destination.SetX( x );
+	destination.SetY( y );
+	if( destinationInitialize == false ) {
 		destinationInitialize = true;
-		destination.setZ( 0 );
+		destination.SetZ( 0 );
 	}
 }
 void WSL::Containers::Math::Vector::SetDestination( float x, float y, float z )
 {
-	destination.setX( x );
-	destination.setY( y );
-	destination.setZ( z );
+	destination.SetX( x );
+	destination.SetY( y );
+	destination.SetZ( z );
 }
 void WSL::Containers::Math::Vector::SetDestination( WSL::Containers::Base::XYZ destination_ )
 {
@@ -114,19 +99,16 @@ void WSL::Containers::Math::Vector::SetDestination( WSL::Containers::Base::XYZ d
 }
 void WSL::Containers::Math::Vector::SetDestination( float allCoords )
 {
-	destination.setX( allCoords );
-	destination.setY( allCoords );
-	destination.setZ( allCoords );
+	destination.SetX( allCoords );
+	destination.SetY( allCoords );
+	destination.SetZ( allCoords );
 }
-void WSL::Containers::Math::Vector::SetVector( WSL::Containers::Base::XYZ vector_ )
-{
+void WSL::Containers::Math::Vector::SetVector( WSL::Containers::Base::XYZ vector_ ) {
 	vector = vector_;
 }
-WSL::Containers::Base::XYZ WSL::Containers::Math::Vector::GetVector()
-{
+WSL::Containers::Base::XYZ WSL::Containers::Math::Vector::GetVector() {
 	return vector;
 }
-float WSL::Containers::Math::Vector::GetSpeed()
-{
+float WSL::Containers::Math::Vector::GetSpeed() {
 	return speed;
 }

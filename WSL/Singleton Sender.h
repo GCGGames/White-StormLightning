@@ -27,7 +27,7 @@ namespace WSL
 			{
 				void SendToLua();
 				void DeleteRefrence();
-				WSL::Singleton *singleton;
+				WSL::Singleton* singleton;
 			};
 		}
 	}

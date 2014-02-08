@@ -25,25 +25,22 @@ namespace WSL
 		struct Stack
 		{
 			WSL::Algorithmic::SenderNode node;
-			std::vector<T> Array;
+			std::vector< T > Array;
 			std::string type;
 			unsigned int size;
-			inline void Add( T t )
-			{
+			inline void Add( T t ) {
 				Array.push_back( t );
 				size = Array.size();
 			}
 			inline void Delete( unsigned int element )
 			{
-				if( WSL::Algorithmic::Range_Check_bool( element, Array.size() ) == true )
-				{
+				if( WSL::Algorithmic::BoolRangeCheck( element, Array.size() ) == true ) {
 					node.ElementDeleted( element );
 					Array.erase( Array.begin() + element );
 				}
-				else
-				{
-					std::cout<<"In method ''Delete'' you have attempted to accses a non-existant "<<type<<"."<<std::endl;
-					std::cout<<"You have tried to accses "<<element<<" when there are only "<<Array.size()<<" "<<type<<"."<<std::endl;
+				else {
+					std::cout << "In method ''Delete'' you have attempted to accses a non-existant " << type << "." << std::endl;
+					std::cout << "You have tried to accses " << element << " when there are only " << Array.size() << " " << type << "." << std::endl;
 				}
 				size = Array.size();
 			}

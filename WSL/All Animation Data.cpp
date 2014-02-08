@@ -17,35 +17,27 @@ This file is part of White - Storm: Lightning (alpha).
     along with White - Storm: Lightning (alpha).  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "All Animation Data.h"
-int WSL::Components::Algorithimic::SubBase::AllAnimationData::GetCount()
-{
+int WSL::Components::Algorithimic::SubBase::AllAnimationData::GetCount() {
 	return count;
 }
-unsigned int WSL::Components::Algorithimic::SubBase::AllAnimationData::GetFrame()
-{
+unsigned int WSL::Components::Algorithimic::SubBase::AllAnimationData::GetFrame() {
 	return frame;
 }
-int WSL::Components::Algorithimic::SubBase::AllAnimationData::GetIncrement()
-{
+int WSL::Components::Algorithimic::SubBase::AllAnimationData::GetIncrement() {
 	return inc;
 }
-bool WSL::Components::Algorithimic::SubBase::AllAnimationData::GetInitialized()
-{
+bool WSL::Components::Algorithimic::SubBase::AllAnimationData::GetInitialized() {
 	return init;
 }
-void WSL::Components::Algorithimic::SubBase::AllAnimationData::SetCount( int value )
-{
+void WSL::Components::Algorithimic::SubBase::AllAnimationData::SetCount( int value ) {
 	count = value;
 }
-void WSL::Components::Algorithimic::SubBase::AllAnimationData::SetFrame( unsigned int value )
-{
+void WSL::Components::Algorithimic::SubBase::AllAnimationData::SetFrame( unsigned int value ) {
 	frame = value;
 }
-void WSL::Components::Algorithimic::SubBase::AllAnimationData::SetIncrement( int value )
-{
+void WSL::Components::Algorithimic::SubBase::AllAnimationData::SetIncrement( int value ) {
 	inc = value;
 }
-void WSL::Components::Algorithimic::SubBase::AllAnimationData::SetIntilized( bool value )
-{
+void WSL::Components::Algorithimic::SubBase::AllAnimationData::SetIntilized( bool value ) {
 	init = value;
 }

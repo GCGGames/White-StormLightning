@@ -17,35 +17,29 @@ This file is part of White - Storm: Lightning (alpha).
     along with White - Storm: Lightning (alpha).  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "Bubble Sort.h"
-void WSL::Algorithmic::BubbleSort::BubbleSortAlgorithm( WSL::Containers::PointableVector<WSL::Containers::RenderType> *toBeSorted )
+void WSL::Algorithmic::BubbleSort::BubbleSortAlgorithm( WSL::Containers::PointableVector< WSL::Containers::RenderType > *toBeSorted )
 {
-	unsigned int size, i, j;
 	WSL::Containers::RenderType transfer;
-	size = toBeSorted->vector.size();
-	i = 0;
-	j = 0;
-	while( i < size )
+	const unsigned int SIZE = toBeSorted->vector.size();
+	for( unsigned int i = 0; i < SIZE; ++i )
 	{
-		while( j < size )
+		for( unsigned int j = 0; j < SIZE; ++j )
 		{
-			if( j + 1 != size )
+			if( ( j + 1 ) < SIZE )
 			{
-				if( toBeSorted->vector[j].z > toBeSorted->vector[j + 1].z )
+				if( toBeSorted->vector[ j ].z > toBeSorted->vector[ ( j + 1 ) ].z )
 				{
-					transfer = toBeSorted->vector[j];
-					toBeSorted->vector[j] = toBeSorted->vector[j + 1];
-					toBeSorted->vector[j + 1] = transfer;
+					transfer = toBeSorted->vector[ j ];
+					toBeSorted->vector[ j ] = toBeSorted->vector[ ( j + 1 ) ];
+					toBeSorted->vector[ j + 1 ] = transfer;
 				}
 			}
-			else if( toBeSorted->vector[0].z > toBeSorted->vector[j].z )
+			else if( toBeSorted->vector[ 0 ].z > toBeSorted->vector[ j ].z )
 			{
-				transfer = toBeSorted->vector[0];
-				toBeSorted->vector[0] = toBeSorted->vector[j];
-				toBeSorted->vector[j] = transfer;
+				transfer = toBeSorted->vector[ 0 ];
+				toBeSorted->vector[ 0 ] = toBeSorted->vector[ j ];
+				toBeSorted->vector[ j ] = transfer;
 			}
-			++j;
 		}
-		j = 0;
-		++i;
 	}
 }

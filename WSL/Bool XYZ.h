@@ -21,40 +21,34 @@ namespace WSL
 {
 	namespace Containers
 	{
-		class Bool_XYZ
+		class BoolXYZ
 		{
-			Containers::Base::XYZ Coords;
-			bool Bool;
+			Containers::Base::XYZ coordinates;
+			bool booleanvalue;
 		public:
-			inline Bool_XYZ( Containers::Base::XYZ A, bool B )
-			{
-				Coords = A;
-				Bool = B;
+			inline BoolXYZ( Containers::Base::XYZ coordinates_, bool booleanvalue_ ) {
+				coordinates = coordinates_;
+				booleanvalue = booleanvalue_;
 			}
-			inline Bool_XYZ( bool B )
-			{
-				Bool = B;
+			inline BoolXYZ( bool booleanvalue_ ) {
+				booleanvalue = booleanvalue_;
 			}
-			inline Bool_XYZ( WSL::Containers::Base::XYZ A )
-			{
-				Coords = A;
+			inline BoolXYZ( WSL::Containers::Base::XYZ coordinates_ ) {
+				coordinates = coordinates_;
 			}
-			inline Bool_XYZ() { }
-			bool getBool()
-			{
-				return Bool;
+			inline BoolXYZ() {
 			}
-			Containers::Base::XYZ getCoords()
-			{
-				return Coords;
+			bool GetBooleanValue() {
+				return booleanvalue;
 			}
-			void setBool( bool Value )
-			{
-				Bool = Value;
+			Containers::Base::XYZ GetCoordinates() {
+				return coordinates;
 			}
-			void setCoords( Containers::Base::XYZ Value )
-			{
-				Coords = Value;
+			void SetBooleanValue( bool booleanvalue_ ) {
+				booleanvalue = booleanvalue_;
+			}
+			void SetCoordinates( Containers::Base::XYZ coordinates_ ) {
+				coordinates = coordinates_;
 			}
 		};
 	}

@@ -17,42 +17,34 @@ This file is part of White - Storm: Lightning (alpha).
     along with White - Storm: Lightning (alpha).  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "Animation Data.h"
-bool WSL::Components::Algorithimic::Base::AnimationData::GetAnimate()
-{
+bool WSL::Components::Algorithimic::Base::AnimationData::GetAnimate() {
 	return animate;
 }
-unsigned int WSL::Components::Algorithimic::Base::AnimationData::GetSize()
-{
+unsigned int WSL::Components::Algorithimic::Base::AnimationData::GetSize() {
 	return size;
 }
-int WSL::Components::Algorithimic::Base::AnimationData::GetDelay()
-{
+int WSL::Components::Algorithimic::Base::AnimationData::GetDelay() {
 	return delay;
 }
-bool WSL::Components::Algorithimic::Base::AnimationData::GetType()
-{
-	return (type);
+bool WSL::Components::Algorithimic::Base::AnimationData::GetType() {
+	return ( type );
 }
-void WSL::Components::Algorithimic::Base::AnimationData::SetType( AnimationType  SheetOrImageByImage )
+void WSL::Components::Algorithimic::Base::AnimationData::SetType( AnimationType  sheetOrImageByImage )
 {
-	if( SheetOrImageByImage == Sheet )
+	if( sheetOrImageByImage == Sheet )
 		type = false;
 	else
 		type = true;
 }
-void WSL::Components::Algorithimic::Base::AnimationData::SetType( bool value )
-{
-	type = value;
+void WSL::Components::Algorithimic::Base::AnimationData::SetType( bool type_ ) {
+	type = type_;
 }
-void WSL::Components::Algorithimic::Base::AnimationData::SetCurrentFrame( unsigned int value )
-{
-	currentFrame = value;
+void WSL::Components::Algorithimic::Base::AnimationData::SetCurrentFrame( unsigned int currentFrame_ ) {
+	currentFrame = currentFrame_;
 }
-void WSL::Components::Algorithimic::Base::AnimationData::SetAnimate( bool value )
-{
-	animate = value;
+void WSL::Components::Algorithimic::Base::AnimationData::SetAnimate( bool animate_ ) {
+	animate = animate_;
 }
-void WSL::Components::Algorithimic::Base::AnimationData::SetDelay( int value )
-{
-	delay = value;
+void WSL::Components::Algorithimic::Base::AnimationData::SetDelay( int delay_ ) {
+	delay = delay_;
 }

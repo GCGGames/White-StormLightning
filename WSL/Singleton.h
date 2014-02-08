@@ -36,10 +36,9 @@ namespace WSL
 		void AddScanArea( std::string scanAreaFile );
 		void GetLevel( unsigned int i );
 		void GetLevel( std::string name );
-		void SetLevel( WSL::Algorithmic::Level *level, unsigned int i );
-		void SetLevel( WSL::Algorithmic::Level *level, std::string name );
-		inline void SetDebug( bool value )
-		{
+		void SetLevel( WSL::Algorithmic::Level* level, unsigned int i );
+		void SetLevel( WSL::Algorithmic::Level* level, std::string name );
+		inline void SetDebug( bool value ) {
 			debug = value;
 		}
 		void SearchAlgorithum();
@@ -61,11 +60,11 @@ namespace WSL
 		int InstantiateRenderLayer( std::string name );
 		void InitializeTranslators();
 		template< typename T >
-		void BaseAddComponent( T *t, std::string script )
+		void BaseAddComponent( T* t, std::string script )
 		{
 			luabind::globals( engine->luaContainer->State )[ "new" ] = t;
-			objects.Array[componentTrack]->SetRefrence( engine );
-			objects.Array[componentTrack]->RunInitScript( script );
+			objects.Array[ componentTrack ]->SetRefrence( engine );
+			objects.Array[ componentTrack ]->RunInitScript( script );
 		}
 		void GetObject( unsigned int id, int objID, int componentID );
 		void GetRenderLayer( unsigned int layer );
@@ -74,26 +73,23 @@ namespace WSL
 		void GetCamera();
 		void GetSoundManager();
 		WSL::Containers::Base::XYZ GetMousePosition();
-		inline bool GetDebug()
-		{
+		inline bool GetDebug() {
 			return debug;
 		}
-		inline bool GetThreeDCollision()
-		{
-			return (threeDCollision);
+		inline bool GetThreeDCollision() {
+			return ( threeDCollision );
 		}
-		inline void SetThreeDCollision( bool threeDCollision_ )
-		{
+		inline void SetThreeDCollision( bool threeDCollision_ ) {
 			threeDCollision = threeDCollision_;
 		}
-		WSL::Containers::Bool_XYZ CheckCollision( WSL::Collision::Scan_Area_Collision::Scan_Area a, WSL::Collision::Scan_Area_Collision::Scan_Area b, bool ThreeD );
-		bool Check_Collision( WSL::Collision::Scan_Area_Collision::Rectangle rect1, WSL::Collision::Scan_Area_Collision::Rectangle rect2);
+		WSL::Containers::BoolXYZ CheckCollision( WSL::Collision::ScanAreaCollision::ScanArea a, WSL::Collision::ScanAreaCollision::ScanArea b, bool ThreeD );
+		bool CheckCollision( WSL::Collision::ScanAreaCollision::Rectangle rect1, WSL::Collision::ScanAreaCollision::Rectangle rect2 );
 		unsigned int currentObject;
-		std::vector<WSL::DataTranslation::Base::BaseTranslator*> (*SetUpTranslators)(
-			std::vector<WSL::DataTranslation::Base::BaseTranslator*> );
-		std::string levelScripts[3];
-		WSL::Global::Stack<WSL::Algorithmic::Level*> levels;
-		WSL::DataTransfer::Lua::SenderBase *sender;
-		WSL::Global::SoundManager *soundManager;
+		std::vector< WSL::DataTranslation::Base::BaseTranslator* > ( *SetUpTranslators ) ( 
+			std::vector< WSL::DataTranslation::Base::BaseTranslator* > );
+		std::string levelScripts[ 3 ];
+		WSL::Global::Stack< WSL::Algorithmic::Level* > levels;
+		WSL::DataTransfer::Lua::SenderBase* sender;
+		WSL::Global::SoundManager* soundManager;
 	};
 }

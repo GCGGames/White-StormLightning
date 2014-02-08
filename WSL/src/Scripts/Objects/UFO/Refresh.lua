@@ -1,3 +1,4 @@
+io.write( "" )
 function MoveTo( Xdest, val, to )
 	if stack:GetInt( "dir" ):Get() == val then
 		object:SetDestination( Xdest, 300, 0 )
@@ -7,8 +8,8 @@ function MoveTo( Xdest, val, to )
 		end
 	end
 end
-
 sprite:SetDraw( true )
 MoveTo( 1000, 0, 1 )
 MoveTo( 0, 1, 0 )
 object:Move()
+io.write( "" )

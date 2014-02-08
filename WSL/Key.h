@@ -26,41 +26,32 @@ namespace WSL
 			bool key;
 			std::string name;
 		public:
-			inline Key( bool key_, std::string name_ )
-			{
+			inline Key( bool key_, std::string name_ ) {
 				key = key_;
 				name = name_;
 			}
-			inline Key( bool key_ )
-			{
-				key = key;
-			}
-			inline Key( std::string name_ )
-			{
-				name = name;
-			}
-			inline Key()
-			{
-			}
-			inline void SetInfo( bool key_, std::string name_ )
-			{
-				key = key;
-				name = name;
-			}
-			inline void SetName( std::string name_ )
-			{
-				name = name_;
-			}
-			inline void SetKey( bool key_ )
-			{
+			inline Key( bool key_ ) {
 				key = key_;
 			}
-			inline bool GetKey()
-			{
+			inline Key( std::string name_ ) {
+				name = name_;
+			}
+			inline Key() {
+			}
+			inline void SetInfo( bool key_, std::string name_ ) {
+				key = key_;
+				name = name_;
+			}
+			inline void SetName( std::string name_ ) {
+				name = name_;
+			}
+			inline void SetKey( bool key_ ) {
+				key = key_;
+			}
+			inline bool GetKey() {
 				return key;
 			}
-			inline std::string GetName()
-			{
+			inline std::string GetName() {
 				return name;
 			}
 		};

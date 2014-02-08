@@ -21,15 +21,23 @@ namespace WSL
 {
 	namespace Containers
 	{
-		class Int_Bool
+		class IntBool
 		{
-			int Int;
-			bool Bool;
+			int integervalue;
+			bool booleanvalue;
 		public:
-			inline int getInt() { return Int; }
-			inline bool getBool() { return Bool; }
-			inline void setInt( int Value ) { Int = Value; }
-			inline void setBool( bool Value ) { Bool = Value; }
+			inline int GetIntegervalue() {
+				return integervalue;
+			}
+			inline bool GetBooleanValue() {
+				return booleanvalue;
+			}
+			inline void SetIntegervalue( int integervalue_ ) {
+				integervalue = integervalue_;
+			}
+			inline void SetBooleanvalue( bool booleanvalue_ ) {
+				booleanvalue = booleanvalue_;
+			}
 		};
 	}
 }

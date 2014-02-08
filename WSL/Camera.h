@@ -33,9 +33,10 @@ namespace WSL
 				depth = depth_;
 				camera = camera_;
 			}
-			inline Camera() {}
+			inline Camera() {
+			}
 			float x, y, z, width, height, depth;
-			sf::View *camera;
+			sf::View* camera;
 			void Move( float x_, float y_, float z_ )
 			{
 				x += x_;
